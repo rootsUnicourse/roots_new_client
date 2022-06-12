@@ -28,7 +28,7 @@ import Icon from "@mui/material/Icon";
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 
-function BackgroundBlogCard({ image, title, description, action }) {
+function BackgroundBlogCard({ image, title, description }) {
   const cardActionStyles = {
     display: "flex",
     alignItems: "center",
@@ -46,62 +46,35 @@ function BackgroundBlogCard({ image, title, description, action }) {
   };
 
   return (
-    <Card
-      sx={{
-        backgroundImage: ({ palette: { black }, functions: { linearGradient, rgba } }) =>
-          `${linearGradient(rgba(black.main, 0.5), rgba(black.main, 0.5))}, url(${image})`,
-        backgroundSize: "cover",
-      }}
-    >
-      <MKBox p={3}>
-        <MKBox minHeight="20.625rem" my="auto" py={3}>
-          <MKTypography
-            variant="h2"
-            color="white"
-            mb={1}
-            sx={({ breakpoints, typography: { size } }) => ({
-              [breakpoints.down("md")]: {
-                fontSize: size["3xl"],
-              },
-            })}
-          >
-            {title}
-          </MKTypography>
-          <MKTypography variant="body2" color="white" my={3}>
-            {description}
-          </MKTypography>
-          {action.type === "internal" ? (
+    <MKBox component="section">
+      <Card
+        sx={{
+          backgroundImage: ({ palette: { black }, functions: { linearGradient, rgba } }) =>
+            `${linearGradient(rgba(black.main, 0.5), rgba(black.main, 0.5))}, url(${image})`,
+          backgroundSize: "cover",
+        }}
+      >
+        <MKBox p={3}>
+          <MKBox minHeight="20.625rem" my="auto" py={3}>
             <MKTypography
-              component={Link}
-              to={action.route}
-              variant="body2"
-              fontWeight="regular"
+              variant="h2"
               color="white"
-              textTransform="capitalize"
-              sx={cardActionStyles}
+              mb={1}
+              sx={({ breakpoints, typography: { size } }) => ({
+                [breakpoints.down("md")]: {
+                  fontSize: size["3xl"],
+                },
+              })}
             >
-              {action.label}
-              <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
+              {title}
             </MKTypography>
-          ) : (
-            <MKTypography
-              component={MuiLink}
-              href={action.route}
-              target="_blank"
-              rel="noreferrer"
-              variant="body2"
-              fontWeight="regular"
-              color="white"
-              textTransform="capitalize"
-              sx={cardActionStyles}
-            >
-              {action.label}
-              <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
+            <MKTypography variant="body2" color="white" my={3}>
+              {description}
             </MKTypography>
-          )}
+          </MKBox>
         </MKBox>
-      </MKBox>
-    </Card>
+      </Card>
+    </MKBox>
   );
 }
 

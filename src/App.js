@@ -29,14 +29,22 @@ import Presentation from "layouts/pages/presentation";
 // Material Kit 2 React routes
 import routes from "routes";
 
+import { useDispatch } from 'react-redux';
+import { getCompanys, getCompanyBySearch } from './actions/companys'
+import { getUsers } from './actions/users'
+
+
 export default function App() {
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
 
   // Setting page scroll to 0 when changing the route
   useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
-  }, [pathname]);
+    dispatch(getCompanys());
+    dispatch(getUsers());
+  }, [pathname, dispatch]);
 
   const getRoutes = (allRoutes) =>
     allRoutes.map((route) => {

@@ -80,7 +80,7 @@ function Places() {
               }}
             />
           </Grid>
-          <Grid item xs={12} sm={6} lg={3}>
+          {<Grid item xs={12} sm={6} lg={3}>
             <BackgroundBlogCard
               image={post4}
               title="Flexible work hours"
@@ -91,7 +91,7 @@ function Places() {
                 label: "read more",
               }}
             />
-          </Grid>
+          </Grid>}
         </Grid>
       </Container>
     </MKBox>

@@ -44,7 +44,11 @@ import routes from "routes";
 import footerRoutes from "footer.routes";
 
 // Images
-import bgImage from "assets/images/bg-presentation.jpg";
+import bgImage from "assets/images/roots.webp";
+import SearchBar from "components/SearchBar/SearchBar";
+import CompCards from "components/CompCards/CompCards";
+import Companys from '../../components/Companys/Companys'
+
 
 function Presentation() {
   return (
@@ -53,8 +57,8 @@ function Presentation() {
         routes={routes}
         action={{
           type: "external",
-          route: "https://www.creative-tim.com/product/material-kit-react",
-          label: "free download",
+          route: "/pages/authentication/sign-in",
+          label: "Sign In",
           color: "info",
         }}
         sticky
@@ -83,7 +87,7 @@ function Presentation() {
                 },
               })}
             >
-              Material Kit 2 React{" "}
+              Roots{" "}
             </MKTypography>
             <MKTypography
               variant="body1"
@@ -92,8 +96,7 @@ function Presentation() {
               px={{ xs: 6, lg: 12 }}
               mt={1}
             >
-              Free & Open Source Web UI Kit built over ReactJS &amp; MUI. Join over 1.6 million
-              developers around the world.
+              Buy the same products But get your money BACK !
             </MKTypography>
           </Grid>
         </Container>
@@ -110,13 +113,16 @@ function Presentation() {
         }}
       >
         <Counters />
+        <SearchBar/>
+        {/* <CompCards /> */}
+        <Companys/>
         <Information />
-        <DesignBlocks />
-        <Pages />
-        <Container sx={{ mt: 6 }}>
+        {/* <DesignBlocks /> */}
+        {/* <Pages /> */}
+        {/* <Container sx={{ mt: 6 }}>
           <BuiltByDevelopers />
-        </Container>
-        <Container>
+        </Container> */}
+        {/* <Container>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={4}>
               <FilledInfoCard
@@ -131,7 +137,7 @@ function Presentation() {
                   label: "Let's start",
                 }}
               />
-            </Grid>
+            </Grid>}
             <Grid item xs={12} lg={4}>
               <FilledInfoCard
                 color="info"
@@ -159,10 +165,10 @@ function Presentation() {
               />
             </Grid>
           </Grid>
-        </Container>
-        <Testimonials />
-        <Download />
-        <MKBox pt={18} pb={6}>
+        </Container> */}
+        {/* <Testimonials /> */}
+        {/* <Download /> */}
+        {/* <MKBox pt={18} pb={6}>
           <Container>
             <Grid container spacing={3}>
               <Grid item xs={12} lg={5} ml="auto" sx={{ textAlign: { xs: "center", lg: "left" } }}>
@@ -213,7 +219,7 @@ function Presentation() {
               </Grid>
             </Grid>
           </Container>
-        </MKBox>
+        </MKBox> */}
       </Card>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />

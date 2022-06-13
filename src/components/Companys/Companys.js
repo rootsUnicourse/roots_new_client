@@ -13,6 +13,9 @@ import { useSelector } from 'react-redux';
 import BackgroundBlogCard from "examples/Cards/BlogCards/BackgroundBlogCard";
 import {CircularProgress} from '@material-ui/core'
 
+import RotatingCard from "examples/Cards/RotatingCard";
+import RotatingCardFront from "examples/Cards/RotatingCard/RotatingCardFront";
+import RotatingCardBack from "examples/Cards/RotatingCard/RotatingCardBack";
 
 function Companys() {
 
@@ -40,7 +43,23 @@ function Companys() {
                             <Grid container item spacing={3} alignItems="center" >
                                 {companys.map((company) => (
                                     <Grid key={company._id} item xs={12} sm={4} lg={4}>
-                                        <BackgroundBlogCard image={company.image} title={company.title} description="Rather than worrying about switching offices every couple years, you stay in the same place." />
+                                        <RotatingCard>
+                                            <RotatingCardFront
+                                                image={company.image}
+                                                icon="touch_app"
+                                                title={company.title}
+                                            />
+                                            <RotatingCardBack
+                                                image={company.image}
+                                                title={company.discount}
+                                                description="You will save a lot of time going from prototyping to full-functional code because all elements are implemented."
+                                                action={{
+                                                type: "internal",
+                                                route: "/sections/page-sections/page-headers",
+                                                label: "Go To Store",
+                                                }}
+                                            />
+                                        </RotatingCard>
                                     </Grid>
                                 ))}
                             </Grid>

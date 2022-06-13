@@ -12,6 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
+import React, { useEffect, useState } from 'react';
 
 // @mui material components
 import Container from "@mui/material/Container";
@@ -49,8 +50,37 @@ import SearchBar from "components/SearchBar/SearchBar";
 import CompCards from "components/CompCards/CompCards";
 import Companys from '../../components/Companys/Companys'
 
+import { useDispatch } from 'react-redux';
+import { getCompanyBySearch, getCompanys } from '../../actions/companys'
+
 
 function Presentation() {
+
+  const [search,setSearch] = useState('');
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(getCompanys())
+  },[search==''])
+
+  const searchCompany = () => {
+    if(search.trim())
+    {
+        dispatch(getCompanyBySearch({ search }))
+    }
+  }
+
+  const handleKeyPress = (e) => {
+    if(e.keyCode == 13 || e.which == 13) {
+        searchCompany()
+    }
+  }
+
+  const handleChange = (e) => {
+    console.log(e.target.value)
+    setSearch(e.target.value)
+  }
+
   return (
     <>
       <DefaultNavbar
@@ -113,10 +143,9 @@ function Presentation() {
         }}
       >
         <Counters />
-        <SearchBar/>
-        {/* <CompCards /> */}
+        <SearchBar handlePress = {handleKeyPress} change = {handleChange}/>
         <Companys/>
-        <Information />
+        {/* <Information /> */}
         {/* <DesignBlocks /> */}
         {/* <Pages /> */}
         {/* <Container sx={{ mt: 6 }}>

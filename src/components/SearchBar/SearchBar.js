@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -10,12 +12,19 @@ import SearchIcon from "@mui/icons-material/Search";
 import MKBox from "components/MKBox";
 import MKInput from "components/MKInput";
 
-function SearchBar() {
+
+
+function SearchBar(props) {
+
+    const [search,setSearch] = useState('');
+
     return (
         <MKBox component="section" py={12}>
         <Container>
             <Grid container item xs={12} lg={4} py={1} mx="auto">
             <MKInput
+                onChange={(e)=>props.change(e)} 
+                onKeyPress={(e) => props.handlePress(e)}
                 variant="standard"
                 placeholder="Search"
                 fullWidth

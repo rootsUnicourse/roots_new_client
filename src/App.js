@@ -32,6 +32,7 @@ import routes from "routes";
 import { useDispatch } from 'react-redux';
 import { getCompanys, getCompanyBySearch } from './actions/companys'
 import { getUsers } from './actions/users'
+import Form from "components/Form/Form";
 
 
 export default function App() {
@@ -66,6 +67,7 @@ export default function App() {
         {getRoutes(routes)}
         <Route path="/presentation" element={<Presentation />} />
         <Route path="*" element={<Navigate to="/presentation" />} />
+        <Route path="/form" exact element={<Form/>}/>
       </Routes>
     </ThemeProvider>
   );

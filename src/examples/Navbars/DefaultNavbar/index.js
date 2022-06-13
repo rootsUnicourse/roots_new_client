@@ -42,9 +42,13 @@ import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMob
 
 // Material Kit 2 React base styles
 import breakpoints from "assets/theme/base/breakpoints";
+import MKAvatar from "components/MKAvatar";
+
+import { useNavigate } from 'react-router-dom'
+
 
 /* eslint-disable */
-function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center }) {
+function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center, handleLogout }) {
   const [dropdown, setDropdown] = useState("");
   const [dropdownEl, setDropdownEl] = useState("");
   const [dropdownName, setDropdownName] = useState("");
@@ -54,7 +58,9 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
   const [arrowRef, setArrowRef] = useState(null);
   const [mobileNavbar, setMobileNavbar] = useState(false);
   const [mobileView, setMobileView] = useState(false);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
 
+  const navigate = useNavigate()
   const openMobileNavbar = () => setMobileNavbar(!mobileNavbar);
 
   useEffect(() => {
@@ -70,8 +76,8 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
     }
 
     /** 
-     The event listener that's calling the displayMobileNavbar function when 
-     resizing the window.
+      The event listener that's calling the displayMobileNavbar function when 
+      resizing the window.
     */
     window.addEventListener("resize", displayMobileNavbar);
 
@@ -481,6 +487,19 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
               {brand}
             </MKTypography>
           </MKBox>
+          { user ? (
+              <MKBox display={{ xs: "none", lg: "flex" }}>
+                <MKAvatar src={user.result.imageUrl} alt="Burce Mars" size="xl" shadow="xl" />
+              </MKBox>
+            ) : null }
+
+          {
+            user.result.email == "rootsunicourse@gmail.com" &&(
+              <MKBox display={{ xs: "none", lg: "flex" }}>
+                <MKTypography component={Link} to="/form" size="xl" shadow="xl">Add Store</MKTypography>
+              </MKBox>
+            ) 
+          }
           {/* <MKBox
             color="inherit"
             display={{ xs: "none", lg: "flex" }}
@@ -502,6 +521,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                   }
                   color={action.color ? action.color : "info"}
                   size="small"
+                  onClick={handleLogout}
                 >
                   {action.label}
                 </MKButton>

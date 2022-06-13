@@ -19,7 +19,7 @@ function Companys() {
     const companys = useSelector((state) => state.companys)
 
     return (
-        <MKBox component="section" py={12}>
+        <MKBox component="section">
         <Container>
             {/* <Grid container item xs={12} lg={4} py={1} mx="auto">
             <MKInput

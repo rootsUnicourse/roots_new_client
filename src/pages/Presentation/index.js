@@ -163,7 +163,7 @@ function Presentation() {
         <Companys/>
         {/* <Information /> */}
         {/* <DesignBlocks /> */}
-        {/* <Pages /> */}
+       {/*  <Pages /> */}
         {/* <Container sx={{ mt: 6 }}>
           <BuiltByDevelopers />
         </Container> */}

@@ -12,6 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
+import React, { useEffect, useState } from 'react';
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -33,20 +34,39 @@ import routes from "routes";
 
 // Images
 import bgImage from "assets/images/city-profile.jpg";
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
+
 
 function Author() {
+
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+  console.log(user)
+  const label = user ? "Log Out" : "Sign In"
+  const route = user ? "/" : "/pages/authentication/sign-in"
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const logout = () => {
+    dispatch({ type: 'LOGOUT' })
+    navigate('/')
+    setUser(null)
+  }
+
   return (
     <>
       <DefaultNavbar
         routes={routes}
         action={{
-          type: "external",
-          route: "https://www.creative-tim.com/product/material-kit-react",
-          label: "free download",
+          type: "internal",
+          route: route,
+          label: label,
           color: "info",
         }}
         transparent
         light
+        handleLogout = {logout}
+        user = {user}
       />
       <MKBox bgColor="white">
         <MKBox
@@ -75,7 +95,7 @@ function Author() {
             boxShadow: ({ boxShadows: { xxl } }) => xxl,
           }}
         >
-          <Profile />
+          <Profile user={user}/>
           <Posts />
         </Card>
         <Contact />

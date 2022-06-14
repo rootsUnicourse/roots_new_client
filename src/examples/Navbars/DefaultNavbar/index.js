@@ -494,7 +494,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
           { 
             user ?(
                 <MKBox >
-                  <MKAvatar src={user.result.imageUrl} alt="Burce Mars" size="lg" shadow="xl" />
+                  <MKAvatar src={user.result.imageUrl} alt="Burce Mars" size="lg" shadow="xl"  component={Link} to={'/profile'}/>
                 </MKBox>
             ) : null
           }

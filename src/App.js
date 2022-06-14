@@ -33,7 +33,7 @@ import { useDispatch } from 'react-redux';
 import { getCompanys, getCompanyBySearch } from './actions/companys'
 import { getUsers } from './actions/users'
 import Form from "components/Form/Form";
-
+import Profile from "pages/LandingPages/Author/index";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -68,6 +68,8 @@ export default function App() {
         <Route path="/presentation" element={<Presentation />} />
         <Route path="*" element={<Navigate to="/presentation" />} />
         <Route path="/form" exact element={<Form/>}/>
+        <Route path="/profile" exact element={<Profile/>}/>
+
       </Routes>
     </ThemeProvider>
   );

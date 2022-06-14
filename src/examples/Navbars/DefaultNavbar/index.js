@@ -48,7 +48,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 /* eslint-disable */
-function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center, handleLogout }) {
+function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center, handleLogout, user }) {
   const [dropdown, setDropdown] = useState("");
   const [dropdownEl, setDropdownEl] = useState("");
   const [dropdownName, setDropdownName] = useState("");
@@ -58,7 +58,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
   const [arrowRef, setArrowRef] = useState(null);
   const [mobileNavbar, setMobileNavbar] = useState(false);
   const [mobileView, setMobileView] = useState(false);
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+  console.log('user:', user)
 
   const navigate = useNavigate()
   const openMobileNavbar = () => setMobileNavbar(!mobileNavbar);
@@ -456,6 +456,8 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
     </Popper>
   );
 
+  
+
   return (
     <Container sx={sticky ? { position: "sticky", top: 0, zIndex: 10 } : null}>
       <MKBox
@@ -487,19 +489,22 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
               {brand}
             </MKTypography>
           </MKBox>
-          { user ? (
-              <MKBox display={{ xs: "none", lg: "flex" }}>
-                <MKAvatar src={user.result.imageUrl} alt="Burce Mars" size="xl" shadow="xl" />
-              </MKBox>
-            ) : null }
 
-          {
-            user.result.email == "rootsunicourse@gmail.com" &&(
+          { 
+            user ?(
+                <MKBox display={{ xs: "none", lg: "flex" }}>
+                  <MKAvatar src={user.result.imageUrl} alt="Burce Mars" size="xl" shadow="xl" />
+                </MKBox>
+            ) : null
+          }
+
+        {
+            user && user.result.email == "rootsunicourse@gmail.com" &&(
               <MKBox display={{ xs: "none", lg: "flex" }}>
                 <MKTypography component={Link} to="/form" size="xl" shadow="xl">Add Store</MKTypography>
               </MKBox>
             ) 
-          }
+        }
           {/* <MKBox
             color="inherit"
             display={{ xs: "none", lg: "flex" }}

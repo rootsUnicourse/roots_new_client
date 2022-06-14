@@ -60,6 +60,7 @@ function Presentation() {
 
   const [search,setSearch] = useState('');
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+  console.log(user)
   const label = user ? "Log Out" : "Sign In"
   const route = user ? "/" : "/pages/authentication/sign-in"
   const dispatch = useDispatch()
@@ -106,6 +107,7 @@ function Presentation() {
         }}
         sticky
         handleLogout = {logout}
+        user = {user}
       />
       <MKBox
         minHeight="75vh"

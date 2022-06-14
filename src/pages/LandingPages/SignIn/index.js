@@ -45,21 +45,75 @@ import routes from "routes";
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 
+
+import {useDispatch} from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { signin ,signup, googleLogin } from '../../../actions/auth'
+import {GoogleLogin} from 'react-google-login'
+import Icon from './Icon'
+
+
+
 function SignInBasic() {
+  const queryParams = new URLSearchParams(window.location.search);
+  const email = queryParams.get('email');
   const [rememberMe, setRememberMe] = useState(false);
+  const [isSignup, setIsSignup] = useState(false)
+  const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', password: '', confirmPassword: '',parantId: email, imageUrl: ''})
+  const [showPassword, setShowPassword] = useState(false)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(formData)
+    if(isSignup){
+        console.log(formData)
+        dispatch(signup(formData, navigate))
+    }else {
+        console.log(formData)
+        dispatch(signin(formData, navigate))
+    }
+  }
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleShowPassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword)
+  }
+
+  const switchMode = () => {
+    setIsSignup((prevIsSignup) => !prevIsSignup)
+    setShowPassword(false)
+  }
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+
+  const googleSuccess = async (res) => {
+    // console.log(process.env.BASE_IMAGE)
+    const result = res?.profileObj
+    const token = res?.tokenId
+    // console.log(result)
+    const googleData = {result: result, token: token, parantId : formData.parantId}
+    // console.log(googleData)
+    try {
+        dispatch(googleLogin(googleData, navigate))
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const googleFailure = (err) => {
+    console.log("Google Sign In was unsuccessful. Try Again Later")
+    console.log(err)
+}
 
   return (
     <>
       <DefaultNavbar
         routes={routes}
-        action={{
-          type: "external",
-          route: "https://www.creative-tim.com/product/material-kit-react",
-          label: "free download",
-          color: "info",
-        }}
         transparent
         light
       />
@@ -100,21 +154,41 @@ function SignInBasic() {
                   Sign in
                 </MKTypography>
                 <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
-                  <Grid item xs={2}>
-                    <MKTypography component={MuiLink} href="#" variant="body1" color="white">
-                      <GoogleIcon color="inherit" />
-                    </MKTypography>
+                  <Grid item xs={2} sx={{ mr: 8 }}>
+                      <GoogleLogin
+                            clientId="299163078742-7udqvrad5p2pc66g2im7q7bknb4pf6gh.apps.googleusercontent.com"
+                            render={(renderProps)=>(
+                                <MKButton onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon/>} variant="contained">Google Sign in</MKButton>
+                            )}
+                            onSuccess={googleSuccess}
+                            onFailure={googleFailure}
+                            cookiePolicy="single_host_origin"
+                      />
                   </Grid>
                 </Grid>
               </MKBox>
               <MKBox pt={4} pb={3} px={3}>
                 <MKBox component="form" role="form">
+                  { isSignup && (
+                    <>
+                      <MKBox mb={2}>
+                        <MKInput name="firstName" label="First Name" onChange={handleChange} autoFocus fullWidth/>
+                      </MKBox>
+                      <MKBox mb={2}>
+                        <MKInput name="lastName" label="Last Name" onChange={handleChange} fullWidth/>
+                      </MKBox>
+                    </>
+                  )}
                   <MKBox mb={2}>
-                    <MKInput type="email" label="Email" fullWidth />
+                    <MKInput name="email" type="email" label="Email" fullWidth onChange={handleChange}/>
                   </MKBox>
                   <MKBox mb={2}>
-                    <MKInput type="password" label="Password" fullWidth />
+                    <MKInput name="password" type="password" label="Password" fullWidth onChange={handleChange}/>
                   </MKBox>
+                  { isSignup && 
+                  <MKBox mb={2}> 
+                    <MKInput name="confirmPassword" label="Repeat Password" onChange={handleChange} type="password" fullWidth/>
+                  </MKBox>}
                   <MKBox display="flex" alignItems="center" ml={-1}>
                     <Switch checked={rememberMe} onChange={handleSetRememberMe} />
                     <MKTypography
@@ -128,24 +202,18 @@ function SignInBasic() {
                     </MKTypography>
                   </MKBox>
                   <MKBox mt={4} mb={1}>
-                    <MKButton variant="gradient" color="info" fullWidth>
-                      sign in
+                    <MKButton variant="gradient" color="info" fullWidth onClick={handleSubmit}>
+                      {isSignup ? 'Sign up' : 'Sign In'}
                     </MKButton>
                   </MKBox>
                   <MKBox mt={3} mb={1} textAlign="center">
-                    <MKTypography variant="button" color="text">
-                      Don&apos;t have an account?{" "}
-                      <MKTypography
-                        component={Link}
-                        to="/authentication/sign-up/cover"
-                        variant="button"
-                        color="info"
-                        fontWeight="medium"
-                        textGradient
-                      >
-                        Sign up
-                      </MKTypography>
-                    </MKTypography>
+                    <MKButton
+                      fontWeight="medium"
+                      textGradient
+                      onClick={switchMode}
+                    >
+                      {isSignup ? 'Alredy have an account? Sign In' : "Don't have an account? Sign Up!"}
+                    </MKButton>
                   </MKBox>
                 </MKBox>
               </MKBox>

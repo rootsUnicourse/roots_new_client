@@ -52,12 +52,19 @@ import Companys from '../../components/Companys/Companys'
 
 import { useDispatch } from 'react-redux';
 import { getCompanyBySearch, getCompanys } from '../../actions/companys'
+import { useNavigate } from 'react-router-dom'
+import Video from 'components/Video/Video';
 
 
 function Presentation() {
 
   const [search,setSearch] = useState('');
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+  console.log(user)
+  const label = user ? "Log Out" : "Sign In"
+  const route = user ? "/" : "/pages/authentication/sign-in"
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(()=>{
     dispatch(getCompanys())
@@ -79,6 +86,13 @@ function Presentation() {
   const handleChange = (e) => {
     console.log(e.target.value)
     setSearch(e.target.value)
+    searchCompany()
+  }
+
+  const logout = () => {
+    dispatch({ type: 'LOGOUT' })
+    navigate('/')
+    setUser(null)
   }
 
   return (
@@ -86,12 +100,14 @@ function Presentation() {
       <DefaultNavbar
         routes={routes}
         action={{
-          type: "external",
-          route: "/pages/authentication/sign-in",
-          label: "Sign In",
+          type: "internal",
+          route: route,
+          label: label,
           color: "info",
         }}
         sticky
+        handleLogout = {logout}
+        user = {user}
       />
       <MKBox
         minHeight="75vh"
@@ -143,6 +159,7 @@ function Presentation() {
         }}
       >
         <Counters />
+        <Video/>
         <SearchBar handlePress = {handleKeyPress} change = {handleChange}/>
         <Companys/>
         {/* <Information /> */}

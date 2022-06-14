@@ -86,7 +86,6 @@ function Presentation() {
   const handleChange = (e) => {
     console.log(e.target.value)
     setSearch(e.target.value)
-    searchCompany()
   }
 
   const logout = () => {

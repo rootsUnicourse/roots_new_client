@@ -189,7 +189,7 @@ const googleFailure = (err) => {
                   <MKBox mb={2}> 
                     <MKInput name="confirmPassword" label="Repeat Password" onChange={handleChange} type="password" fullWidth/>
                   </MKBox>}
-                  <MKBox display="flex" alignItems="center" ml={-1}>
+                  {/* <MKBox display="flex" alignItems="center" ml={-1}>
                     <Switch checked={rememberMe} onChange={handleSetRememberMe} />
                     <MKTypography
                       variant="button"
@@ -200,7 +200,7 @@ const googleFailure = (err) => {
                     >
                       &nbsp;&nbsp;Remember me
                     </MKTypography>
-                  </MKBox>
+                  </MKBox> */}
                   <MKBox mt={4} mb={1}>
                     <MKButton variant="gradient" color="info" fullWidth onClick={handleSubmit}>
                       {isSignup ? 'Sign up' : 'Sign In'}

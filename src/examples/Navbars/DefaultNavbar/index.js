@@ -477,13 +477,14 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
           backdropFilter: transparent ? "none" : `saturate(200%) blur(30px)`,
         })}
       >
-        <MKBox display="flex" justifyContent="space-between" alignItems="center">
+        <MKBox display="flex" justifyContent="space-between" alignItems="center" >
           <MKBox
             component={Link}
             to="/"
             lineHeight={1}
             py={transparent ? 1.5 : 0.75}
             pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
+            display={{ xs: user ? "none" : "flex", lg: "flex" }}
           >
             <MKTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
               {brand}
@@ -492,8 +493,8 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
 
           { 
             user ?(
-                <MKBox display={{ xs: "none", lg: "flex" }}>
-                  <MKAvatar src={user.result.imageUrl} alt="Burce Mars" size="xl" shadow="xl" />
+                <MKBox >
+                  <MKAvatar src={user.result.imageUrl} alt="Burce Mars" size="lg" shadow="xl" />
                 </MKBox>
             ) : null
           }
@@ -548,7 +549,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                 </MKButton>
               ))}
           </MKBox>
-          <MKBox
+          {/* <MKBox
             display={{ xs: "inline-block", lg: "none" }}
             lineHeight={0}
             py={1.5}
@@ -558,7 +559,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             onClick={openMobileNavbar}
           >
             <Icon fontSize="default">{mobileNavbar ? "close" : "menu"}</Icon>
-          </MKBox>
+          </MKBox> */}
         </MKBox>
         <MKBox
           bgColor={transparent ? "white" : "transparent"}
@@ -569,8 +570,8 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
           {mobileView && <DefaultNavbarMobile routes={routes} open={mobileNavbar} />}
         </MKBox>
       </MKBox>
-      {dropdownMenu}
-      {nestedDropdownMenu}
+      {/* {dropdownMenu}
+      {nestedDropdownMenu} */}
     </Container>
   );
 }

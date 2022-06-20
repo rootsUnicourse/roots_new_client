@@ -42,7 +42,7 @@ function Companys() {
                         (
                             <Grid container item spacing={3} alignItems="center" >
                                 {companys.map((company) => (
-                                    <Grid key={company._id} item xs={12} sm={4} lg={4}>
+                                    <Grid key={company._id} item xs={12} sm={6} lg={4} sx={{ display: { xs: 'none', sm: 'block' } }}>
                                         <RotatingCard>
                                             <RotatingCardFront
                                                 image={company.image}

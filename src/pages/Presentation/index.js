@@ -54,6 +54,7 @@ import { useDispatch } from 'react-redux';
 import { getCompanyBySearch, getCompanys } from '../../actions/companys'
 import { useNavigate } from 'react-router-dom'
 import Video from 'components/Video/Video';
+import CompanysMobile from 'components/Companys/CompanysMobile';
 
 
 function Presentation() {
@@ -161,9 +162,10 @@ function Presentation() {
         <Video/>
         <SearchBar handlePress = {handleKeyPress} change = {handleChange}/>
         <Companys/>
+        <CompanysMobile/>
         {/* <Information /> */}
         {/* <DesignBlocks /> */}
-       {/*  <Pages /> */}
+        <Pages />
         {/* <Container sx={{ mt: 6 }}>
           <BuiltByDevelopers />
         </Container> */}

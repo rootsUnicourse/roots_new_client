@@ -37,15 +37,17 @@ function RotatingCardFront({ color, image, icon, title, description }) {
       sx={{
         backgroundImage: ({ palette: { gradients }, functions: { linearGradient, rgba } }) =>
           `${linearGradient(
-            rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.55),
-            rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.55)
+            rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.45),
+            rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.45)
           )}, url(${image})`,
-        backgroundSize: "cover",
+        backgroundSize: "408px 400px",
         backfaceVisibility: "hidden",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed"
       }}
     >
       <MKBox py={12} px={3} textAlign="center" lineHeight={1}>
-        
         <MKTypography variant="h5" color="white" gutterBottom>
           {title}
         </MKTypography>
@@ -54,7 +56,18 @@ function RotatingCardFront({ color, image, icon, title, description }) {
             {typeof icon === "string" ? <Icon>{icon}</Icon> : icon}
           </MKTypography>
         )}
-        <MKTypography variant="body2" color="white" opacity={0.8}>
+        {/* <MKBox
+        component="img"
+        src={image}
+        alt={title}
+        borderRadius="lg"
+        shadow="lg"
+        width="150px"
+        height= '150px'
+        position="relative"
+        zIndex={1}
+      /> */}
+        <MKTypography variant="body2" color="black" opacity={0.8}>
           {description}
         </MKTypography>
       </MKBox>

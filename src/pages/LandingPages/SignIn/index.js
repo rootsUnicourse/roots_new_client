@@ -153,19 +153,6 @@ const googleFailure = (err) => {
                 <MKTypography variant="h4" fontWeight="medium" color="white" mt={1}>
                   Sign in
                 </MKTypography>
-                <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
-                  <Grid item xs={2} sx={{ mr: 8 }}>
-                      <GoogleLogin
-                            clientId="299163078742-7udqvrad5p2pc66g2im7q7bknb4pf6gh.apps.googleusercontent.com"
-                            render={(renderProps)=>(
-                                <MKButton onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon/>} variant="contained">Google Sign in</MKButton>
-                            )}
-                            onSuccess={googleSuccess}
-                            onFailure={googleFailure}
-                            cookiePolicy="single_host_origin"
-                      />
-                  </Grid>
-                </Grid>
               </MKBox>
               <MKBox pt={4} pb={3} px={3}>
                 <MKBox component="form" role="form">
@@ -204,6 +191,19 @@ const googleFailure = (err) => {
                   <MKBox mt={4} mb={1}>
                     <MKButton variant="gradient" color="info" fullWidth onClick={handleSubmit}>
                       {isSignup ? 'Sign up' : 'Sign In'}
+                    </MKButton>
+                  </MKBox>
+                  <MKBox mt={4} mb={1}>
+                    <MKButton variant="gradient" fullWidth>
+                    <GoogleLogin
+                                clientId="299163078742-7udqvrad5p2pc66g2im7q7bknb4pf6gh.apps.googleusercontent.com"
+                                render={(renderProps)=>(
+                                    <MKButton onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon/>} variant="contained">Google Sign in</MKButton>
+                                )}
+                                onSuccess={googleSuccess}
+                                onFailure={googleFailure}
+                                cookiePolicy="single_host_origin"
+                          />
                     </MKButton>
                   </MKBox>
                   <MKBox mt={3} mb={1} textAlign="center">

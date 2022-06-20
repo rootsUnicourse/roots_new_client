@@ -8,7 +8,7 @@
 
 Coded by www.creative-tim.com
 
- =========================================================
+=========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
@@ -140,7 +140,8 @@ function Presentation() {
               color="white"
               textAlign="center"
               px={{ xs: 6, lg: 12 }}
-              mt={1}
+              mt={0}
+              fontWeight="bold"
             >
               Buy the same products But get your money BACK !
             </MKTypography>
@@ -165,7 +166,7 @@ function Presentation() {
         <CompanysMobile/>
         {/* <Information /> */}
         {/* <DesignBlocks /> */}
-        <Pages />
+        {/* <Pages /> */}
         {/* <Container sx={{ mt: 6 }}>
           <BuiltByDevelopers />
         </Container> */}

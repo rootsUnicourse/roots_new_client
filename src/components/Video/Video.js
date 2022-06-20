@@ -28,8 +28,7 @@ function Video() {
         <MKBox component="section" py={12}>
         <Container>
             <Grid container item xs={12} lg={12} py={1} mx="auto">
-                <CardMedia style={styles.media} component="video" controls src={Tona}/>
-                {/* <TransparentVideo src={Tona} /> */}
+                <CardMedia style={styles.media} component="video" controls />
             </Grid>
         </Container>
         </MKBox>

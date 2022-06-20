@@ -31,7 +31,7 @@ function CompanysMobile() {
                                 {companys.map((company) => (
                                     <Grid key={company._id} item xs={12} sm={6} lg={4} >
                                         <RotatingCardComp>
-                                            <CompCard image={company.image} title={company.title} icon="touch_app" description={company.discount} action={{ type: "internal", route: "/sections/page-sections/page-headers", label: "Go To Store" }}/>
+                                            <CompCard image={company.image} title={company.title} icon="touch_app" description={company.discount} action={{ type: "internal", route: "/", label: "Go To Store" }}/>
                                         </RotatingCardComp>
                                     </Grid>
                                 ))}

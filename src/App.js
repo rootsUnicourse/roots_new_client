@@ -69,7 +69,6 @@ export default function App() {
         <Route path="*" element={<Navigate to="/presentation" />} />
         <Route path="/form" exact element={<Form/>}/>
         <Route path="/profile" exact element={<Profile/>}/>
-
       </Routes>
     </ThemeProvider>
   );

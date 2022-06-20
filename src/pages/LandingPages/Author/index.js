@@ -28,6 +28,7 @@ import Profile from "pages/LandingPages/Author/sections/Profile";
 import Posts from "pages/LandingPages/Author/sections/Posts";
 import Contact from "pages/LandingPages/Author/sections/Contact";
 import Footer from "pages/LandingPages/Author/sections/Footer";
+import DefaultFooter from "../../../examples/Footers/DefaultFooter/index";
 
 // Routes
 import routes from "routes";
@@ -37,6 +38,7 @@ import bgImage from "assets/images/city-profile.jpg";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 
+import footerRoutes from "footer.routes";
 
 function Author() {
 
@@ -96,10 +98,10 @@ function Author() {
           }}
         >
           <Profile user={user}/>
-          <Posts />
+          {/* <Posts /> */}
         </Card>
-        <Contact />
-        <Footer />
+        {/* <Contact /> */}
+        <DefaultFooter content={footerRoutes} />
       </MKBox>
     </>
   );

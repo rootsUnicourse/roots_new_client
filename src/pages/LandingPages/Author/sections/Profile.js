@@ -33,9 +33,10 @@ function Profile({ user }) {
       <Container>
         <Grid container item xs={12} justifyContent="center" mx="auto">
           <MKBox mt={{ xs: -16, md: -20 }} textAlign="center">
-            <MKAvatar src={user.result.imageUrl} alt="Burce Mars" size="xxl" shadow="xl" />
+            <MKAvatar src={user.result.imageUrl} alt={"Burce Mars"} size="xxl" shadow="xl" />
           </MKBox>
-          <Grid container justifyContent="center" py={6}>
+          
+          {/* <Grid container justifyContent="center" py={6}>
             <Grid item xs={12} md={7} mx={{ xs: "auto", sm: 6, md: 1 }}>
               <MKBox display="flex" justifyContent="space-between" alignItems="center" mb={1}>
                 <MKTypography variant="h3">Michael Roven</MKTypography>
@@ -99,8 +100,14 @@ function Profile({ user }) {
                 </MKTypography>
               </MKTypography>
             </Grid>
-          </Grid>
+          </Grid> */}
         </Grid>
+        <MKBox textAlign="center" >
+            <MKTypography variant="h3" >
+              {user.result.name}
+            </MKTypography>
+        </MKBox>
+        
       </Container>
     </MKBox>
   );

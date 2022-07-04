@@ -9,7 +9,7 @@ import { createCompany } from '../../actions/companys'
 const Form = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const [companyData, setCompanyData] = useState({image: "", title: "", discount: ""});
+    const [companyData, setCompanyData] = useState({image: "", title: "", discount: "", description: "", siteUrl: ""});
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,6 +27,8 @@ const Form = () => {
                         <Typography variant="h6">Creating a Company</Typography>
                         <TextField name="title" variant="outlined" label="Title" fullWidthvalue={companyData.title} onChange={(e) => setCompanyData({...companyData, title: e.target.value})}/>
                         <TextField name="discount" variant="outlined" label="discount" fullWidthvalue={companyData.discount} onChange={(e) => setCompanyData({...companyData, discount: e.target.value})}/>
+                        <TextField name="siteUrl" variant="outlined" label="siteUrl" fullWidthvalue={companyData.siteUrl} onChange={(e) => setCompanyData({...companyData, siteUrl: e.target.value})}/>
+                        <TextField name="description" variant="outlined" label="description" fullWidthvalue={companyData.description} onChange={(e) => setCompanyData({...companyData, description: e.target.value})}/>
                         <div className={classes.fileInput}>
                             <FileBase type="file" multiple={false} onDone={({base64}) => setCompanyData({...companyData, image: base64})}/>
                         </div>

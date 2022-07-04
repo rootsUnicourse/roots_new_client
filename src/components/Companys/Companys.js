@@ -42,7 +42,7 @@ function Companys() {
                         (
                             <Grid container item spacing={3} alignItems="center" >
                                 {companys.map((company) => (
-                                    <Grid key={company._id} item xs={12} sm={6} lg={4} sx={{ display: { xs: 'none', sm: 'block' } }}>
+                                    <Grid key={company._id} item xs={12} md={6} lg={3} sx={{ display: { xs: 'none', sm: 'block' } }}>
                                         <RotatingCard>
                                             <RotatingCardFront
                                                 image={company.image}
@@ -52,12 +52,13 @@ function Companys() {
                                             <RotatingCardBack
                                                 image={company.image}
                                                 title={company.discount}
-                                                description="You will save a lot of time going from prototyping to full-functional code because all elements are implemented."
+                                                description={company.description}
                                                 action={{
-                                                type: "internal",
+                                                type: "external",
                                                 route: "/",
                                                 label: "Go To Store",
                                                 }}
+                                                url={company.siteUrl}
                                             />
                                         </RotatingCard>
                                     </Grid>

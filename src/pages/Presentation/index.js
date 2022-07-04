@@ -160,7 +160,7 @@ function Presentation() {
         }}
       >
         <Counters />
-        <Video/>
+        {/* <Video/> */}
         <SearchBar handlePress = {handleKeyPress} change = {handleChange}/>
         <Companys/>
         <CompanysMobile/>

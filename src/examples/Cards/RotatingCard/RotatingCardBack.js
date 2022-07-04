@@ -27,7 +27,9 @@ import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKButton from "components/MKButton";
 
-function RotatingCard({ color, image, title, description, action }) {
+function RotatingCard({ color, image, title, description, action, url }) {
+
+  console.log('url:', url)
   return (
     <MKBox
       display="flex"
@@ -49,18 +51,18 @@ function RotatingCard({ color, image, title, description, action }) {
           )}, url(${image})`,
         backfaceVisibility: "hidden",
         transform: "rotateY(180deg)",
-        backgroundSize: "408px 400px",
+        margin: "auto",
         backfaceVisibility: "hidden",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundAttachment: "fixed"
       }}
     >
-      <MKBox pt={12} pb={2} px={2} textAlign="center" lineHeight={1}>
+      <MKBox pt={5} pb={2} px={2} textAlign="center" lineHeight={1}>
         <MKTypography variant="h3" color="white" gutterBottom>
           {title}
         </MKTypography>
-        <MKTypography variant="body2" color="white" opacity={0.8}>
+        <MKTypography variant="body1" color="white" sx={{ fontWeight: 'bold' }}>
           {description}
         </MKTypography>
         {action && (
@@ -68,7 +70,7 @@ function RotatingCard({ color, image, title, description, action }) {
             {action.type === "external" ? (
               <MKButton
                 component={MuiLink}
-                href={action.route}
+                href={url}
                 target="_blank"
                 rel="noreferrer"
                 color="white"
@@ -78,7 +80,7 @@ function RotatingCard({ color, image, title, description, action }) {
                 {action.label}
               </MKButton>
             ) : (
-              <MKButton component={Link} to={action.route} color="white" size="small" fullWidth>
+              <MKButton component={Link} to={url} color="white" size="small" fullWidth>
                 {action.label}
               </MKButton>
             )}

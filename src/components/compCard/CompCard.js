@@ -29,7 +29,7 @@ import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import './comp.css'
 
-function CompCard({ color, image, icon, title, description, action }) {
+function CompCard({ color, image, icon, title, description, action, url }) {
   return (
     <MKBox
       display="grid"
@@ -46,14 +46,13 @@ function CompCard({ color, image, icon, title, description, action }) {
             rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.45),
             rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.45)
           )}, url(${image})`,
-        backgroundSize: "408px 500px",
-        backfaceVisibility: "hidden",
+        
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundAttachment: "fixed"
       }}
     >
-      <MKBox py={12} px={3} textAlign="center">
+      <MKBox py={4} textAlign="center">
         <MKTypography variant="h2" color="white" >
           {title}
         </MKTypography>
@@ -62,17 +61,17 @@ function CompCard({ color, image, icon, title, description, action }) {
             {typeof icon === "string" ? <Icon>{icon}</Icon> : icon}
           </MKTypography>
         )}
-        <MKTypography className="glow" variant="h3" color="white" mt={4}>
+        <MKTypography className="glow" variant="h3" color="white">
           {description}
         </MKTypography>
         
       </MKBox>
       {action && (
-          <MKBox fullWidth mt={4} mb={2} mx="auto">
+          <MKBox fullWidth mx="auto">
             {action.type === "external" ? (
               <MKButton
                 component={MuiLink}
-                href={action.route}
+                href={url}
                 target="_blank"
                 rel="noreferrer"
                 color="white"
@@ -82,7 +81,7 @@ function CompCard({ color, image, icon, title, description, action }) {
                 {action.label}
               </MKButton>
             ) : (
-              <MKButton component={Link} to={action.route} color="white" size="large" fullWidth >
+              <MKButton component={Link} to={url} color="white" size="large" fullWidth >
                 {action.label}
               </MKButton>
             )}

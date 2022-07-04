@@ -47,7 +47,7 @@ function RotatingCardFront({ color, image, icon, title, description }) {
       }}
     >
       <MKBox py={13} textAlign="center" >
-        <MKTypography variant="h5" color="black" gutterBottom pb={3} sx={{ fontWeight: 'bold' }}>
+        <MKTypography variant="h5" color="black" gutterBottom pb={6} sx={{ fontWeight: 'bold' }}>
           {title}
         </MKTypography>
         {icon && (

@@ -40,10 +40,11 @@ function RotatingCardFront({ color, image, icon, title, description }) {
             rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.25),
             rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.25)
           )}, url(${image})`,
+        // backgroundImage: `url(${image})`,
         backfaceVisibility: "hidden",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed"
+        backgroundAttachment: "initial"
       }}
     >
       <MKBox py={13} textAlign="center" >

@@ -49,13 +49,14 @@ function RotatingCard({ color, image, title, description, action, url }) {
             rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.45),
             rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.45)
           )}, url(${image})`,
+        // backgroundImage: `url(${image})`,
         backfaceVisibility: "hidden",
         transform: "rotateY(180deg)",
         margin: "auto",
         backfaceVisibility: "hidden",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed"
+        backgroundAttachment: "initial"
       }}
     >
       <MKBox pt={5} pb={2} px={2} textAlign="center" lineHeight={1}>

@@ -28,8 +28,12 @@ import MKButton from "components/MKButton";
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import './comp.css'
+import {useStyles} from './styles'
 
 function CompCard({ color, image, icon, title, description, action, url }) {
+
+
+
   return (
     <MKBox
       display="grid"
@@ -46,10 +50,10 @@ function CompCard({ color, image, icon, title, description, action, url }) {
             rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.45),
             rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.45)
           )}, url(${image})`,
-        
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed"
+          backfaceVisibility: "hidden",
+          backgroundPosition: "center center",
+          backgroundRepeat: "no-repeat",
+          backgroundAttachment: "initial"
       }}
     >
       <MKBox py={4} textAlign="center">

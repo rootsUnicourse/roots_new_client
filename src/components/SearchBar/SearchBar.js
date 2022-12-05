@@ -19,9 +19,9 @@ function SearchBar(props) {
     const [search,setSearch] = useState('');
 
     return (
-        <MKBox component="section" py={12}>
+        <MKBox component="section" pt={10} pb={3}>
         <Container>
-            <Grid container item xs={12} lg={4} py={1} mx="auto">
+            <Grid container item xs={12} lg={4}  mx="auto">
             <MKInput
                 onChange={(e)=>props.change(e)} 
                 onKeyPress={(e) => props.handlePress(e)}

@@ -45,7 +45,7 @@ import breakpoints from "assets/theme/base/breakpoints";
 import MKAvatar from "components/MKAvatar";
 
 import { useNavigate } from 'react-router-dom'
-
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 /* eslint-disable */
 function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center, handleLogout, user }) {
@@ -486,15 +486,27 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
             display={{ xs: user ? "none" : "flex", lg: "flex" }}
           >
-            <MKTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
+            <MKTypography fontWeight="bold" color={light ? "white" : "dark"} >
               {brand}
             </MKTypography>
           </MKBox>
-
+          
           { 
             user ?(
                 <MKBox >
                   <MKAvatar src={user.result.imageUrl} alt="Burce Mars" size="lg" shadow="xl"  component={Link} to={'/profile'}/>
+                  <MKTypography
+                    variant="h6"
+                    color="black"
+                    pl={1}
+                    sx={({ breakpoints, typography: { size } }) => ({
+                      [breakpoints.down("md")]: {
+                        fontSize: size["3xl"],
+                      },
+                        })}
+                    >
+                      Profile{" "}
+                  </MKTypography>
                 </MKBox>
             ) : null
           }

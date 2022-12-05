@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API = axios.create({ baseURL: 'https://rootsunicourse.herokuapp.com/' });
+const API = axios.create({ baseURL: 'https://roots-server.onrender.com' });
 
 
 export const fetchUsers = () => API.get('/user');

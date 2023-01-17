@@ -75,16 +75,6 @@ export default {
   copyright: (
     <MKTypography variant="button" fontWeight="regular">
       All rights reserved. Copyright &copy; {date} Roots
-      <MKTypography
-        component="a"
-        href="https://www.creative-tim.com"
-        target="_blank"
-        rel="noreferrer"
-        variant="button"
-        fontWeight="regular"
-      >
-      </MKTypography>
-      .
     </MKTypography>
   ),
 };

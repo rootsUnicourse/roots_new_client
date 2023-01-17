@@ -23,7 +23,7 @@ import Icon from "@mui/material/Icon";
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 
-function RotatingCardFront({ color, image, icon, title, description }) {
+function RotatingCardFront({ color, image, icon, title}) {
   return (
     <MKBox
       display="flex"
@@ -48,7 +48,7 @@ function RotatingCardFront({ color, image, icon, title, description }) {
       }}
     >
       <MKBox py={13} textAlign="center" >
-        <MKTypography variant="h5" color="black" gutterBottom pb={6} sx={{ fontWeight: 'bold' }}>
+        <MKTypography variant="h5" color="dark" gutterBottom pb={6} sx={{ fontWeight: 'bold' }}>
           {title}
         </MKTypography>
         {icon && (
@@ -56,9 +56,7 @@ function RotatingCardFront({ color, image, icon, title, description }) {
             {typeof icon === "string" ? <Icon>{icon}</Icon> : icon}
           </MKTypography>
         )}
-        <MKTypography variant="body2" color="black" opacity={0.8}>
-          {description}
-        </MKTypography>
+
       </MKBox>
     </MKBox>
   );
@@ -84,8 +82,7 @@ RotatingCardFront.propTypes = {
   ]),
   image: PropTypes.string.isRequired,
   icon: PropTypes.node,
-  title: PropTypes.node.isRequired,
-  description: PropTypes.node.isRequired,
+  title: PropTypes.node.isRequired
 };
 
 export default RotatingCardFront;

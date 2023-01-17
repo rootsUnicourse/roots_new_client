@@ -23,49 +23,35 @@ function Companys() {
 
     return (
         <MKBox component="section">
-        <Container>
-            {/* <Grid container item xs={12} lg={4} py={1} mx="auto">
-            <MKInput
-                variant="standard"
-                placeholder="Search"
-                fullWidth
-                InputProps={{
-                endAdornment: (
-                    <InputAdornment position="start">
-                    <SearchIcon fontSize="small" />
-                    </InputAdornment>
-                ),
-                }}
-            />
-            </Grid> */}
-            {!companys.length ? <CircularProgress/> : 
-                        (
-                            <Grid container item spacing={3} alignItems="center" >
-                                {companys.map((company) => (
-                                    <Grid key={company._id} item xs={12} md={6} lg={3} sx={{ display: { xs: 'none', sm: 'block' } }}>
-                                        <RotatingCard>
-                                            <RotatingCardFront
-                                                image={company.image}
-                                                icon="touch_app"
-                                                title={company.title}
-                                            />
-                                            <RotatingCardBack
-                                                image={company.image}
-                                                title={company.discount}
-                                                description={company.description}
-                                                action={{
-                                                type: "external",
-                                                route: "/",
-                                                label: "Go To Store",
-                                                }}
-                                                url={company.siteUrl}
-                                            />
-                                        </RotatingCard>
-                                    </Grid>
-                                ))}
-                            </Grid>
-                        )}
-        </Container>
+            <Container>
+                {!companys.length ? <CircularProgress/> : 
+                            (
+                                <Grid container item spacing={3} alignItems="center" >
+                                    {companys.map((company) => (
+                                        <Grid key={company._id} item xs={12} md={6} lg={3} sx={{ display: { xs: 'none', sm: 'block' } }}>
+                                            <RotatingCard>
+                                                <RotatingCardFront
+                                                    image={company.image}
+                                                    icon="touch_app"
+                                                    title={company.title}
+                                                />
+                                                <RotatingCardBack
+                                                    image={company.image}
+                                                    title={company.discount}
+                                                    description={company.description}
+                                                    action={{
+                                                    type: "external",
+                                                    route: "/",
+                                                    label: "Go To Store",
+                                                    }}
+                                                    url={company.siteUrl}
+                                                />
+                                            </RotatingCard>
+                                        </Grid>
+                                    ))}
+                                </Grid>
+                            )}
+            </Container>
         </MKBox>
     );
 }

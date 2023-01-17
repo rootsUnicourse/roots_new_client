@@ -29,7 +29,7 @@ import MKButton from "components/MKButton";
 
 function RotatingCard({ color, image, title, description, action, url }) {
 
-  console.log('url:', url)
+  // console.log('url:', url)
   return (
     <MKBox
       display="flex"

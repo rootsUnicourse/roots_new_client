@@ -58,7 +58,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
   const [arrowRef, setArrowRef] = useState(null);
   const [mobileNavbar, setMobileNavbar] = useState(false);
   const [mobileView, setMobileView] = useState(false);
-  console.log('user:', user)
+  // console.log('user:', user)
 
   const navigate = useNavigate()
   const openMobileNavbar = () => setMobileNavbar(!mobileNavbar);

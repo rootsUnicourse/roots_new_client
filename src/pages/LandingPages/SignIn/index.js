@@ -14,15 +14,18 @@ Coded by www.creative-tim.com
 */
 
 import { useState } from "react";
-
+import * as api from '../../../api/index'
+import SignupPromo from './promo'
 // react-router-dom components
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 // @mui material components
 import Card from "@mui/material/Card";
 import Switch from "@mui/material/Switch";
 import Grid from "@mui/material/Grid";
 import MuiLink from "@mui/material/Link";
+import { Link } from '@material-ui/core';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 // @mui icons
 // import FacebookIcon from "@mui/icons-material/Facebook";
@@ -34,14 +37,14 @@ import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
-
+import Checkbox from '@mui/material/Checkbox';
 // Material Kit 2 React example components
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import SimpleFooter from "examples/Footers/SimpleFooter";
 
 // Material Kit 2 React page layout routes
 import routes from "routes";
-
+import Pdf from "./privacy.pdf";
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 
@@ -57,6 +60,7 @@ import Icon from './Icon'
 function SignInBasic() {
   const queryParams = new URLSearchParams(window.location.search);
   const email = queryParams.get('email');
+  const [isChecked, setIsChecked] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [isSignup, setIsSignup] = useState(false)
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', password: '', confirmPassword: '',parantId: email, imageUrl: ''})
@@ -66,14 +70,19 @@ function SignInBasic() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(formData)
+    // console.log(formData)
     if(isSignup){
-        console.log(formData)
+        // console.log(formData)
         dispatch(signup(formData, navigate))
     }else {
-        console.log(formData)
+        // console.log(formData)
         dispatch(signin(formData, navigate))
     }
+  }
+
+  const handleCheckbox = async(e) => {
+    const {data} = await api.checkBox({isChecked: e.target.checked});
+    setIsChecked(data.status);
   }
 
   const handleChange = (e) => {
@@ -189,27 +198,36 @@ const googleFailure = (err) => {
                     </MKTypography>
                   </MKBox> */}
                   <MKBox mt={4} mb={1}>
-                    <MKButton variant="gradient" color="info" fullWidth onClick={handleSubmit}>
+                    <MKButton variant="gradient" color="info" fullWidth onClick={handleSubmit} disabled = {!isChecked}>
                       {isSignup ? 'Sign up' : 'Sign In'}
                     </MKButton>
                   </MKBox>
                   <MKBox mt={4} mb={1}>
-                    <MKButton variant="gradient" fullWidth>
-                    <GoogleLogin
-                                clientId="299163078742-7udqvrad5p2pc66g2im7q7bknb4pf6gh.apps.googleusercontent.com"
-                                render={(renderProps)=>(
-                                    <MKButton onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon/>} variant="contained">Google Sign in</MKButton>
-                                )}
-                                onSuccess={googleSuccess}
-                                onFailure={googleFailure}
-                                cookiePolicy="single_host_origin"
-                          />
-                    </MKButton>
+                    <Grid align="center" justify="center">
+                      <GoogleLogin
+                                  clientId="299163078742-7udqvrad5p2pc66g2im7q7bknb4pf6gh.apps.googleusercontent.com"
+                                  render={(renderProps)=>(
+                                      <MKButton onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon/>} variant="contained" disabled = {!isChecked} >Google Sign in</MKButton>
+                                  )}
+                                  onSuccess={googleSuccess}
+                                  onFailure={googleFailure}
+                                  cookiePolicy="single_host_origin"
+                            />
+                      </Grid>
+                    </MKBox>
+                  {/* here */}
+                  <MKBox textAlign="center" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <ReCAPTCHA sitekey="6Ldb2wQkAAAAAM6o3s8VlHHL8vxJmfdNvsCpCnt_" />
+                  </MKBox>
+                  <MKBox style={{ display: 'flex' }}>
+                    <Checkbox onChange={handleCheckbox} style={{ marginTop: '14px' }}/>
+                    <Link variant="subtitle1" style={{ marginTop: '6px', marginTop: '20px' }} href={Pdf} target="_blank" rel="noopener noreferrer">
+                      I Agree To The Terms And Conditions 
+                    </Link>
                   </MKBox>
                   <MKBox mt={3} mb={1} textAlign="center">
                     <MKButton
                       fontWeight="medium"
-                      textGradient
                       onClick={switchMode}
                     >
                       {isSignup ? 'Alredy have an account? Sign In' : "Don't have an account? Sign Up!"}
@@ -218,6 +236,7 @@ const googleFailure = (err) => {
                 </MKBox>
               </MKBox>
             </Card>
+            <SignupPromo/>
           </Grid>
         </Grid>
       </MKBox>

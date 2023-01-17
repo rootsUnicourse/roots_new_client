@@ -24,6 +24,7 @@ import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKSocialButton from "components/MKSocialButton";
 
+
 // Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import DefaultFooter from "examples/Footers/DefaultFooter";
@@ -61,7 +62,7 @@ function Presentation() {
 
   const [search,setSearch] = useState('');
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
-  console.log(user)
+  // console.log(user)
   const label = user ? "Log Out" : "Sign In"
   const route = user ? "/" : "/pages/authentication/sign-in"
   const dispatch = useDispatch()
@@ -85,7 +86,7 @@ function Presentation() {
   }
 
   const handleChange = (e) => {
-    console.log(e.target.value)
+    // console.log(e.target.value)
     setSearch(e.target.value)
   }
 

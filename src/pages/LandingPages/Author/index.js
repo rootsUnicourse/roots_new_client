@@ -43,7 +43,7 @@ import footerRoutes from "footer.routes";
 function Author() {
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
-  console.log(user)
+  // console.log(user)
   const label = user ? "Log Out" : "Sign In"
   const route = user ? "/" : "/pages/authentication/sign-in"
   const dispatch = useDispatch()

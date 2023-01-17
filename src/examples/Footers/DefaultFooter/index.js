@@ -26,6 +26,7 @@ import Grid from "@mui/material/Grid";
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
+import Contact from "../ContactFooter/index"
 
 function DefaultFooter({ content }) {
   const { brand, socials, menus, copyright } = content;
@@ -102,6 +103,7 @@ function DefaultFooter({ content }) {
             </Grid>
           ))} */}
           <Grid item xs={12} sx={{ textAlign: "center", my: 3 }}>
+            <Contact/>
             {copyright}
           </Grid>
         </Grid>

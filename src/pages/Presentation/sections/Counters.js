@@ -50,7 +50,7 @@ function Counters() {
           </Grid>
           <Grid item xs={12} md={4}>
             <DefaultCounterCard
-              count={25}
+              count={1}
               suffix="M$"
               title="Money Earned"
               description="Join the success and make some of it yours!"

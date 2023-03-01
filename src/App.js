@@ -34,6 +34,9 @@ import { getCompanys, getCompanyBySearch } from './actions/companys'
 import { getUsers } from './actions/users'
 import Form from "components/Form/Form";
 import Profile from "pages/LandingPages/Author/index";
+import ForgetMyPassword from "./pages/LandingPages/SignIn/forgetMyPass"
+import ResetPassword from './pages/LandingPages/SignIn/resetPass'
+import EditProfile from "components/editProfile/EditProfile";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -69,6 +72,9 @@ export default function App() {
         <Route path="*" element={<Navigate to="/presentation" />} />
         <Route path="/form" exact element={<Form/>}/>
         <Route path="/profile" exact element={<Profile/>}/>
+        <Route path="/forgotpassword" exact element={<ForgetMyPassword/>}/>
+        <Route path="/resetpassword/:token" element={<ResetPassword/>}/>
+        <Route path="/editProfile" element={<EditProfile/>}/>
       </Routes>
     </ThemeProvider>
   );

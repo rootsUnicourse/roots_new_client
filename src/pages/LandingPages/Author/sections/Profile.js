@@ -23,92 +23,82 @@ import MKBox from "components/MKBox";
 import MKAvatar from "components/MKAvatar";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
-
+import accountSVG from '../../../../assets/svg/account.svg';
 // Images
-import profilePicture from "assets/images/bruce-mars.jpg";
+import profilePicture from "assets/images/roots.webp";
+import UserCoin from "./UserCoin";
+import * as api from '../../../../api/index'
+import { useState, useEffect } from "react";
+import RootsTable from './OffspringTable';
 
 function Profile({ user }) {
+
+  const [offspring, setOffpring] = useState(false);
+  const [childrens, setChildrens] = useState(false);
+  const [grandChildren, setGrandChildren] = useState(false);
+  const [offspringFetched, setOffspringFetched] = useState(false);
+
+  const getOffspring = async () => {
+    const {data} = await api.getChildren(user.result.email);
+    setOffspringFetched(true);
+    setOffpring(data);
+  }
+
+  const filterOffpring = async () => {
+    const childrenFiltered = offspring.filter(child => child.parantId == user.result.email);
+    setChildrens(childrenFiltered);
+    const grandChildrenFiltered = offspring.filter(child => child.parantId != user.result.email);
+    setGrandChildren(grandChildrenFiltered);
+  }
+
+  useEffect(() => {
+    if(!offspringFetched){
+          getOffspring();
+          
+        }
+    if(offspringFetched){
+      filterOffpring();
+    }
+  },[offspring]);
+  
   return (
     <MKBox component="section" py={{ xs: 6, sm: 12 }}>
       <Container>
-        <Grid container item xs={12} justifyContent="center" mx="auto">
-          <MKBox mt={{ xs: -16, md: -20 }} textAlign="center">
-            <MKAvatar src={user.result.imageUrl} alt={"Burce Mars"} size="xxl" shadow="xl" />
-          </MKBox>
-          
-          {/* <Grid container justifyContent="center" py={6}>
-            <Grid item xs={12} md={7} mx={{ xs: "auto", sm: 6, md: 1 }}>
-              <MKBox display="flex" justifyContent="space-between" alignItems="center" mb={1}>
-                <MKTypography variant="h3">Michael Roven</MKTypography>
-                <MKButton variant="outlined" color="info" size="small">
-                  Follow
-                </MKButton>
-              </MKBox>
-              <Grid container spacing={3} mb={3}>
-                <Grid item>
-                  <MKTypography component="span" variant="body2" fontWeight="bold">
-                    323&nbsp;
-                  </MKTypography>
-                  <MKTypography component="span" variant="body2" color="text">
-                    Posts
-                  </MKTypography>
-                </Grid>
-                <Grid item>
-                  <MKTypography component="span" variant="body2" fontWeight="bold">
-                    3.5k&nbsp;
-                  </MKTypography>
-                  <MKTypography component="span" variant="body2" color="text">
-                    Followers
-                  </MKTypography>
-                </Grid>
-                <Grid item>
-                  <MKTypography component="span" variant="body2" fontWeight="bold">
-                    260&nbsp;
-                  </MKTypography>
-                  <MKTypography component="span" variant="body2" color="text">
-                    Following
-                  </MKTypography>
-                </Grid>
-              </Grid>
-              <MKTypography variant="body1" fontWeight="light" color="text">
-                Decisions: If you can&apos;t decide, the answer is no. If two equally difficult
-                paths, choose the one more painful in the short term (pain avoidance is creating an
-                illusion of equality). Choose the path that leaves you more equanimous. <br />
-                <MKTypography
-                  component="a"
-                  href="#"
-                  variant="body1"
-                  fontWeight="light"
-                  color="info"
-                  mt={3}
-                  sx={{
-                    width: "max-content",
-                    display: "flex",
-                    alignItems: "center",
-
-                    "& .material-icons-round": {
-                      transform: `translateX(3px)`,
-                      transition: "transform 0.2s cubic-bezier(0.34, 1.61, 0.7, 1.3)",
-                    },
-
-                    "&:hover .material-icons-round, &:focus .material-icons-round": {
-                      transform: `translateX(6px)`,
-                    },
-                  }}
-                >
-                  More about me <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
-                </MKTypography>
-              </MKTypography>
-            </Grid>
-          </Grid> */}
-        </Grid>
-        <MKBox textAlign="center" >
+        <MKBox mb={5} mt={-7} textAlign="center" >
             <MKTypography variant="h3" >
-              {user.result.name}
+              Your Tree
             </MKTypography>
         </MKBox>
-        
+        <MKBox>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+            {user ? <UserCoin avatarSrc={user.result.imageUrl} avaterName={user.result.name} moneyEarned="$1000" /> : null}
+            </Grid>
+            <Grid item xs={6}>
+            {childrens[0]? <UserCoin avatarSrc={childrens[0].imageUrl ? childrens[0].imageUrl : accountSVG } avaterName={childrens[0].name}  moneyEarned="$2000" /> : null}
+            </Grid>
+            <Grid item xs={6}>
+            {childrens[1] ? <UserCoin avatarSrc={childrens[1].imageUrl ? childrens[1].imageUrl : accountSVG} avaterName={childrens[1].name} moneyEarned="$3000" /> : null}
+            </Grid>
+            <Grid item xs={3}>
+              {grandChildren[0] ? <UserCoin avatarSrc={grandChildren[0].imageUrl? grandChildren[0].imageUrl : accountSVG} avaterName={grandChildren[0].name} moneyEarned="$4000" /> : null}
+            </Grid>
+            <Grid item xs={3}>
+              {grandChildren[2] ? <UserCoin avatarSrc={grandChildren[2].imageUrl ? grandChildren[2].imageUrl : accountSVG} avaterName={grandChildren[2].name} moneyEarned="$5000" /> : null}
+            </Grid>
+            <Grid item xs={3}>
+              {grandChildren[1] ? <UserCoin avatarSrc={grandChildren[1].imageUrl ? grandChildren[1].imageUrl : accountSVG} avaterName={grandChildren[1].name} moneyEarned="$6000" /> : null}
+            </Grid>
+            <Grid item xs={3}>
+              {grandChildren[3] ? <UserCoin avatarSrc={grandChildren[3].imageUrl ? grandChildren[3].imageUrl : accountSVG} avaterName={grandChildren[4].name} moneyEarned="$7000" /> : null}
+            </Grid>
+          </Grid>
+        </MKBox>
       </Container>
+      <hr style={{ marginTop: "100px" }}/>
+      <MKBox mb={5} mt={15} textAlign="center">
+          <RootsTable data={offspring ? offspring : null} user={user}/>
+      </MKBox>
     </MKBox>
   );
 }

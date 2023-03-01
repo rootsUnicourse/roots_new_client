@@ -494,10 +494,10 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
           { 
             user ?(
                 <MKBox >
-                  <MKAvatar src={user.result.imageUrl} alt="Burce Mars" size="lg" shadow="xl"  component={Link} to={'/profile'}/>
+                  <MKAvatar src={user.result.imageUrl} alt="Burce Mars" size="lg" shadow="xl" component={Link} to={'/profile'}/>
                   <MKTypography
                     variant="h6"
-                    color="black"
+                    color="dark"
                     pl={1}
                     sx={({ breakpoints, typography: { size } }) => ({
                       [breakpoints.down("md")]: {
@@ -505,9 +505,11 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                       },
                         })}
                     >
-                      Profile{" "}
+                      Profile
                   </MKTypography>
+                  
                 </MKBox>
+                
             ) : null
           }
 

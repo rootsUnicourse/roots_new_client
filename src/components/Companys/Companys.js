@@ -2,6 +2,7 @@
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import InputAdornment from "@mui/material/InputAdornment";
+import {useState} from 'react';
 
 // @mui icons
 import SearchIcon from "@mui/icons-material/Search";
@@ -20,6 +21,7 @@ import RotatingCardBack from "examples/Cards/RotatingCard/RotatingCardBack";
 function Companys() {
 
     const companys = useSelector((state) => state.companys)
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
 
     return (
         <MKBox component="section">
@@ -42,9 +44,9 @@ function Companys() {
                                                     action={{
                                                     type: "external",
                                                     route: "/",
-                                                    label: "Go To Store",
+                                                    label: user ? "Go To Store" : "Sign in first",
                                                     }}
-                                                    url={company.siteUrl}
+                                                    url={user ? company.siteUrl : "/pages/authentication/sign-in"}
                                                 />
                                             </RotatingCard>
                                         </Grid>

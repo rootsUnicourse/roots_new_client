@@ -56,7 +56,8 @@ import { getCompanyBySearch, getCompanys } from '../../actions/companys'
 import { useNavigate } from 'react-router-dom'
 import Video from 'components/Video/Video';
 import CompanysMobile from 'components/Companys/CompanysMobile';
-
+import companys from 'reducers/companys';
+import HoveringButton from '../../components/hoverInvite/Invite'
 
 function Presentation() {
 
@@ -67,10 +68,21 @@ function Presentation() {
   const route = user ? "/" : "/pages/authentication/sign-in"
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const email = user ? user.result.email : null;
+  const encodedEmail = window.btoa(email);
+  //https://www.rootz.website/pages/authentication/sign-in
+  const url = `http://localhost:3000/pages/authentication/sign-in?email=${encodedEmail}`
+
+  // useEffect(()=>{
+  //   dispatch(getCompanys())
+  // },[search==''])
 
   useEffect(()=>{
-    dispatch(getCompanys())
-  },[search==''])
+    if(search == ''){
+      dispatch(getCompanys())
+    }
+    dispatch(getCompanyBySearch({ search }))
+  },[search])
 
   const searchCompany = () => {
     if(search.trim())
@@ -86,7 +98,6 @@ function Presentation() {
   }
 
   const handleChange = (e) => {
-    // console.log(e.target.value)
     setSearch(e.target.value)
   }
 
@@ -143,11 +154,26 @@ function Presentation() {
               px={{ xs: 6, lg: 12 }}
               mt={0}
               fontWeight="bold"
+              style={{ textShadow: '0.5px 0.5px #aaa' }}
             >
               Buy the same products But get your money BACK !
             </MKTypography>
+            <MKTypography
+              variant="body1"
+              color="white"
+              textAlign="center"
+              px={{ xs: 6, lg: 12 }}
+              mt={0}
+              fontWeight="bold"
+              style={{ textShadow: '0.5px 0.5px #aaa' }}
+            >
+              Sign in to eran money from yours and your friends shopping!
+            </MKTypography>
           </Grid>
         </Container>
+      </MKBox>
+      <MKBox>
+          {user? <HoveringButton url={url}/> : null}
       </MKBox>
       <Card
         sx={{
@@ -162,7 +188,7 @@ function Presentation() {
       >
         <Counters />
         {/* <Video/> */}
-        <SearchBar handlePress = {handleKeyPress} change = {handleChange}/>
+        <SearchBar  change = {handleChange}/>
         <Companys/>
         <CompanysMobile/>
         {/* <Information /> */}
@@ -269,7 +295,9 @@ function Presentation() {
             </Grid>
           </Container>
         </MKBox> */}
+        
       </Card>
+      
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>

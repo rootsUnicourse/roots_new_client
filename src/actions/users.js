@@ -8,3 +8,12 @@ export const getUsers = () => async (dispatch) => {
         console.log(error.message);
     }
 }
+
+export const getChildren = (email) => async (dispatch) => {
+    try {
+        const { data } = await api.getChildren(email);
+        dispatch({ type: 'GET_CHILDREN', payload: data });
+    } catch (error) {
+        console.log(error.message);
+    }
+}

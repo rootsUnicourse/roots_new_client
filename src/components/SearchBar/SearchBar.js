@@ -24,7 +24,7 @@ function SearchBar(props) {
             <Grid container item xs={12} lg={4}  mx="auto">
             <MKInput
                 onChange={(e)=>props.change(e)} 
-                onKeyPress={(e) => props.handlePress(e)}
+                // onKeyPress={(e) => props.handlePress(e)}
                 variant="standard"
                 placeholder="Search"
                 fullWidth

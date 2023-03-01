@@ -22,6 +22,7 @@ import MKBox from "components/MKBox";
 
 // Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import MKTypography from "components/MKTypography";
 
 // Author page sections
 import Profile from "pages/LandingPages/Author/sections/Profile";
@@ -34,20 +35,24 @@ import DefaultFooter from "../../../examples/Footers/DefaultFooter/index";
 import routes from "routes";
 
 // Images
-import bgImage from "assets/images/city-profile.jpg";
+import bgImage from "assets/images/roots.webp";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
-
 import footerRoutes from "footer.routes";
+import HoveringButton from '../../../components/hoverInvite/Invite'
+import ProfileButton from '../../../components/editProfileButton/ProfileButton';
 
 function Author() {
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
-  // console.log(user)
-  const label = user ? "Log Out" : "Sign In"
-  const route = user ? "/" : "/pages/authentication/sign-in"
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const label = user ? "Log Out" : "Sign In";
+  const route = user ? "/" : "/pages/authentication/sign-in";
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const email = user.result.email;
+  const encodedEmail = window.btoa(email);
+  //https://www.rootz.website/pages/authentication/sign-in
+  const url = `http://localhost:3000/pages/authentication/sign-in?email=${encodedEmail}`
 
   const logout = () => {
     dispatch({ type: 'LOGOUT' })
@@ -65,8 +70,6 @@ function Author() {
           label: label,
           color: "info",
         }}
-        transparent
-        light
         handleLogout = {logout}
         user = {user}
       />
@@ -77,8 +80,8 @@ function Author() {
           sx={{
             backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
               `${linearGradient(
-                rgba(gradients.dark.main, 0.8),
-                rgba(gradients.dark.state, 0.8)
+                rgba(gradients.dark.main, 0.2),
+                rgba(gradients.dark.state, 0.2)
               )}, url(${bgImage})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
@@ -97,10 +100,12 @@ function Author() {
             boxShadow: ({ boxShadows: { xxl } }) => xxl,
           }}
         >
+        <ProfileButton/>
           <Profile user={user}/>
           {/* <Posts /> */}
         </Card>
         {/* <Contact /> */}
+        <HoveringButton url={url}/>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
     </>

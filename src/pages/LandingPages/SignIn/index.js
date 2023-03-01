@@ -17,7 +17,7 @@ import { useState } from "react";
 import * as api from '../../../api/index'
 import SignupPromo from './promo'
 // react-router-dom components
-// import { Link } from "react-router-dom";
+import { Link as RouterLink }  from "react-router-dom";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -59,7 +59,8 @@ import Icon from './Icon'
 
 function SignInBasic() {
   const queryParams = new URLSearchParams(window.location.search);
-  const email = queryParams.get('email');
+  const encodedEmail = queryParams.get('email');
+  const email = window.atob(encodedEmail);
   const [isChecked, setIsChecked] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [isSignup, setIsSignup] = useState(false)
@@ -173,6 +174,7 @@ const googleFailure = (err) => {
                       <MKBox mb={2}>
                         <MKInput name="lastName" label="Last Name" onChange={handleChange} fullWidth/>
                       </MKBox>
+                      
                     </>
                   )}
                   <MKBox mb={2}>
@@ -181,22 +183,18 @@ const googleFailure = (err) => {
                   <MKBox mb={2}>
                     <MKInput name="password" type="password" label="Password" fullWidth onChange={handleChange}/>
                   </MKBox>
+                  
                   { isSignup && 
                   <MKBox mb={2}> 
                     <MKInput name="confirmPassword" label="Repeat Password" onChange={handleChange} type="password" fullWidth/>
                   </MKBox>}
-                  {/* <MKBox display="flex" alignItems="center" ml={-1}>
-                    <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-                    <MKTypography
-                      variant="button"
-                      fontWeight="regular"
-                      color="text"
-                      onClick={handleSetRememberMe}
-                      sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
-                    >
-                      &nbsp;&nbsp;Remember me
+                  
+                  {!isSignup && <MKBox>
+                    <MKTypography variant="body2">
+                      <RouterLink to="/forgotpassword">Forgot your password?</RouterLink>
                     </MKTypography>
-                  </MKBox> */}
+                  </MKBox> }
+
                   <MKBox mt={4} mb={1}>
                     <MKButton variant="gradient" color="info" fullWidth onClick={handleSubmit} disabled = {!isChecked}>
                       {isSignup ? 'Sign up' : 'Sign In'}
@@ -236,7 +234,6 @@ const googleFailure = (err) => {
                 </MKBox>
               </MKBox>
             </Card>
-            <SignupPromo/>
           </Grid>
         </Grid>
       </MKBox>

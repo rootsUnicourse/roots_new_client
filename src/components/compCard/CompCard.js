@@ -71,7 +71,7 @@ function CompCard({ color, image, icon, title, description, action, url }) {
         
       </MKBox>
       {action && (
-          <MKBox fullWidth mx="auto">
+          <MKBox  mx="auto">
             {action.type === "external" ? (
               <MKButton
                 component={MuiLink}

@@ -23,6 +23,24 @@ function ResetPasswordForm() {
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
 
+    // const handleSubmit = async (event) => {
+    //     event.preventDefault();
+    //     if (password !== confirmPassword) {
+    //     setError('Passwords do not match');
+    //     return;
+    //     }
+
+    //     try {
+    //     const response = await axios.post('https://roots-server.onrender.com/forgotpassword/reset-password', {
+    //         password,
+    //         token: window.location.pathname.split('/')[2], // get the token from the query string
+    //     });
+    //     setSuccess(true);
+    //     } catch (error) {
+    //     setError(error.response.data);
+    //     }
+    // };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (password !== confirmPassword) {

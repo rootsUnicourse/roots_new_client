@@ -36,7 +36,7 @@ const ForgotPasswordForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:5002/forgotpassword', { email })
+    axios.post('https://roots-server.onrender.com/forgotpassword', { email })
       .then(response => {
         console.log("yayy")
       })
@@ -44,6 +44,17 @@ const ForgotPasswordForm = () => {
         // Handle error
       });
   };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   axios.post('http://localhost:5002/forgotpassword', { email })
+  //     .then(response => {
+  //       console.log("yayy")
+  //     })
+  //     .catch(error => {
+  //       // Handle error
+  //     });
+  // };
 
 
   return (

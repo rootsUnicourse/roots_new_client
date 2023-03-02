@@ -76,7 +76,7 @@ const EditProfile = () => {
             imageUrl: image,
             name: name
         }
-        const {data} = await api.updateUser(formData);
+        await api.updateUser(formData);
     }
 
 

@@ -1,4 +1,9 @@
 [[redirects]]
 from ="/*"
-to = "/src/index.js"
+to = "index.html"
 status = 200
+
+[[redirects]]
+from = "/resetpassword/*"
+to = "https://www.rootz.website/resetpassword/:splat"
+status = 301

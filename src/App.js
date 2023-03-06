@@ -74,7 +74,7 @@ export default function App() {
         <Route path="/form" exact element={<Form/>}/>
         <Route path="/profile" exact element={<Profile/>}/>
         <Route path="/forgotpassword" exact element={<ForgetMyPassword/>}/>
-        <Route path="/resetpassword/:token" exact element={<ResetPassword/>}/>
+        <Route path="/resetpassword/:token"  element={<ResetPassword/>}/>
         <Route path="/editProfile" exact element={<EditProfile/>}/>
         <Route path="/pages/authentication/sign-in" element={<SignIn/>} />
       </Routes>

@@ -72,7 +72,7 @@ function Presentation() {
   const encodedEmail = window.btoa(email);
   //https://www.rootz.website/pages/authentication/sign-in
   const url = `https://www.rootz.website/pages/authentication/sign-in?email=${encodedEmail}`
-
+  const isMobile = window.innerWidth <= 768;
   // useEffect(()=>{
   //   dispatch(getCompanys())
   // },[search==''])
@@ -190,7 +190,7 @@ function Presentation() {
         {/* <Video/> */}
         <SearchBar  change = {handleChange}/>
         <Companys/>
-        <CompanysMobile/>
+        { isMobile ? <CompanysMobile/> : null}
         {/* <Information /> */}
         {/* <DesignBlocks /> */}
         {/* <Pages /> */}

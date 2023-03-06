@@ -26,6 +26,8 @@ import MKTypography from "components/MKTypography";
 function RotatingCardFront({ color, image, icon, title}) {
   return (
     <MKBox
+      height={350}
+      width={300}
       display="flex"
       justifyContent="center"
       alignContent="center"
@@ -41,21 +43,25 @@ function RotatingCardFront({ color, image, icon, title}) {
             rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.25)
           )}, url(${image})`,
         // backgroundImage: `url(${image})`,
-        backfaceVisibility: "hidden",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "initial"
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backfaceVisibility: "hidden"
       }}
     >
       <MKBox py={13} textAlign="center" >
-        <MKTypography variant="h5" color="dark" gutterBottom pb={6} sx={{ fontWeight: 'bold' }}>
-          {title}
-        </MKTypography>
-        {icon && (
-          <MKTypography variant="h2" color="white">
-            {typeof icon === "string" ? <Icon>{icon}</Icon> : icon}
+        <MKBox>
+          <MKTypography variant="h5" color="dark" gutterBottom pb={6} sx={{ fontWeight: 'bold' }}>
+            {title}
           </MKTypography>
-        )}
+        </MKBox>
+        <MKBox>
+          {icon && (
+            <MKTypography variant="h2" color="white">
+              {typeof icon === "string" ? <Icon>{icon}</Icon> : icon}
+            </MKTypography>
+          )}
+        </MKBox>
 
       </MKBox>
     </MKBox>

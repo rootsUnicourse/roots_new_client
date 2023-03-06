@@ -25,9 +25,9 @@ function CompanysMobile() {
     return (
         <MKBox component="section">
         <Container>
-            <Grid container item spacing={3} alignItems="center" sx={{ display: { xs: 'block', sm: 'none' } }}>
+            <Grid container item spacing={3} alignItems="center" >
                 {companys.map((company) => (
-                    <Grid key={company._id} item xs={12} sm={6} lg={4} >
+                    <Grid key={company._id} item xs={4} sm={4} md={4} lg={4} >
                         <RotatingCardComp>
                             <CompCard url={company.siteUrl} image={company.image} title={company.title} icon="touch_app" description={company.discount} action={{ type: "external", route: "/", label: "Go To Store" }}/>
                         </RotatingCardComp>

@@ -54,6 +54,8 @@ function RotatingCard({ color, image, title, description, action, url }) {
   // console.log('url:', url)
   return (
     <MKBox
+      height={350}
+      width={300}
       display="flex"
       justifyContent="center"
       alignItems="center"
@@ -75,40 +77,46 @@ function RotatingCard({ color, image, title, description, action, url }) {
         backfaceVisibility: "hidden",
         transform: "rotateY(180deg)",
         margin: "auto",
-        backfaceVisibility: "hidden",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "initial"
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backfaceVisibility: "hidden"
       }}
     >
       <MKBox pt={5} pb={2} px={2} textAlign="center" lineHeight={1}>
-        <MKTypography variant="h3" color="white" gutterBottom>
-          {title}
-        </MKTypography>
-        <MKTypography variant="body1" color="white" sx={{ fontWeight: 'bold' }}>
-          {description}
-        </MKTypography>
-        {action && (
-          <MKBox width="50%" mt={4} mb={2} mx="auto">
-            {action.type === "external" ? (
-              <MKButton
-                component={MuiLink}
-                href={url}
-                target="_blank"
-                rel="noreferrer"
-                color="white"
-                size="small"
-                fullWidth
-              >
-                {action.label}
-              </MKButton>
-            ) : (
-              <MKButton component={Link} to={url} color="white" size="small" fullWidth onClick={popUp}>
-                {action.label}
-              </MKButton>
-            )}
+        <MKBox>
+          <MKTypography variant="h3" color="white" gutterBottom>
+            {title}
+          </MKTypography>
+        </MKBox>
+        <MKBox>
+          <MKTypography variant="body1" color="white" sx={{ fontWeight: 'bold' }}>
+            {description}
+          </MKTypography>
+        </MKBox>
+        <MKBox>
+          {action && (
+            <MKBox width="50%" mt={4} mb={2} mx="auto">
+              {action.type === "external" ? (
+                <MKButton
+                  component={MuiLink}
+                  href={url}
+                  target="_blank"
+                  rel="noreferrer"
+                  color="white"
+                  size="small"
+                  fullWidth
+                >
+                  {action.label}
+                </MKButton>
+              ) : (
+                <MKButton component={Link} to={url} color="white" size="small" fullWidth onClick={popUp}>
+                  {action.label}
+                </MKButton>
+              )}
           </MKBox>
         )}
+        </MKBox>
       </MKBox>
     </MKBox>
   );

@@ -32,10 +32,33 @@ import {useStyles} from './styles'
 
 function CompCard({ color, image, icon, title, description, action, url }) {
 
+  const getTextFontSize = (title) => {
+    const containerWidth = 60; // Change this to the actual width of the container
+    const textWidth = getTextWidth(title);
+    const scaleFactor = containerWidth / textWidth;
+    const maxFontSize = 32;
+    const minFontSize = 10;
+    const fontSize = Math.min(maxFontSize, Math.max(minFontSize, scaleFactor * maxFontSize));
+    return `${fontSize}px`;
+  };
 
+  const getTextWidth = (title) => {
+    const span = document.createElement("span");
+    span.style.fontSize = "32px"; // Change this to the maximum font size
+    span.style.visibility = "hidden";
+    span.style.position = "absolute";
+    span.style.whiteSpace = "nowrap";
+    span.textContent = title;
+    document.body.appendChild(span);
+    const width = span.getBoundingClientRect().width;
+    document.body.removeChild(span);
+    return width;
+  };
 
   return (
     <MKBox
+      height={140}
+      width={100}
       display="grid"
       justifyContent="center"
       alignContent="center"
@@ -50,47 +73,54 @@ function CompCard({ color, image, icon, title, description, action, url }) {
             rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.45),
             rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.45)
           )}, url(${image})`,
-          backfaceVisibility: "hidden",
-          backgroundPosition: "center center",
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "initial"
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          
       }}
     >
-      <MKBox py={4} textAlign="center">
-        <MKTypography variant="h2" color="white" >
-          {title}
-        </MKTypography>
-        {icon && (
-          <MKTypography variant="h2" color="white">
-            {typeof icon === "string" ? <Icon>{icon}</Icon> : icon}
+      <MKBox py={4}  textAlign="center">
+        <MKBox>
+          <MKTypography style={{ fontSize: getTextFontSize(title), lineHeight: 1, whiteSpace: 'nowrap',marginBottom:'15px' }} color="dark" >
+            {title}
           </MKTypography>
-        )}
-        <MKTypography className="glow" variant="h3" color="white">
-          {description}
-        </MKTypography>
+        </MKBox>
+        <MKBox>
+          {icon && (
+            <MKTypography variant="h4" color="dark">
+              {typeof icon === "string" ? <Icon>{icon}</Icon> : icon}
+            </MKTypography>
+          )}
+        </MKBox>
+        <MKBox>
+          <MKTypography className="glow" variant="h6" color="dark">
+            {description}
+          </MKTypography>
+        </MKBox>
         
-      </MKBox>
       {action && (
           <MKBox  mx="auto">
             {action.type === "external" ? (
               <MKButton
+                height={25}
                 component={MuiLink}
                 href={url}
                 target="_blank"
                 rel="noreferrer"
-                color="white"
+                color="dark"
                 size="small"
                 fullWidth
               >
                 {action.label}
               </MKButton>
             ) : (
-              <MKButton component={Link} to={url} color="white" size="large" fullWidth >
+              <MKButton component={Link} to={url} color="dark" size="large" fullWidth >
                 {action.label}
               </MKButton>
             )}
           </MKBox>
         )}
+      </MKBox>
     </MKBox>
   );
 }

@@ -16,6 +16,7 @@
     "node": "14 || 15 || 16",
     "npm": ">=6"
   },
+  "homepage": "https://www.rootz.website/",
   "dependencies": {
     "@emotion/cache": "11.4.0",
     "@emotion/react": "11.4.1",

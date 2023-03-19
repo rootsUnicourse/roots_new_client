@@ -47,7 +47,7 @@ import routes from "routes";
 import Pdf from "./privacy.pdf";
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
-
+import { useSelector } from 'react-redux';
 
 import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -68,6 +68,8 @@ function SignInBasic() {
   const [showPassword, setShowPassword] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const error = useSelector(state => state.auth.error);
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -178,10 +180,10 @@ const googleFailure = (err) => {
                     </>
                   )}
                   <MKBox mb={2}>
-                    <MKInput name="email" type="email" label="Email" fullWidth onChange={handleChange}/>
+                    <MKInput name="email" type="email" label="Email" fullWidth onChange={handleChange} error={error == "User doesn't exist." ? true : false} helperText={error == "User doesn't exist." ? error : null}/>
                   </MKBox>
                   <MKBox mb={2}>
-                    <MKInput name="password" type="password" label="Password" fullWidth onChange={handleChange}/>
+                    <MKInput name="password" type="password" label="Password" fullWidth onChange={handleChange} error={error == "Invalid credentials. please try again" ? true : false} helperText={error == "Invalid credentials. please try again" ? error : null}/>
                   </MKBox>
                   
                   { isSignup && 

@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
         right: theme.spacing(2),
         top: theme.spacing(2),
         zIndex: 1,
-        backgroundColor: '#9BA17B',
+        backgroundColor: '#ABC4AA',
         color: 'white',
         borderRadius: '50%',
         width: theme.spacing(10),
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         '&:hover': {
-            backgroundColor: '#9FC088',
+            backgroundColor: '#ABC4AA',
         },
 },
     popover: {

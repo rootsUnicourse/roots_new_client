@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import InputAdornment from "@mui/material/InputAdornment";
 
-// @mui icons
-import SearchIcon from "@mui/icons-material/Search";
 
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
-import MKInput from "components/MKInput";
-import {CardMedia, Card} from '@material-ui/core';
-import { TransparentVideo } from 'react-transparent-video'
-import Tona from './noga.mp4';
+
+import {CardMedia} from '@material-ui/core';
+// import Tona from './noga.mp4';
 
 function Video() {
 

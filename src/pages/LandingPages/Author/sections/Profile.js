@@ -16,42 +16,26 @@ Coded by www.creative-tim.com
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
-import { makeStyles } from '@material-ui/core/styles';
 
 
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
-import MKAvatar from "components/MKAvatar";
-import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
 import accountSVG from '../../../../assets/svg/account.svg';
 // Images
-import profilePicture from "assets/images/roots.webp";
 import UserCoin from "./UserCoin";
 import * as api from '../../../../api/index'
-import { useState, useEffect, useRef  } from "react";
+import { useState, useEffect } from "react";
 import RootsTable from './OffspringTable';
 import CircleAvatars from '../../../../components/CircleAvatars/CircleAvatars'
 import './styles.css';
 import SouthIcon from '@mui/icons-material/South';
-import { Box } from "@mui/system";
+import BigLink from "components/BigLinkText/BigLinkText";
 
 
 
 function Profile({ user }) {
 
-  const useStyles = makeStyles(theme => ({
-    wrapIcon: {
-      display: 'flex',
-      alignItems: 'center',
-      flexWrap: 'wrap',
-  }
-  }));
-
-  const startRef = useRef(null);
-  const endRef = useRef(null);
-  const classes = useStyles();
 
   const [offspring, setOffpring] = useState(false);
   const [childrens, setChildrens] = useState(false);
@@ -121,17 +105,17 @@ function Profile({ user }) {
             <Grid item xs={12} >
               {user ? <UserCoin avatarSrc={user.result.imageUrl} avaterName={user.result.name} moneyEarned="$0" kind="dad"/> : null}
               <MKBox  style={{ textAlign: 'center' }} mt={2} >
-                {user ? <SouthIcon style={{ transform: 'scale(2)' }}/> : null}
+                {childrens[0] ? <SouthIcon style={{ transform: 'scale(2)' }}/> : null}
               </MKBox>
             </Grid>
             
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <MKBox textAlign="center">
                 <MKTypography variant="h4">
                     Childrens
                 </MKTypography>
               </MKBox>
-            </Grid>
+            </Grid> */}
 
             <Grid container item xs={gridSize ? gridSize : 0}>
               <Grid item xs={12}>
@@ -193,9 +177,9 @@ function Profile({ user }) {
           
         </MKBox>
       </Container>
-      <hr style={{ marginTop: "100px" }}/>
-      <MKBox mb={5} mt={15} textAlign="center">
-          <RootsTable data={offspring ? offspring : null} user={user}/>
+      {childrens[0] ? <hr style={{ marginTop: "100px" }}/> : null}
+      <MKBox mb={5} mt={childrens[0] ? 15 : null} textAlign="center">
+          {childrens[0] ? <RootsTable data={offspring ? offspring : null} user={user}/> : <BigLink/>}
       </MKBox>
     </MKBox>
   );

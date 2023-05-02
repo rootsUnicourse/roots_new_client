@@ -37,12 +37,12 @@ const ForgotPasswordForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios.post('https://roots-server.onrender.com/forgotpassword', { email })
-      .then(response => {
+      .then( 
         console.log("yayy")
-      })
-      .catch(error => {
+      )
+      .catch(
         // Handle error
-      });
+      );
   };
 
   // const handleSubmit = (event) => {

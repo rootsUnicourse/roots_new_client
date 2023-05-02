@@ -45,7 +45,6 @@ import breakpoints from "assets/theme/base/breakpoints";
 import MKAvatar from "components/MKAvatar";
 
 import { useNavigate } from 'react-router-dom'
-import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 /* eslint-disable */
 function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center, handleLogout, user }) {

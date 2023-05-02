@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // @mui material components
 import Container from "@mui/material/Container";
@@ -16,7 +16,7 @@ import MKInput from "components/MKInput";
 
 function SearchBar(props) {
 
-    const [search,setSearch] = useState('');
+    // const [search,setSearch] = useState('');
 
     return (
         <MKBox component="section" pt={10} pb={3}>

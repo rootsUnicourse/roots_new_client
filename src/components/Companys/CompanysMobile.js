@@ -2,19 +2,15 @@
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import InputAdornment from "@mui/material/InputAdornment";
 
-// @mui icons
-import SearchIcon from "@mui/icons-material/Search";
+
+
 
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
-import MKInput from "components/MKInput";
 import { useSelector } from 'react-redux';
-import BackgroundBlogCard from "examples/Cards/BlogCards/BackgroundBlogCard";
-import {CircularProgress} from '@material-ui/core'
 import RotatingCardComp from "../compCard/index";
-import Card from "@mui/material/Card";
+
 
 import CompCard from '../compCard/CompCard'
 

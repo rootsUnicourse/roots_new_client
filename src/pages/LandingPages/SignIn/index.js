@@ -15,22 +15,18 @@ Coded by www.creative-tim.com
 
 import { useState } from "react";
 import * as api from '../../../api/index'
-import SignupPromo from './promo'
 // react-router-dom components
 import { Link as RouterLink }  from "react-router-dom";
 
 // @mui material components
 import Card from "@mui/material/Card";
-import Switch from "@mui/material/Switch";
 import Grid from "@mui/material/Grid";
-import MuiLink from "@mui/material/Link";
 import { Link } from '@material-ui/core';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 // @mui icons
 // import FacebookIcon from "@mui/icons-material/Facebook";
 // import GitHubIcon from "@mui/icons-material/GitHub";
-import GoogleIcon from "@mui/icons-material/Google";
 
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
@@ -40,7 +36,6 @@ import MKButton from "components/MKButton";
 import Checkbox from '@mui/material/Checkbox';
 // Material Kit 2 React example components
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import SimpleFooter from "examples/Footers/SimpleFooter";
 
 // Material Kit 2 React page layout routes
 import routes from "routes";
@@ -62,10 +57,8 @@ function SignInBasic() {
   const encodedEmail = queryParams.get('email');
   const email = window.atob(encodedEmail);
   const [isChecked, setIsChecked] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
   const [isSignup, setIsSignup] = useState(false)
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', password: '', confirmPassword: '',parantId: email, imageUrl: ''})
-  const [showPassword, setShowPassword] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -92,16 +85,12 @@ function SignInBasic() {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleShowPassword = () => {
-    setShowPassword((prevShowPassword) => !prevShowPassword)
-  }
+  
 
   const switchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup)
-    setShowPassword(false)
+    
   }
-
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
   const googleSuccess = async (res) => {
     // console.log(process.env.BASE_IMAGE)
@@ -221,7 +210,7 @@ const googleFailure = (err) => {
                   </MKBox>
                   <MKBox style={{ display: 'flex' }}>
                     <Checkbox onChange={handleCheckbox} style={{ marginTop: '14px' }}/>
-                    <Link variant="subtitle1" style={{ marginTop: '6px', marginTop: '20px' }} href={Pdf} target="_blank" rel="noopener noreferrer">
+                    <Link variant="subtitle1" style={{ marginTop: '20px' }} href={Pdf} target="_blank" rel="noopener noreferrer">
                       I Agree To The Terms And Conditions 
                     </Link>
                   </MKBox>

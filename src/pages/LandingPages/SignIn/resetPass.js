@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Grid, Paper, Typography, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import axios from 'axios';
+// import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,7 +21,7 @@ function ResetPasswordForm() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(false);
+    const [success] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -30,15 +30,15 @@ function ResetPasswordForm() {
         return;
         }
 
-        try {
-        const response = await axios.post('https://roots-server.onrender.com/forgotpassword/reset-password', {
-            password,
-            token: window.location.pathname.split('/')[2], // get the token from the query string
-        });
-        setSuccess(true);
-        } catch (error) {
-        setError(error.response.data);
-        }
+        // try {
+        // const response = await axios.post('https://roots-server.onrender.com/forgotpassword/reset-password', {
+        //     password,
+        //     token: window.location.pathname.split('/')[2], // get the token from the query string
+        // });
+        // setSuccess(true);
+        // } catch (error) {
+        // setError(error.response.data);
+        // }
     };
 
     // const handleSubmit = async (event) => {

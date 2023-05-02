@@ -22,24 +22,22 @@ import Card from "@mui/material/Card";
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
-import MKSocialButton from "components/MKSocialButton";
 
 
 // Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import DefaultFooter from "examples/Footers/DefaultFooter";
-import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
 
 // Presentation page sections
 import Counters from "pages/Presentation/sections/Counters";
-import Information from "pages/Presentation/sections/Information";
-import DesignBlocks from "pages/Presentation/sections/DesignBlocks";
-import Pages from "pages/Presentation/sections/Pages";
-import Testimonials from "pages/Presentation/sections/Testimonials";
-import Download from "pages/Presentation/sections/Download";
+// import Information from "pages/Presentation/sections/Information";
+// import DesignBlocks from "pages/Presentation/sections/DesignBlocks";
+// import Pages from "pages/Presentation/sections/Pages";
+// import Testimonials from "pages/Presentation/sections/Testimonials";
+// import Download from "pages/Presentation/sections/Download";
 
 // Presentation page components
-import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers";
+// import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers";
 
 // Routes
 import routes from "routes";
@@ -48,15 +46,15 @@ import footerRoutes from "footer.routes";
 // Images
 import bgImage from "assets/images/roots.webp";
 import SearchBar from "components/SearchBar/SearchBar";
-import CompCards from "components/CompCards/CompCards";
+// import CompCards from "components/CompCards/CompCards";
 import Companys from '../../components/Companys/Companys'
 
 import { useDispatch } from 'react-redux';
 import { getCompanyBySearch, getCompanys } from '../../actions/companys'
 import { useNavigate } from 'react-router-dom'
-import Video from 'components/Video/Video';
+// import Video from 'components/Video/Video';
 import CompanysMobile from 'components/Companys/CompanysMobile';
-import companys from 'reducers/companys';
+// import companys from 'reducers/companys';
 import HoveringButton from '../../components/hoverInvite/Invite'
 
 function Presentation() {
@@ -84,18 +82,18 @@ function Presentation() {
     dispatch(getCompanyBySearch({ search }))
   },[search])
 
-  const searchCompany = () => {
-    if(search.trim())
-    {
-        dispatch(getCompanyBySearch({ search }))
-    }
-  }
+  // const searchCompany = () => {
+  //   if(search.trim())
+  //   {
+  //       dispatch(getCompanyBySearch({ search }))
+  //   }
+  // }
 
-  const handleKeyPress = (e) => {
-    if(e.keyCode == 13 || e.which == 13) {
-        searchCompany()
-    }
-  }
+  // const handleKeyPress = (e) => {
+  //   if(e.keyCode == 13 || e.which == 13) {
+  //       searchCompany()
+  //   }
+  // }
 
   const handleChange = (e) => {
     setSearch(e.target.value)

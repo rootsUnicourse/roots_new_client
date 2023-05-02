@@ -30,7 +30,7 @@ import Presentation from "layouts/pages/presentation";
 import routes from "routes";
 
 import { useDispatch } from 'react-redux';
-import { getCompanys, getCompanyBySearch } from './actions/companys'
+import { getCompanys } from './actions/companys'
 import { getUsers } from './actions/users'
 import Form from "components/Form/Form";
 import Profile from "pages/LandingPages/Author/index";

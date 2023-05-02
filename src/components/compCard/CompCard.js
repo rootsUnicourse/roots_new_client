@@ -28,7 +28,7 @@ import MKButton from "components/MKButton";
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import './comp.css'
-import {useStyles} from './styles'
+
 
 function CompCard({ color, image, icon, title, description, action, url }) {
 

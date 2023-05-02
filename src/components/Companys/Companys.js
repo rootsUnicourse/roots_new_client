@@ -1,17 +1,11 @@
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import InputAdornment from "@mui/material/InputAdornment";
 import {useState} from 'react';
-
-// @mui icons
-import SearchIcon from "@mui/icons-material/Search";
 
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
-import MKInput from "components/MKInput";
 import { useSelector } from 'react-redux';
-import BackgroundBlogCard from "examples/Cards/BlogCards/BackgroundBlogCard";
 import {CircularProgress} from '@material-ui/core'
 
 import RotatingCard from "examples/Cards/RotatingCard";
@@ -21,7 +15,7 @@ import RotatingCardBack from "examples/Cards/RotatingCard/RotatingCardBack";
 function Companys() {
 
     const companys = useSelector((state) => state.companys)
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+    const [user] = useState(JSON.parse(localStorage.getItem('profile')))
 
     return (
         <MKBox component="section">

@@ -1,11 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import MenuItem from '@material-ui/core/MenuItem';
-import FileCopyIcon from '@material-ui/icons/FileCopy';
-import WhatsAppIcon from '@material-ui/icons/WhatsApp';
-import Popover from '@material-ui/core/Popover';
-import Typography from '@material-ui/core/Typography';
 import { ReactComponent as EditProfile } from '../../assets/svg/profile.svg';
 import { Link } from 'react-router-dom';
 
@@ -33,9 +28,8 @@ const useStyles = makeStyles((theme) => ({
 },
 }));
 
-const ProfileButton = ({ url }) => {
+const ProfileButton = () => {
     const classes = useStyles();
-    const [anchorEl, setAnchorEl] = useState(null);
 
 
     return (

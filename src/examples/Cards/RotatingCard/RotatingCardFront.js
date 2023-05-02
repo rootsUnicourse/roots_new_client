@@ -27,13 +27,12 @@ function RotatingCardFront({ color, image, icon, title}) {
   return (
     <MKBox
       height={350}
-      width={300}
+      width="100%"
       display="flex"
       justifyContent="center"
       alignContent="center"
       borderRadius="lg"
       coloredShadow={color}
-      width="100%"
       position="relative"
       zIndex={2}
       sx={{

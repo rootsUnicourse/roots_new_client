@@ -1,6 +1,5 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import MKBox from 'components/MKBox';
 import MKAvatar from 'components/MKAvatar';
@@ -94,7 +93,7 @@ const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind }) => {
               <Card className={classes.card}>
                 <CardContent className={classes.cardContent}>
                   <Typography className={classes.responsiveTypography}>
-                    Money Waiting: {moneyEarned}
+                    Money Earned: {moneyEarned}
                   </Typography>
                 </CardContent>
               </Card> 

@@ -26,32 +26,14 @@ import MuiLink from "@mui/material/Link";
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKButton from "components/MKButton";
-import {useState} from 'react';
 
 
 
 function RotatingCard({ color, image, title, description, action, url }) {
 
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  function Popup() {
-    return (
-        <div className="popup">
-            <p>sorry, you need to login first</p>
-            <button onClick={() => setIsPopupOpen(false)}>close</button>
-        </div>
-    );
-  }
+  
 
-  const popUp = () => {
-    if (url == null) {
-      setIsPopupOpen(true);
-    }
-    else{
-      setIsPopupOpen(false);
-    }
-  }
-  // console.log('url:', url)
   return (
     <MKBox
       height={350}
@@ -80,7 +62,6 @@ function RotatingCard({ color, image, title, description, action, url }) {
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        backfaceVisibility: "hidden"
       }}
     >
       <MKBox pt={5} pb={2} px={2} textAlign="center" lineHeight={1}>
@@ -110,7 +91,7 @@ function RotatingCard({ color, image, title, description, action, url }) {
                   {action.label}
                 </MKButton>
               ) : (
-                <MKButton component={Link} to={url} color="white" size="small" fullWidth onClick={popUp}>
+                <MKButton component={Link} to={url} color="white" size="small" fullWidth>
                   {action.label}
                 </MKButton>
               )}

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import useStyles from './styles'
-import { TextField, Button, Typography, Paper, Grid, CardMedia, Avatar } from '@material-ui/core';
+import { TextField, Button, Typography, Paper, Grid } from '@material-ui/core';
 import FileBase from 'react-file-base64'
 import { useDispatch } from 'react-redux'
 import { createCompany } from '../../actions/companys'

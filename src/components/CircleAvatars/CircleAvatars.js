@@ -1,10 +1,10 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import UserCoin from 'pages/LandingPages/Author/sections/UserCoin';
+import { makeStyles} from '@material-ui/core/styles';
+// import UserCoin from 'pages/LandingPages/Author/sections/UserCoin';
 import GrandCoin from 'pages/LandingPages/Author/sections/GrandCoin';
 import theme from 'assets/theme';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     position: 'relative',
     width: '200px',

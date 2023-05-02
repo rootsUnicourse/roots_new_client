@@ -12,7 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -22,13 +22,9 @@ import MKBox from "components/MKBox";
 
 // Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import MKTypography from "components/MKTypography";
 
 // Author page sections
 import Profile from "pages/LandingPages/Author/sections/Profile";
-import Posts from "pages/LandingPages/Author/sections/Posts";
-import Contact from "pages/LandingPages/Author/sections/Contact";
-import Footer from "pages/LandingPages/Author/sections/Footer";
 import DefaultFooter from "../../../examples/Footers/DefaultFooter/index";
 
 // Routes

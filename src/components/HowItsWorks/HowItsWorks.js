@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
         color: '#a9907e',
     },
     step: {
-        color: '#f3deba',
+        color: '#675D50',
         marginBottom: theme.spacing(1),
     },
 }));
@@ -89,7 +89,7 @@ const HowItWorks = () => {
             2. Invite friends, and get money back for their purchases as well.
         </Typography>
         <Typography variant="h5" className={classes.step}>
-            3. They invite friends, you get money back for their purchases and their friends' purchases and their friends' friends purchases.
+            3. They invite friends, you get money back for their purchases and their friends' purchases and their friends' friends purchases!
         </Typography>
         <Typography variant="h5" className={classes.step}>
             4. In short, grow roots that like to shop, it pays off.

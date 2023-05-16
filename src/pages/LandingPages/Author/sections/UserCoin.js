@@ -6,6 +6,7 @@ import MKAvatar from 'components/MKAvatar';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
+import UserDetailsPopup from 'components/UserDetailsPopup/UserDetailsPopup';
 
 const useStyles = makeStyles((theme) => ({
   dad: {
@@ -69,6 +70,17 @@ const useStyles = makeStyles((theme) => ({
 
 const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind }) => {
   const classes = useStyles();
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   var classKind;
   if(kind == 'dad'){
     classKind = classes.dad;
@@ -81,7 +93,19 @@ const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind }) => {
   }
   return (
     <MKBox mb={10}>
-      <MKAvatar alt="Profile Picture" src={avatarSrc} className={`${classKind} ${classes.avatar}`} />
+      <div>
+        <MKAvatar onClick={handleClickOpen} alt="Profile Picture" src={avatarSrc} className={`${classKind} ${classes.avatar}`} />
+      </div>
+      {kind !== 'dad' ? (
+      <UserDetailsPopup
+        open={open}
+        handleClose={handleClose}
+        avatarSrc={avatarSrc}
+        avaterName={avaterName}
+        moneyEarned={moneyEarned}
+        lastActivity="2023-05-04" // Replace with actual data
+        registeredFrom="2023-04-01" // Replace with actual data
+      />) : null}
       <Typography style={kind == 'grand' ? { fontSize: '15px' } : null} className={classes.moneyEarned} variant="h6">
         {avaterName}
       </Typography>

@@ -31,7 +31,7 @@ const useStyles = makeStyles(() => ({
 
 function CircleAvatars({ users, parantEmail }) {
   const classes = useStyles();
-
+  console.log(users);
   const childCount = users.filter((user) => user.parantId === parantEmail).length;
 
   const childElements = users
@@ -50,6 +50,7 @@ function CircleAvatars({ users, parantEmail }) {
           key={index}
           className={classes.avatar}
           avatarSrc={user.imageUrl}
+          avatarName={user.name}
           style={{
             top: `${top}%`,
             left: `${left}%`,
@@ -58,7 +59,14 @@ function CircleAvatars({ users, parantEmail }) {
       );
     });
 
-  return <div className={classes.root} >{childElements}</div>;
+    return (
+      childCount !== 0 ? (
+        <div className={classes.root}>
+          {childElements}
+        </div>
+      ) : null
+    );
+    
 }
 
 export default CircleAvatars;

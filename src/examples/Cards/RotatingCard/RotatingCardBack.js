@@ -26,12 +26,35 @@ import MuiLink from "@mui/material/Link";
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKButton from "components/MKButton";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+    button: {
+        backgroundColor: "#A9907E",
+        color: "#fff",
+        borderRadius: "25px",
+        padding: "10px 20px",
+        textTransform: "none",
+        margin: theme.spacing(1),
+        "&:hover": {
+        color: "#fff",
+        backgroundColor: "#ABC4AA",
+        },
+    },
+    selectedButton: {
+        backgroundColor: "#ABC4AA",
+        color: "#fff",
+        "&:hover": {
+        color: "#fff",
+        backgroundColor: "#ABC4AA",
+        },
+    },
+}));
 
 
+function RotatingCard({ color, image, title, description, action, url, customColor }) {
 
-function RotatingCard({ color, image, title, description, action, url }) {
-
-
+  const classes = useStyles();
   
 
   return (
@@ -52,8 +75,8 @@ function RotatingCard({ color, image, title, description, action, url }) {
       sx={{
         backgroundImage: ({ palette: { gradients }, functions: { linearGradient, rgba } }) =>
           `${linearGradient(
-            rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.45),
-            rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.45)
+            rgba(customColor || (gradients[color] ? gradients[color].main : gradients.info.main), 0.25),
+            rgba(customColor || (gradients[color] ? gradients[color].main : gradients.info.main), 0.25),
           )}, url(${image})`,
         // backgroundImage: `url(${image})`,
         backfaceVisibility: "hidden",
@@ -64,7 +87,7 @@ function RotatingCard({ color, image, title, description, action, url }) {
         backgroundPosition: 'center',
       }}
     >
-      <MKBox pt={5} pb={2} px={2} textAlign="center" lineHeight={1}>
+      <MKBox pt={5} pb={2} px={2} textAlign="center" >
         <MKBox>
           <MKTypography variant="h3" color="white" gutterBottom>
             {title}
@@ -77,21 +100,24 @@ function RotatingCard({ color, image, title, description, action, url }) {
         </MKBox>
         <MKBox>
           {action && (
-            <MKBox width="50%" mt={4} mb={2} mx="auto">
+            <MKBox  mt={4} mb={2} mx="auto">
               {action.type === "external" ? (
                 <MKButton
                   component={MuiLink}
                   href={url}
                   target="_blank"
                   rel="noreferrer"
-                  color="white"
-                  size="small"
-                  fullWidth
+                  className={classes.button}
+                  sx={{
+                    whiteSpace: 'nowrap',
+                    textOverflow: 'ellipsis',
+                    overflow: 'hidden',
+                  }}
                 >
                   {action.label}
                 </MKButton>
               ) : (
-                <MKButton component={Link} to={url} color="white" size="small" fullWidth>
+                <MKButton className={classes.button} component={Link} to={url} sx={{whiteSpace: 'nowrap',textOverflow: 'ellipsis',overflow: 'hidden',}}>
                   {action.label}
                 </MKButton>
               )}
@@ -120,6 +146,7 @@ RotatingCard.propTypes = {
     "dark",
     "light",
   ]),
+  customColor: PropTypes.string,
   image: PropTypes.string.isRequired,
   title: PropTypes.node.isRequired,
   description: PropTypes.node.isRequired,

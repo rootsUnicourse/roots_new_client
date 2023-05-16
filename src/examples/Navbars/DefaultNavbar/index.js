@@ -492,6 +492,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
           
           { 
             user ?(
+              <MKBox display="flex" justifyContent="center" alignItems="center" width="100%" ml={"140px"}>
                 <MKBox >
                   <MKAvatar src={user.result.imageUrl} alt="Burce Mars" size="lg" shadow="xl" component={Link} to={'/profile'}/>
                   <MKTypography
@@ -506,9 +507,8 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                     >
                       Profile
                   </MKTypography>
-                  
                 </MKBox>
-                
+              </MKBox>
             ) : null
           }
 
@@ -519,15 +519,15 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
               </MKBox>
             ) 
         }
-          {/* <MKBox
+          <MKBox
             color="inherit"
             display={{ xs: "none", lg: "flex" }}
             ml="auto"
             mr={center ? "auto" : 0}
           >
             {renderNavbarItems}
-          </MKBox> */}
-          <MKBox ml={{ xs: "auto", lg: 0 }}>
+          </MKBox>
+          <MKBox>
             {action &&
               (action.type === "internal" ? (
                 <MKButton
@@ -541,6 +541,11 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                   color={action.color ? action.color : "info"}
                   size="small"
                   onClick={handleLogout}
+                  sx={{
+                    whiteSpace: 'nowrap',
+                    textOverflow: 'ellipsis',
+                    overflow: 'hidden',
+                  }}
                 >
                   {action.label}
                 </MKButton>
@@ -562,7 +567,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                 </MKButton>
               ))}
           </MKBox>
-          {/* <MKBox
+          <MKBox
             display={{ xs: "inline-block", lg: "none" }}
             lineHeight={0}
             py={1.5}
@@ -572,7 +577,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             onClick={openMobileNavbar}
           >
             <Icon fontSize="default">{mobileNavbar ? "close" : "menu"}</Icon>
-          </MKBox> */}
+          </MKBox>
         </MKBox>
         <MKBox
           bgColor={transparent ? "white" : "transparent"}
@@ -583,8 +588,8 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
           {mobileView && <DefaultNavbarMobile routes={routes} open={mobileNavbar} />}
         </MKBox>
       </MKBox>
-      {/* {dropdownMenu}
-      {nestedDropdownMenu} */}
+      {dropdownMenu}
+      {nestedDropdownMenu}
     </Container>
   );
 }

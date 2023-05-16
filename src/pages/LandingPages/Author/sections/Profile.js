@@ -53,7 +53,6 @@ function Profile({ user }) {
 
   const getOffspring = async () => {
     const {data} = await api.getAllDescendants(user.result.email);
-    console.log(data);
     setOffspringFetched(true);
     setOffpring(data);
   }
@@ -106,7 +105,7 @@ function Profile({ user }) {
       "undoManager.isEnabled": true,
       layout: $(go.TreeLayout, { angle: 90, layerSpacing: 35 }),
       initialContentAlignment: go.Spot.Center, 
-      initialScale: 0.9, 
+      initialScale: 0.9,
     });
   
     diagram.nodeTemplate = $(
@@ -118,7 +117,7 @@ function Profile({ user }) {
           "Auto",
           $(go.Shape, "Circle", {
             fill: null,
-            stroke: "#ABC4AA",
+            stroke: "#675D50",
             strokeWidth: 4,
           },
           new go.Binding("width", "", function(_, target) {
@@ -148,7 +147,7 @@ function Profile({ user }) {
         go.Shape,
         "Circle",
         {
-          fill: "#ffffff",
+          fill: "#ABC4AA",
           strokeWidth: 2,
           stroke: "#555",
         }
@@ -246,7 +245,7 @@ function Profile({ user }) {
             <MKTypography variant="h3" >
                 Your Roots
             </MKTypography>
-            <Container id="gojs-diagram" style={{ width: "100vw", height: "800px" }} />
+            <Container id="gojs-diagram" className="gojs-diagram" style={{ width: "100vw", height: "800px" }} />
           </MKBox>) : null}
         </MKBox>
           {offspring ? <hr style={{ marginTop: "100px" }}/> : null}

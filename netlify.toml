@@ -7,3 +7,8 @@ status = 200
 from = "/resetpassword/*"
 to = "https://www.rootz.website/resetpassword/:splat"
 status = 301
+
+[[redirects]]
+from ="/*"
+to = "https://www.rootz.website/pages/authentication/sign-in"
+status = 200

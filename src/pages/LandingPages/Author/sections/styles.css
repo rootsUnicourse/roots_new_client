@@ -3,3 +3,7 @@
     height: 100px;
     margin: 0 10px;
 }
+
+.gojs-diagram {
+    background-color: #A9907E; /* Replace this with your desired background color */
+}

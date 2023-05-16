@@ -42,8 +42,8 @@ function Profile({ user }) {
 
 
   const [offspring, setOffpring] = useState(false);
-  const [childrens, setChildrens] = useState(false);
-  const [grandChildren, setGrandChildren] = useState(false);
+  // const [childrens, setChildrens] = useState(false);
+  // const [grandChildren, setGrandChildren] = useState(false);
   const [offspringFetched, setOffspringFetched] = useState(false);
   // const [numOfChildrens, setNumOfChildrens] = useState(false);
   // const [gridSize, setGridSize] = useState(false);
@@ -52,18 +52,20 @@ function Profile({ user }) {
 
 
   const getOffspring = async () => {
-    const {data} = await api.getChildren(user.result.email);
+    const {data} = await api.getAllDescendants(user.result.email);
+    console.log(data);
     setOffspringFetched(true);
     setOffpring(data);
   }
+  
 
-  const filterOffpring = async () => {
-    const childrenFiltered = offspring.filter(child => child.parantId == user.result.email);
-    // setNumOfChildrens(childrenFiltered.length);
-    setChildrens(childrenFiltered);
-    const grandChildrenFiltered = offspring.filter(child => child.parantId != user.result.email);
-    setGrandChildren(grandChildrenFiltered);
-  }
+  // const filterOffpring = async () => {
+  //   const childrenFiltered = offspring.filter(child => child.parantId == user.result.email);
+  //   // setNumOfChildrens(childrenFiltered.length);
+  //   setChildrens(childrenFiltered);
+  //   const grandChildrenFiltered = offspring.filter(child => child.parantId != user.result.email);
+  //   setGrandChildren(grandChildrenFiltered);
+  // }
 
   // const createGridSize = () =>{
   //   if(numOfChildrens == 1){
@@ -88,9 +90,9 @@ function Profile({ user }) {
           getOffspring();
           
         }
-    if(offspringFetched){
-      filterOffpring();
-    }
+    // if(offspringFetched){
+    //   filterOffpring();
+    // }
   },[offspring]);
 
   // useEffect(() => {
@@ -103,6 +105,8 @@ function Profile({ user }) {
     const diagram = $(go.Diagram, {
       "undoManager.isEnabled": true,
       layout: $(go.TreeLayout, { angle: 90, layerSpacing: 35 }),
+      initialContentAlignment: go.Spot.Center, 
+      initialScale: 0.9, 
     });
   
     diagram.nodeTemplate = $(
@@ -184,48 +188,49 @@ function Profile({ user }) {
   
   
   
-  function generateModel(user, childrens, grandChildren) {
+  function generateModel(user, offspring) {
     const nodeDataArray = [
       { key: user.result.email, name: user.result.name, source: user.result.imageUrl },
     ];
   
     const linkDataArray = [];
   
-    if (Array.isArray(childrens)) {
-      childrens.forEach((child) => {
-        nodeDataArray.push({
-          key: child.email,
-          name: child.name,
-          source: child.imageUrl ? child.imageUrl : accountSVG,
-        });
-  
-        linkDataArray.push({ from: user.result.email, to: child.email });
-  
-        grandChildren.forEach((grandChild) => {
-          if (grandChild.parantId === child.email) {
+    const addDescendants = (parentId) => {
+      if (Array.isArray(offspring)) {
+        offspring.forEach((descendant) => {
+          if (descendant.parantId === parentId) {
             nodeDataArray.push({
-              key: grandChild.email,
-              name: grandChild.name,
-              source: grandChild.imageUrl ? grandChild.imageUrl : accountSVG,
+              key: descendant.email,
+              name: descendant.name,
+              source: descendant.imageUrl ? descendant.imageUrl : accountSVG,
             });
-  
-            linkDataArray.push({ from: child.email, to: grandChild.email });
+    
+            linkDataArray.push({ from: parentId, to: descendant.email });
+    
+            addDescendants(descendant.email);
           }
         });
-      });
-    }
+      } else {
+        console.error("offspring is not an array:", offspring);
+      }
+    };
+    
+  
+    addDescendants(user.result.email);
   
     return new go.GraphLinksModel(nodeDataArray, linkDataArray);
   }
+  
   
 
   useEffect(() => {
     if (offspringFetched) {
       const diagram = initDiagram();
-      diagram.model = generateModel(user, childrens, grandChildren);
+      diagram.model = generateModel(user, offspring);
       diagram.div = document.getElementById("gojs-diagram");
     }
-  }, [offspringFetched, childrens, grandChildren]);
+  }, [offspringFetched, offspring]);
+  
   
   
   return (
@@ -237,16 +242,16 @@ function Profile({ user }) {
                 {user ? <UserCoin avatarSrc={user.result.imageUrl} avaterName={user.result.name} moneyEarned="$0" kind="dad"/> : null}
               </Grid>
             </Grid>
-          {childrens[0] ? (<MKBox  textAlign="center" >
+          {offspring ? (<MKBox  textAlign="center" >
             <MKTypography variant="h3" >
                 Your Roots
             </MKTypography>
-            <Container id="gojs-diagram" style={{ width: "100%", height: "600px" }} />
+            <Container id="gojs-diagram" style={{ width: "100vw", height: "800px" }} />
           </MKBox>) : null}
         </MKBox>
-          {childrens[0] ? <hr style={{ marginTop: "100px" }}/> : null}
-          <MKBox mb={5} mt={childrens[0] ? 15 : null} textAlign="center">
-              {childrens[0] ? <RootsTable data={offspring ? offspring : null} user={user}/> : <BigLink/>}
+          {offspring ? <hr style={{ marginTop: "100px" }}/> : null}
+          <MKBox mb={5} mt={offspring ? 15 : null} textAlign="center">
+              {offspring ? <RootsTable data={offspring ? offspring : null} user={user}/> : <BigLink/>}
           </MKBox>
           <UserDetailsPopup
             open={popupOpen}

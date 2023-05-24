@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   card: {
-    backgroundColor: '#ABC4AA',
+    backgroundColor: '#F1F1F1',
     margin: theme.spacing(1),
     width: 170,
     height: 100,
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContent: {
     textAlign: 'center',
-    color: '#675D50',
+    color: '#334767',
   },
   cardGrid: {
     display: 'flex',
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind }) => {
+const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind,moneyWaiting,moneyApproved,cashWithdrawn,createdAt,lastActivity }) => {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -103,8 +103,8 @@ const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind }) => {
         avatarSrc={avatarSrc}
         avaterName={avaterName}
         moneyEarned={moneyEarned}
-        lastActivity="2023-05-04" // Replace with actual data
-        registeredFrom="2023-04-01" // Replace with actual data
+        lastActivity={lastActivity} // Replace with actual data
+        createdAt={createdAt} // Replace with actual data
       />) : null}
       <Typography style={kind == 'grand' ? { fontSize: '15px' } : null} className={classes.moneyEarned} variant="h6">
         {avaterName}
@@ -113,11 +113,11 @@ const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind }) => {
       {kind == 'dad' ? (
         <Grid container className={classes.cardGrid}>
           <Grid item>
-            {moneyEarned ? 
+            {moneyEarned >= 0? 
               <Card className={classes.card}>
                 <CardContent className={classes.cardContent}>
                   <Typography className={classes.responsiveTypography}>
-                    Money Earned: {moneyEarned}
+                    Money Earned: <br /> <br />  <span style={{ color: 'green' }}>{moneyEarned}</span>
                   </Typography>
                 </CardContent>
               </Card> 
@@ -127,7 +127,7 @@ const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind }) => {
             <Card className={classes.card}>
               <CardContent className={classes.cardContent}>
                 <Typography className={classes.responsiveTypography}>
-                  Money Waiting: {moneyEarned}
+                  Money Waiting: <br /> <br />  <span style={{ color: 'green' }}>{moneyWaiting}</span>
                 </Typography>
               </CardContent>
             </Card>
@@ -136,7 +136,7 @@ const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind }) => {
             <Card className={classes.card}>
               <CardContent className={classes.cardContent}>
                 <Typography className={classes.responsiveTypography}>
-                  Money Approved: {moneyEarned}
+                  Money Approved: <br /> <br />  <span style={{ color: 'green' }}>{moneyApproved}</span>
                 </Typography>
               </CardContent>
             </Card>
@@ -145,7 +145,7 @@ const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind }) => {
             <Card className={classes.card}>
               <CardContent className={classes.cardContent}>
                 <Typography className={classes.responsiveTypography}>
-                  Cash Withdrawn: {moneyEarned}
+                  Cash Withdrawn: <br /> <br />  <span style={{ color: 'green' }}>{cashWithdrawn}</span>
                 </Typography>
               </CardContent>
             </Card>

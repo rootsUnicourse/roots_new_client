@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API = axios.create({ baseURL: 'https://roots-server.onrender.com' });
-// const API = axios.create({ baseURL: 'http://localhost:5002' });
+// const API = axios.create({ baseURL: 'https://roots-server.onrender.com' });
+const API = axios.create({ baseURL: 'http://localhost:5002' });
 
 
 export const fetchUsers = () => API.get('/user');
@@ -18,3 +18,4 @@ export const checkBox = (isChecked) => API.post('/checkbox-clicked' ,isChecked);
 export const sendMail = (mailData) => API.post('/mail', mailData);
 export const updateUser = (formData) => API.put('/user/update',formData);
 export const getAllDescendants = (email) => API.get(`/user/descendants?email=${email}`);
+export const getUserByEmail = (email) => API.get(`/user/user-by-email?email=${email}`);

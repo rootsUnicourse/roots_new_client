@@ -40,7 +40,7 @@ import ProfileButton from '../../../components/editProfileButton/ProfileButton';
 
 function Author() {
 
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const label = user ? "Log Out" : "Sign In";
   const route = user ? "/" : "/pages/authentication/sign-in";
   const dispatch = useDispatch();
@@ -48,7 +48,8 @@ function Author() {
   const email = user.result.email;
   const encodedEmail = window.btoa(email);
   //https://www.rootz.website/pages/authentication/sign-in
-  const url = `https://www.rootz.website/pages/authentication/sign-in?email=${encodedEmail}`
+  // const url = `https://www.rootz.website/pages/authentication/sign-in?email=${encodedEmail}`
+  const url = `http://localhost:3000/pages/authentication/sign-in?email=${encodedEmail}`
 
   const logout = () => {
     dispatch({ type: 'LOGOUT' })

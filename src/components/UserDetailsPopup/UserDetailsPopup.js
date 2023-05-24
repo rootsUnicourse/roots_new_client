@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const UserDetailsPopup = ({ open, handleClose, avatarSrc, avaterName, moneyEarned, lastActivity, registeredFrom }) => {
+const UserDetailsPopup = ({ open, handleClose, avatarSrc, avaterName, moneyEarned, lastActivity, createdAt }) => {
 
     const classes = useStyles();
     
@@ -45,7 +45,7 @@ const UserDetailsPopup = ({ open, handleClose, avatarSrc, avaterName, moneyEarne
             Last activity: {lastActivity}
             </Typography>
             <Typography variant="subtitle1" className={classes.infoText}>
-            Registered from: {registeredFrom}
+            Registered from: {createdAt}
             </Typography>
         </DialogContent>
         <DialogActions>

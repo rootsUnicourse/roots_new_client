@@ -23,7 +23,7 @@ import Icon from "@mui/material/Icon";
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 
-function RotatingCardFront({ color, image, icon, title, customColor}) {
+function RotatingCardFront({ discount,color, image, icon, title, customColor}) {
   return (
     <MKBox
       height={350}
@@ -38,8 +38,8 @@ function RotatingCardFront({ color, image, icon, title, customColor}) {
       sx={{
         backgroundImage: ({ palette: { gradients }, functions: { linearGradient, rgba } }) =>
           `${linearGradient(
-            rgba(customColor || (gradients[color] ? gradients[color].main : gradients.info.main), 0.25),
-            rgba(customColor || (gradients[color] ? gradients[color].main : gradients.info.main), 0.25),
+            rgba(customColor || (gradients[color] ? gradients[color].main : gradients.info.main), 0.1),
+            rgba(customColor || (gradients[color] ? gradients[color].main : gradients.info.main), 0.1),
           )}, url(${image})`,
         // backgroundImage: `url(${image})`,
         backgroundSize: 'contain',
@@ -50,18 +50,22 @@ function RotatingCardFront({ color, image, icon, title, customColor}) {
     >
       <MKBox py={13} textAlign="center" >
         <MKBox>
-          <MKTypography variant="h5" color="dark" gutterBottom pb={6} sx={{ fontWeight: 'bold' }}>
+          <MKTypography variant="h5" color="dark" gutterBottom pb={6} sx={{ fontWeight: 'bold',lineHeight: '1.5',letterSpacing: '0.05em'}}>
             {title}
           </MKTypography>
         </MKBox>
         <MKBox>
           {icon && (
-            <MKTypography variant="h2" color="white">
+            <MKTypography variant="h2" color="dark">
               {typeof icon === "string" ? <Icon>{icon}</Icon> : icon}
             </MKTypography>
           )}
         </MKBox>
-
+        <MKBox>
+          <MKTypography variant="h5" color="dark" gutterBottom pb={6} sx={{ fontWeight: 'bold',lineHeight: '1.5',letterSpacing: '0.05em'}}>
+            {discount}
+          </MKTypography>
+        </MKBox>
       </MKBox>
     </MKBox>
   );

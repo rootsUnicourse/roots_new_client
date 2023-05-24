@@ -48,7 +48,7 @@ const RootsTable = ({ data,user }) => {
                 <TableCell className={classes.cell} component="th" scope="row">
                     {row.name}
                 </TableCell>
-                <TableCell className={classes.cell}>{row.parantId != user.result.email ? "grandchildren" : "children"}</TableCell>
+                <TableCell className={classes.cell}>{row.parentId != user.result.email ? "grandchildren" : "children"}</TableCell>
                 <TableCell className={classes.cell}>85</TableCell>
                 </TableRow>
             ))}

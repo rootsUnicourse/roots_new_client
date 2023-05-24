@@ -1,102 +1,106 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Typography, Button, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Lottie from 'lottie-react';
-import flyingMoneyAnimation from '../../assets/lottie/money.json';
+import { useNavigate } from 'react-router-dom';
+import './css.css';
+import Arrow from '../../assets/svg/forward.svg'
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
-
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
-    container: {
-        position: 'relative',
-        backgroundColor: '#ABC4AA',
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: theme.spacing(2),
-        zIndex: -1,
-
+  stepContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  arrow: {
+    margin: theme.spacing(2),
+    width: '40px', 
+    height: '40px', 
+  },
+  largerText: {
+    fontSize: '1.5rem',
+    color: '#16321E',
+    fontFamily: ['Roboto', 'sans-serif'].join(','),
+  },
+  button: {
+    marginTop: theme.spacing(5),
+    padding: theme.spacing(1, 3),
+    fontSize: '1.2rem',
+    backgroundColor: 'green',
+    color: 'white',
+    borderRadius: '40px',
+    '&:hover': {
+      backgroundColor: 'green',
     },
-    lottieBackground: {
-        position: 'absolute',
-        zIndex: -1,
-        overflow: 'hidden',
-    },
-    title: {
-        color: '#a9907e',
-    },
-    step: {
-        color: '#675D50',
-        marginBottom: theme.spacing(1),
-    },
+  },
+  text: {
+    fontFamily: ['Roboto', 'sans-serif'].join(','),
+    color: '#16321E',
+  }
 }));
 
-const createLottieStyles = (top, left, width, height) => ({
-    position: 'absolute',
-    top: `${top}%`,
-    left: `${left}%`,
-    width: `${width}px`,
-    height: `${height}px`,
-});
-
-const generateRandomPositions = (count) => {
-    const positions = [];
-
-    for (let i = 0; i < count; i++) {
-        const top = Math.random() * 90;
-        const left = Math.random() * 90;
-        const size = Math.random() * 90;
-
-        positions.push({ top, left, width: size, height: size });
-    }
-
-    return positions;
-};
-
 const HowItWorks = () => {
-    const classes = useStyles();
+  const classes = useStyles();
+  const navigate = useNavigate();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const label = user ? "Log Out" : "Sign In";
+  const route = user ? "/" : "/pages/authentication/sign-in";
+  const dispatch = useDispatch();
 
-    const lottiePositions = generateRandomPositions(10);
+  const logout = () => {
+    dispatch({ type: 'LOGOUT' })
+    navigate('/')
+    setUser(null)
+  }
 
-    return (
-        <>
-        <DefaultNavbar
-            routes={routes}
-            dark
-            />
-        <Box className={classes.container}>
-        {lottiePositions.map((pos, index) => (
-            <Lottie
-            key={index}
-            className={classes.lottieBackground}
-            style={createLottieStyles(pos.top, pos.left, pos.width, pos.height)}
-            animationData={flyingMoneyAnimation}
-            loop
-            play
-            />
-            ))}
-        <Typography variant="h1" className={classes.title}>
-            How It Works?
-        </Typography>
-        <Typography variant="h5" className={classes.step}>
-            1. Order through the website and get money back.
-        </Typography>
-        <Typography variant="h5" className={classes.step}>
-            2. Invite friends, and get money back for their purchases as well.
-        </Typography>
-        <Typography variant="h5" className={classes.step}>
-            3. They invite friends, you get money back for their purchases and their friends' purchases and their friends' friends purchases!
-        </Typography>
-        <Typography variant="h5" className={classes.step}>
-            4. In short, grow roots that like to shop, it pays off.
-        </Typography>
-        </Box>
-        </>
-    );
+
+  const steps = [
+    'Order through the website <br /> and get money back',
+    'Invite friends, <br /> and get money back for their purchases as well',
+    'They invite friends, <br /> you get money back for their purchases <br /> and their friends\' purchases <br /> and their friends\' friends purchases!',
+  ];
+
+  return (
+    <>
+      <DefaultNavbar
+          routes={routes}
+          action={{
+            type: "internal",
+            route: route,
+            label: label,
+            color: "info",
+          }}
+          handleLogout = {logout}
+          user = {user}
+        />
+      <Grid 
+        container 
+        direction="column" 
+        justifyContent="center" 
+        alignItems="center"
+        style={{ minHeight: '100vh' , backgroundColor: '#F2F0E6' }} // assuming you want to fill the full viewport
+      >
+        <Grid item >
+          <Typography className={classes.text} style={{ marginTop: '100px' }} variant="h3" align="center" gutterBottom >It's Easy as 1,2,3</Typography>
+        </Grid>
+        <Grid item>
+          <Typography style={{ marginBottom: '100px' }} className={classes.text} variant="h5" align="center" gutterBottom >Roots can help you make money easily. Here's how:</Typography>
+        </Grid>
+        <Grid item container direction="row" justifyContent="center" alignItems="center" style={{ marginBottom: '20px' }}>
+          {steps.map((step, index) => (
+            <Grid item xs={12} sm={6} md={3} key={index} className={classes.stepContainer} >
+              <Typography  variant="body1" align="center" className={classes.largerText} dangerouslySetInnerHTML={{ __html: step }} />
+              {index < steps.length - 1 && <img src={Arrow} alt="arrow" className={classes.arrow} />}
+            </Grid>
+          ))}
+        </Grid>
+        <Grid item>
+          <Button variant="contained" color="primary" className={classes.button} onClick={() => navigate('/')}>Let's get started!</Button>
+        </Grid>
+      </Grid>
+    </>
+  );
 };
 
 export default HowItWorks;

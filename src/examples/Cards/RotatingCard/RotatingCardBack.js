@@ -30,15 +30,15 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
     button: {
-        backgroundColor: "#A9907E",
-        color: "#fff",
+        backgroundColor: "#F1F1F1",
+        color: "#3B3A3B",
         borderRadius: "25px",
         padding: "10px 20px",
         textTransform: "none",
         margin: theme.spacing(1),
         "&:hover": {
-        color: "#fff",
-        backgroundColor: "#ABC4AA",
+        color: "#3B3A3B",
+        backgroundColor: "#53AD57",
         },
     },
     selectedButton: {
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function RotatingCard({ color, image, title, description, action, url, customColor }) {
+function RotatingCard({ color, image, title, description, action, url }) {
 
   const classes = useStyles();
   
@@ -73,12 +73,6 @@ function RotatingCard({ color, image, title, description, action, url, customCol
       left={0}
       zIndex={5}
       sx={{
-        backgroundImage: ({ palette: { gradients }, functions: { linearGradient, rgba } }) =>
-          `${linearGradient(
-            rgba(customColor || (gradients[color] ? gradients[color].main : gradients.info.main), 0.25),
-            rgba(customColor || (gradients[color] ? gradients[color].main : gradients.info.main), 0.25),
-          )}, url(${image})`,
-        // backgroundImage: `url(${image})`,
         backfaceVisibility: "hidden",
         transform: "rotateY(180deg)",
         margin: "auto",
@@ -93,8 +87,13 @@ function RotatingCard({ color, image, title, description, action, url, customCol
             {title}
           </MKTypography>
         </MKBox>
+        {image && (
+          <MKBox mb={2} sx={{ display: 'flex', justifyContent: 'center' }}>
+            <img src={image} alt="company logo" style={{ width: '130px', height: '50px' }}/>
+          </MKBox>
+        )}
         <MKBox>
-          <MKTypography variant="body1" color="white" sx={{ fontWeight: 'bold' }}>
+          <MKTypography variant="body1" color="dark" sx={{ fontWeight: 'bold',lineHeight: '1.5',letterSpacing: '0.05em', textShadow: '2px 2px 4px rgba(0,0,0,0.5)', fontSize: "13px" }}>
             {description}
           </MKTypography>
         </MKBox>

@@ -40,15 +40,15 @@ import UserDetailsPopup from '../../../../components/UserDetailsPopup/UserDetail
 
 function Profile({ user }) {
 
-
-  const [offspring, setOffpring] = useState(false);
-  // const [childrens, setChildrens] = useState(false);
-  // const [grandChildren, setGrandChildren] = useState(false);
+  const [offspring, setOffpring] = useState([]);
   const [offspringFetched, setOffspringFetched] = useState(false);
-  // const [numOfChildrens, setNumOfChildrens] = useState(false);
-  // const [gridSize, setGridSize] = useState(false);
   const [popupOpen, setPopupOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
+
+  async function fetchUserByEmail(email) {
+    const user = await api.getUserByEmail(email);
+    return user;
+  }
 
 
   const getOffspring = async () => {
@@ -58,45 +58,12 @@ function Profile({ user }) {
   }
   
 
-  // const filterOffpring = async () => {
-  //   const childrenFiltered = offspring.filter(child => child.parantId == user.result.email);
-  //   // setNumOfChildrens(childrenFiltered.length);
-  //   setChildrens(childrenFiltered);
-  //   const grandChildrenFiltered = offspring.filter(child => child.parantId != user.result.email);
-  //   setGrandChildren(grandChildrenFiltered);
-  // }
-
-  // const createGridSize = () =>{
-  //   if(numOfChildrens == 1){
-  //     setGridSize(12)
-  //   }
-  //   else if (numOfChildrens == 2){
-  //     setGridSize(6)
-  //   }
-  //   else if (numOfChildrens == 3){
-  //     setGridSize(4)
-  //   }
-  //   else if (numOfChildrens == 4){
-  //     setGridSize(3)
-  //   }
-  //   else if (numOfChildrens == 5){
-  //     setGridSize(2.4)
-  //   }
-  // }
-
   useEffect(() => {
     if(!offspringFetched){
           getOffspring();
-          
         }
-    // if(offspringFetched){
-    //   filterOffpring();
-    // }
   },[offspring]);
 
-  // useEffect(() => {
-  //   createGridSize();
-  // }, [numOfChildrens])
 
   function initDiagram() {
     const $ = go.GraphObject.make;
@@ -147,7 +114,7 @@ function Profile({ user }) {
         go.Shape,
         "Circle",
         {
-          fill: "#ABC4AA",
+          fill: "#FFFFFF",
           strokeWidth: 2,
           stroke: "#555",
         }
@@ -187,48 +154,63 @@ function Profile({ user }) {
   
   
   
-  function generateModel(user, offspring) {
+  async function generateModel(user, offspring) {
     const nodeDataArray = [
-      { key: user.result.email, name: user.result.name, source: user.result.imageUrl },
+        { key: user.result.email, name: user.result.name, source: user.result.imageUrl },
     ];
-  
+
     const linkDataArray = [];
-  
-    const addDescendants = (parentId) => {
-      if (Array.isArray(offspring)) {
-        offspring.forEach((descendant) => {
-          if (descendant.parantId === parentId) {
-            nodeDataArray.push({
-              key: descendant.email,
-              name: descendant.name,
-              source: descendant.imageUrl ? descendant.imageUrl : accountSVG,
-            });
-    
-            linkDataArray.push({ from: parentId, to: descendant.email });
-    
-            addDescendants(descendant.email);
-          }
-        });
-      } else {
-        console.error("offspring is not an array:", offspring);
-      }
-    };
-    
-  
-    addDescendants(user.result.email);
-  
+
+    const addDescendants = async (parentId) => {
+        if (Array.isArray(offspring)) {
+            const descendants = offspring.filter(descendant => descendant.parentId === parentId);
+
+            for (let descendant of descendants) {
+                const parentUser = await fetchUserByEmail(parentId);
+                let moneyEarnedFromOffspring = 0;
+
+                if (parentUser) {
+                    const earningRecord = parentUser.data.descendantsEarnings.find(record => record.descendant === descendant._id);
+                    if (earningRecord) {
+                        moneyEarnedFromOffspring = earningRecord.earnings;
+                    }
+                }
+
+                nodeDataArray.push({
+                    key: descendant.email,
+                    name: descendant.name,
+                    source: descendant.imageUrl ? descendant.imageUrl : accountSVG,
+                    createdAt: descendant.createdAt ? descendant.createdAt.split('T')[0] : null,
+                    lastActivity: descendant.lastActivity? descendant.lastActivity.split('T')[0] : null,
+                    moneyEarnedFromOffspring: moneyEarnedFromOffspring,
+                });
+
+                linkDataArray.push({ from: parentId, to: descendant.email });
+
+                await addDescendants(descendant.email);
+            }
+        } else {
+            console.error("offspring is not an array:", offspring);
+        }
+    }
+
+    await addDescendants(user.result.email);
+
     return new go.GraphLinksModel(nodeDataArray, linkDataArray);
-  }
-  
+}
+
   
 
   useEffect(() => {
     if (offspringFetched) {
       const diagram = initDiagram();
-      diagram.model = generateModel(user, offspring);
-      diagram.div = document.getElementById("gojs-diagram");
+      generateModel(user, offspring).then((model) => {
+        diagram.model = model;
+        diagram.div = document.getElementById("gojs-diagram");
+      });
     }
   }, [offspringFetched, offspring]);
+
   
   
   
@@ -238,14 +220,14 @@ function Profile({ user }) {
         <MKBox>
           <Grid container spacing={3}>
               <Grid item xs={12} >
-                {user ? <UserCoin avatarSrc={user.result.imageUrl} avaterName={user.result.name} moneyEarned="$0" kind="dad"/> : null}
+                {user ? <UserCoin avatarSrc={user.result.imageUrl} avaterName={user.result.name} moneyEarned={user.result.moneyEarned} lastActivity={user.result.lastActivity} registeredFrom={user.result.createdAt} kind="dad"/> : null}
               </Grid>
             </Grid>
           {offspring ? (<MKBox  textAlign="center" >
             <MKTypography variant="h3" >
                 Your Roots
             </MKTypography>
-            <Container id="gojs-diagram" className="gojs-diagram" style={{ width: "100vw", height: "800px" }} />
+            <Container id="gojs-diagram" className="gojs-diagram" style={{ width: "100vw", height: "800px" }} /> 
           </MKBox>) : null}
         </MKBox>
           {offspring ? <hr style={{ marginTop: "100px" }}/> : null}
@@ -257,9 +239,9 @@ function Profile({ user }) {
             handleClose={() => setPopupOpen(false)}
             avatarSrc={selectedUser.source}
             avaterName={selectedUser.name}
-            moneyEarned={selectedUser.moneyEarned}
+            moneyEarned={selectedUser.moneyEarnedFromOffspring}
             lastActivity={selectedUser.lastActivity}
-            registeredFrom={selectedUser.registeredFrom}
+            createdAt={selectedUser.createdAt}
         />
       </Container>
       

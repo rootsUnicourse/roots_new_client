@@ -56,9 +56,10 @@ function SignInBasic() {
   const queryParams = new URLSearchParams(window.location.search);
   const encodedEmail = queryParams.get('email');
   const email = window.atob(encodedEmail);
+  console.log(email);
   const [isChecked, setIsChecked] = useState(false);
   const [isSignup, setIsSignup] = useState(false)
-  const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', password: '', confirmPassword: '',parantId: email, imageUrl: ''})
+  const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', password: '', confirmPassword: '',parentId: email, imageUrl: ''})
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -66,6 +67,7 @@ function SignInBasic() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log(formData);
     // console.log(formData)
     if(isSignup){
         // console.log(formData)
@@ -97,7 +99,7 @@ function SignInBasic() {
     const result = res?.profileObj
     const token = res?.tokenId
     // console.log(result)
-    const googleData = {result: result, token: token, parantId : formData.parantId}
+    const googleData = {result: result, token: token, parentId : formData.parentId}
     // console.log(googleData)
     try {
         dispatch(googleLogin(googleData, navigate))

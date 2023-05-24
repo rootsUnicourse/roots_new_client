@@ -16,23 +16,23 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
     button: {
-        backgroundColor: "#A9907E",
-        color: "#fff",
+        backgroundColor: "#F1F1F1",
+        color: "#3B3A3B",
         borderRadius: "25px",
         padding: "10px 20px",
         textTransform: "none",
         margin: theme.spacing(1),
         "&:hover": {
-        color: "#fff",
-        backgroundColor: "#ABC4AA",
+        color: "#3B3A3B",
+        backgroundColor: "#53AD57",
         },
     },
     selectedButton: {
-        backgroundColor: "#ABC4AA",
-        color: "#fff",
-        "&:hover": {
-        color: "#fff",
-        backgroundColor: "#ABC4AA",
+        backgroundColor: "#F1F1F1",
+        color: "#3B3A3B",
+        "&:hover, &:focus, &:active": {
+            color: "#3B3A3B",
+            backgroundColor: "#53AD57",
         },
     },
 }));
@@ -107,13 +107,14 @@ function Companys() {
                                                     image={company.image}
                                                     icon="touch_app"
                                                     title={company.title}
-                                                    customColor="#A9907E"
+                                                    customColor="#FFFFFF"
+                                                    discount = {company.discount}
                                                 />
                                                 <RotatingCardBack
                                                     image={company.image}
                                                     title={company.discount}
                                                     description={company.description}
-                                                    customColor="#A9907E"
+                                                    customColor="#FFFFFF"
                                                     action={{
                                                     type: "external",
                                                     route: "/",

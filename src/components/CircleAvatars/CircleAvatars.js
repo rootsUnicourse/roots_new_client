@@ -32,10 +32,10 @@ const useStyles = makeStyles(() => ({
 function CircleAvatars({ users, parantEmail }) {
   const classes = useStyles();
   console.log(users);
-  const childCount = users.filter((user) => user.parantId === parantEmail).length;
+  const childCount = users.filter((user) => user.parentId === parantEmail).length;
 
   const childElements = users
-    .filter((user) => user.parantId === parantEmail)
+    .filter((user) => user.parentId === parantEmail)
     .map((user, index) => {
       const angle = (2 * Math.PI * index) / childCount;
       

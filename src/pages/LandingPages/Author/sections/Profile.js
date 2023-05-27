@@ -220,7 +220,7 @@ function Profile({ user }) {
         <MKBox>
           <Grid container spacing={3}>
               <Grid item xs={12} >
-                {user ? <UserCoin avatarSrc={user.result.imageUrl} avaterName={user.result.name} moneyEarned={user.result.moneyEarned} lastActivity={user.result.lastActivity} registeredFrom={user.result.createdAt} kind="dad"/> : null}
+                {user ? <UserCoin avatarSrc={user.result.imageUrl} avaterName={user.result.name} moneyEarned={user.result.moneyEarned} moneyWaiting={user.result.moneyWaiting} moneyApproved={user.result.moneyApproved} cashWithdrawn={user.result.cashWithdrawn} lastActivity={user.result.lastActivity} registeredFrom={user.result.createdAt} kind="dad"/> : null}
               </Grid>
             </Grid>
           {offspring ? (<MKBox  textAlign="center" >

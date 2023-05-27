@@ -48,8 +48,8 @@ function Author() {
   const email = user.result.email;
   const encodedEmail = window.btoa(email);
   //https://www.rootz.website/pages/authentication/sign-in
-  // const url = `https://www.rootz.website/pages/authentication/sign-in?email=${encodedEmail}`
-  const url = `http://localhost:3000/pages/authentication/sign-in?email=${encodedEmail}`
+  const url = `https://www.rootz.website/pages/authentication/sign-in?email=${encodedEmail}`
+  // const url = `http://localhost:3000/pages/authentication/sign-in?email=${encodedEmail}`
 
   const logout = () => {
     dispatch({ type: 'LOGOUT' })

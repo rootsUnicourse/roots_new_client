@@ -1,12 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import MKBox from 'components/MKBox';
 import MKAvatar from 'components/MKAvatar';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
 import UserDetailsPopup from 'components/UserDetailsPopup/UserDetailsPopup';
+import MKTypography from 'components/MKTypography';
 
 const useStyles = makeStyles((theme) => ({
   dad: {
@@ -106,9 +106,10 @@ const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind,moneyWaiting,moneyApp
         lastActivity={lastActivity} // Replace with actual data
         createdAt={createdAt} // Replace with actual data
       />) : null}
-      <Typography style={kind == 'grand' ? { fontSize: '15px' } : null} className={classes.moneyEarned} variant="h6">
+
+      <MKTypography style={kind == 'grand' ? { fontSize: '15px' } : null} className={classes.moneyEarned} variant="h6">
         {avaterName}
-      </Typography>
+      </MKTypography>
       
       {kind == 'dad' ? (
         <Grid container className={classes.cardGrid}>
@@ -116,9 +117,9 @@ const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind,moneyWaiting,moneyApp
             {moneyEarned >= 0? 
               <Card className={classes.card}>
                 <CardContent className={classes.cardContent}>
-                  <Typography className={classes.responsiveTypography}>
+                  <MKTypography className={classes.responsiveTypography}>
                     Money Earned: <br /> <br />  <span style={{ color: 'green' }}>{moneyEarned}</span>
-                  </Typography>
+                  </MKTypography>
                 </CardContent>
               </Card> 
             : null}
@@ -126,27 +127,27 @@ const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind,moneyWaiting,moneyApp
           <Grid item>
             <Card className={classes.card}>
               <CardContent className={classes.cardContent}>
-                <Typography className={classes.responsiveTypography}>
+                <MKTypography className={classes.responsiveTypography}>
                   Money Waiting: <br /> <br />  <span style={{ color: 'green' }}>{moneyWaiting}</span>
-                </Typography>
+                </MKTypography>
               </CardContent>
             </Card>
           </Grid>
           <Grid item>
             <Card className={classes.card}>
               <CardContent className={classes.cardContent}>
-                <Typography className={classes.responsiveTypography}>
+                <MKTypography className={classes.responsiveTypography}>
                   Money Approved: <br /> <br />  <span style={{ color: 'green' }}>{moneyApproved}</span>
-                </Typography>
+                </MKTypography>
               </CardContent>
             </Card>
           </Grid>
           <Grid item>
             <Card className={classes.card}>
               <CardContent className={classes.cardContent}>
-                <Typography className={classes.responsiveTypography}>
+                <MKTypography className={classes.responsiveTypography}>
                   Cash Withdrawn: <br /> <br />  <span style={{ color: 'green' }}>{cashWithdrawn}</span>
-                </Typography>
+                </MKTypography>
               </CardContent>
             </Card>
           </Grid>

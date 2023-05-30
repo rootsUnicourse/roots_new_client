@@ -109,12 +109,14 @@ function Companys() {
                                                     title={company.title}
                                                     customColor="#FFFFFF"
                                                     discount = {company.discount}
+                                                    color="secondary"
                                                 />
                                                 <RotatingCardBack
                                                     image={company.image}
                                                     title={company.discount}
                                                     description={company.description}
                                                     customColor="#FFFFFF"
+                                                    color="secondary"
                                                     action={{
                                                     type: "external",
                                                     route: "/",

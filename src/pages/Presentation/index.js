@@ -25,7 +25,7 @@ import MKTypography from "components/MKTypography";
 
 
 // Material Kit 2 React examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+// import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 
 // Presentation page sections
@@ -40,7 +40,7 @@ import Counters from "pages/Presentation/sections/Counters";
 // import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers";
 
 // Routes
-import routes from "routes";
+// import routes from "routes";
 import footerRoutes from "footer.routes";
 
 // Images
@@ -51,7 +51,7 @@ import Companys from '../../components/Companys/Companys'
 
 import { useDispatch } from 'react-redux';
 import { getCompanyBySearch, getCompanys } from '../../actions/companys'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 // import Video from 'components/Video/Video';
 import CompanysMobile from 'components/Companys/CompanysMobile';
 // import companys from 'reducers/companys';
@@ -60,12 +60,12 @@ import HoveringButton from '../../components/hoverInvite/Invite'
 function Presentation() {
 
   const [search,setSearch] = useState('');
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+  const [user] = useState(JSON.parse(localStorage.getItem('profile')))
   // console.log(user)
-  const label = user ? "Log Out" : "Sign In"
-  const route = user ? "/" : "/pages/authentication/sign-in"
+  // const label = user ? "Log Out" : "Sign In"
+  // const route = user ? "/" : "/pages/authentication/sign-in"
   const dispatch = useDispatch()
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const email = user ? user.result.email : null;
   const encodedEmail = window.btoa(email);
   //https://www.rootz.website/pages/authentication/sign-in
@@ -100,26 +100,15 @@ function Presentation() {
     setSearch(e.target.value)
   }
 
-  const logout = () => {
-    dispatch({ type: 'LOGOUT' })
-    navigate('/')
-    setUser(null)
-  }
+  // const logout = () => {
+  //   dispatch({ type: 'LOGOUT' })
+  //   navigate('/')
+  //   setUser(null)
+  // }
 
   return (
     <>
-      <DefaultNavbar
-        routes={routes}
-        action={{
-          type: "internal",
-          route: route,
-          label: label,
-          color: "info",
-        }}
-        sticky
-        handleLogout = {logout}
-        user = {user}
-      />
+      
       <MKBox
         minHeight="75vh"
         width="100%"

@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 
 // react-router components
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
@@ -29,7 +29,6 @@ import Presentation from "layouts/pages/presentation";
 // Material Kit 2 React routes
 import routes from "routes";
 
-import { useDispatch } from 'react-redux';
 import { getCompanys } from './actions/companys'
 import { getUsers } from './actions/users'
 import Form from "components/Form/Form";
@@ -38,11 +37,17 @@ import ForgetMyPassword from "./pages/LandingPages/SignIn/forgetMyPass"
 import ResetPassword from './pages/LandingPages/SignIn/resetPass'
 import EditProfile from "components/editProfile/EditProfile";
 import SignIn from './pages/LandingPages/SignIn/index'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 
 export default function App() {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
-
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+  const label = user ? "Log Out" : "Sign In"
+  const route = user ? "/" : "/pages/authentication/sign-in"
+  const navigate = useNavigate()
   // Setting page scroll to 0 when changing the route
   useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -50,6 +55,12 @@ export default function App() {
     dispatch(getCompanys());
     dispatch(getUsers());
   }, [pathname, dispatch]);
+
+  const logout = () => {
+    dispatch({ type: 'LOGOUT' })
+    navigate('/')
+    setUser(null)
+  }
 
   const getRoutes = (allRoutes) =>
     allRoutes.map((route) => {
@@ -67,6 +78,18 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <DefaultNavbar
+        routes={routes}
+        action={{
+          type: "internal",
+          route: route,
+          label: label,
+          color: "info",
+        }}
+        sticky
+        handleLogout = {logout}
+        user = {user}
+      />
       <Routes>
         {getRoutes(routes)}
         <Route path="/presentation" element={<Presentation />} />

@@ -57,6 +57,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
   const [arrowRef, setArrowRef] = useState(null);
   const [mobileNavbar, setMobileNavbar] = useState(false);
   const [mobileView, setMobileView] = useState(false);
+  
   // console.log('user:', user)
 
   const navigate = useNavigate()
@@ -490,7 +491,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             </MKTypography>
           </MKBox>
           
-          { 
+          {/* { 
             user ?(
               <MKBox display="flex" justifyContent="center" alignItems="center" width="100%" ml={"140px"}>
                 <MKBox >
@@ -510,23 +511,44 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                 </MKBox>
               </MKBox>
             ) : null
-          }
+          } */}
 
-        {
-            user && user.result.email == "rootsunicourse@gmail.com" &&(
-              <MKBox display={{ xs: "none", lg: "flex" }}>
-                <MKTypography component={Link} to="/form" size="xl" shadow="xl">Add Store</MKTypography>
-              </MKBox>
-            ) 
-        }
-          <MKBox
+        <MKBox
+            color="inherit"
+            display={{ xs: "none", lg: "flex" }}
+            ml="auto"
+            mr={center ? "auto" : 0}
+            alignItems="center" // Ensure all items are centrally aligned vertically
+        >
+            <MKBox display="flex" alignItems="center" mr={2}>
+                <MKTypography component={Link} to="/profile" style={{ fontSize: '14px', marginLeft: '8px' }}>
+                    Profile
+                </MKTypography>
+                <MKAvatar src={user?.result.imageUrl} alt="User Avatar" size="xs" style={{marginLeft: '8px' }}/>
+            </MKBox>
+            <MKTypography component={Link} to="/howitworks" style={{ fontSize: '14px' }} mr={2}>
+                How It Works
+            </MKTypography>
+            {
+                user && user.result.email == "rootsunicourse@gmail.com" && (
+                    <MKTypography component={Link} to="/form" size="xl" shadow="xl" style={{ fontSize: '14px' }} mr={2}>
+                        Add Store
+                    </MKTypography>
+                )
+            }
+        </MKBox>
+
+
+
+          {/* <MKBox
             color="inherit"
             display={{ xs: "none", lg: "flex" }}
             ml="auto"
             mr={center ? "auto" : 0}
           >
             {renderNavbarItems}
-          </MKBox>
+          </MKBox> */}
+          
           <MKBox>
             {action &&
               (action.type === "internal" ? (
@@ -588,8 +610,8 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
           {mobileView && <DefaultNavbarMobile routes={routes} open={mobileNavbar} />}
         </MKBox>
       </MKBox>
-      {dropdownMenu}
-      {nestedDropdownMenu}
+      {/* {dropdownMenu} */}
+      {/* {nestedDropdownMenu} */}
     </Container>
   );
 }

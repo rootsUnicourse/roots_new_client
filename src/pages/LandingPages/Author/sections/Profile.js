@@ -244,7 +244,6 @@ function Profile({ user }) {
             createdAt={selectedUser.createdAt}
         />
       </Container>
-      
     </MKBox>
   );
 }

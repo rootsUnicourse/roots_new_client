@@ -39,9 +39,9 @@ const useStyles = makeStyles((theme) => ({
 
 const EditProfile = () => {
     const classes = useStyles();
-    const [user] = useState(JSON.parse(localStorage.getItem('profile')))
+    const [user] = useState(JSON.parse(localStorage.getItem('profile')));
+    console.log(user);
     const [name, setName] = useState(user.result.name);
-    const [email, setEmail] = useState(user.result.email);
     const [image, setImage] = useState('');
     const [avatarUrl] = useState(
         user.result.imageUrl
@@ -53,20 +53,28 @@ const EditProfile = () => {
         setName(event.target.value);
     };
 
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
-    };
 
     const handleOnSubmit = async () => {
         const formData = {
             id: user.result._id,
-            newEmail: email,
             imageUrl: image,
             name: name
         }
         await api.updateUser(formData);
+        const newUserData = {
+            ...user,
+            result: {
+                ...user.result,
+                name: name ? name : user.result.name,
+                imageUrl: image ? image : user.result.imageUrl
+            }
+        };
+        localStorage.setItem('profile', JSON.stringify(newUserData));
         navigate(-1);
     }
+    
+    
+    
 
 
     return (
@@ -94,22 +102,6 @@ const EditProfile = () => {
                 value={name}
                 onChange={handleNameChange}
             />
-            <TextField
-                id="email"
-                label="Email"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                value={email}
-                onChange={handleEmailChange}
-            />
-            {/* <input
-                id="avatarInput"
-                type="file"
-                accept="image/*"
-                style={{ display: "none" }}
-                onChange={handleAvatarChange}
-            /> */}
             <br />
             <Button
                 className={classes.submitButton}

@@ -106,8 +106,10 @@ function Profile({ user }) {
         ),
         click: (e, obj) => {
           const userData = obj.data;
-          setSelectedUser(userData);
-          setPopupOpen(true);
+          if(!(userData.key == user.result.email)){
+            setSelectedUser(userData);
+            setPopupOpen(true);
+          }
         },
       },
       $(

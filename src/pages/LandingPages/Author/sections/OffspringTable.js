@@ -30,7 +30,6 @@ const useStyles = makeStyles({
 
 const RootsTable = ({ data,user }) => {
     const classes = useStyles();
-
     return (
         <TableContainer component={Paper} className={classes.container}>
         <h2 className={classes.title}>Roots Table</h2>
@@ -43,16 +42,21 @@ const RootsTable = ({ data,user }) => {
             </TableRow>
             </TableHead>
             <TableBody>
-            {data && data.map((row) => (
-                <TableRow key={row.name}>
-                <TableCell className={classes.cell} component="th" scope="row">
-                    {row.name}
-                </TableCell>
-                <TableCell className={classes.cell}>{row.parentId != user.result.email ? "grandchildren" : "children"}</TableCell>
-                <TableCell className={classes.cell}>85</TableCell>
-                </TableRow>
-            ))}
-            </TableBody>
+                {data && data.map((row) => {
+                    // Find the earning record for the current row's user
+                    const earningRecord = user.result.descendantsEarnings.find(record => record.descendant === row._id);
+                    return (
+                        <TableRow key={row.name}>
+                            <TableCell className={classes.cell} component="th" scope="row">
+                                {row.name}
+                            </TableCell>
+                            <TableCell className={classes.cell}>{row.parentId != user.result.email ? "grandchildren" : "children"}</TableCell>
+                            <TableCell className={classes.cell}>{earningRecord ? earningRecord.earnings : 0}</TableCell>
+            </TableRow>
+                    );
+})}
+</TableBody>
+
         </Table>
         </TableContainer>
     );

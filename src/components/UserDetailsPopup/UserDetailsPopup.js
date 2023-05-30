@@ -39,7 +39,7 @@ const UserDetailsPopup = ({ open, handleClose, avatarSrc, avaterName, moneyEarne
         <DialogContent className={classes.content}>
             <img src={avatarSrc} className={classes.avatar} alt="Profile Picture" width={100} height={100}/>
             <Typography variant="subtitle1" className={classes.infoText}>
-            Money earned from this user: {moneyEarned}
+            Money earned from this user: {moneyEarned}$
             </Typography>
             <Typography variant="subtitle1" className={classes.infoText}>
             Last activity: {lastActivity}

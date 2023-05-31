@@ -185,6 +185,7 @@ function Profile({ user }) {
                     createdAt: descendant.createdAt ? descendant.createdAt.split('T')[0] : null,
                     lastActivity: descendant.lastActivity? descendant.lastActivity.split('T')[0] : null,
                     moneyEarnedFromOffspring: moneyEarnedFromOffspring,
+                    email: descendant.email
                 });
 
                 linkDataArray.push({ from: parentId, to: descendant.email });
@@ -244,6 +245,7 @@ function Profile({ user }) {
             moneyEarned={selectedUser.moneyEarnedFromOffspring}
             lastActivity={selectedUser.lastActivity}
             createdAt={selectedUser.createdAt}
+            email={selectedUser.email}
         />
       </Container>
     </MKBox>

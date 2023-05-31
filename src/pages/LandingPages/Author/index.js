@@ -77,8 +77,7 @@ function Author() {
         />
         
         <ProfileButton/>
-          <Profile user={user}/>
-        
+        <Profile user={user}/>
         <HoveringButton url={url}/>
         <DefaultFooter content={footerRoutes} />
       </MKBox>

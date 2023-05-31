@@ -41,6 +41,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 
+
 export default function App() {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
@@ -86,7 +87,7 @@ export default function App() {
           label: label,
           color: "info",
         }}
-        sticky
+        
         handleLogout = {logout}
         user = {user}
       />
@@ -97,7 +98,7 @@ export default function App() {
         <Route path="/form" exact element={<Form/>}/>
         <Route path="/profile" exact element={<Profile/>}/>
         <Route path="/forgotpassword" exact element={<ForgetMyPassword/>}/>
-        <Route path="/resetpassword/:token"  element={<ResetPassword/>}/>
+        <Route path="/resetpassword/:token" element={<ResetPassword/>}/>
         <Route path="/editProfile" exact element={<EditProfile/>}/>
         <Route path="/pages/authentication/sign-in" element={<SignIn/>} />
       </Routes>

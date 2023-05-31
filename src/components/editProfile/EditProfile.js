@@ -1,23 +1,26 @@
 import React, { useState } from "react";
-import {
-    Avatar,
-    Button,
+import{
     TextField,
     Card,
     CardContent,
-    CardHeader,
+
     makeStyles,
 } from "@material-ui/core";
 import roots from '../../assets/images/roots.webp'
 import * as api from '../../api/index'
 import FileBase64 from 'react-file-base64';
 import { useNavigate } from 'react-router-dom';
+import MKAvatar from "components/MKAvatar";
+import MKButton from "components/MKButton";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+    editProfileContainer: {
+        paddingTop: theme.spacing(35), //adjust this value
+        zIndex: 0,
+    },
+    roott: {
         maxWidth: 500,
         margin: "auto",
-        marginTop: theme.spacing(5),
         backgroundColor: "rgba(255, 255, 255, 0.9)",
     },
     avatar: {
@@ -40,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
 const EditProfile = () => {
     const classes = useStyles();
     const [user] = useState(JSON.parse(localStorage.getItem('profile')));
-    console.log(user);
     const [name, setName] = useState(user.result.name);
     const [image, setImage] = useState('');
     const [avatarUrl] = useState(
@@ -78,43 +80,44 @@ const EditProfile = () => {
 
 
     return (
-    <>
-        <img src={bgImageUrl} alt="Background" className={classes.background} />
-        <Card className={classes.root}>
-            <CardHeader title="Edit Profile" />
-            <Avatar
-            className={classes.avatar}
-            src={avatarUrl}
-            >
-            </Avatar>
-            <CardContent>
-            <FileBase64
-                multiple={false}
-                buttonText="Select a file"
-                onDone={({ base64 }) => setImage(base64)}
-            />
-            <TextField
-                id="name"
-                label="Name"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                value={name}
-                onChange={handleNameChange}
-            />
-            <br />
-            <Button
-                className={classes.submitButton}
-                variant="contained"
-                color="primary"
-                type="submit"
-                onClick={handleOnSubmit}
-            >
-                Save
-            </Button>
-            </CardContent>
-        </Card>
-        </>
+        <div className={classes.editProfileContainer}>
+            <>
+            <img src={bgImageUrl} alt="Background" className={classes.background} />
+            <Card className={classes.roott}>
+                <MKAvatar
+                className={classes.avatar}
+                src={avatarUrl}
+                >
+                </MKAvatar>
+                <CardContent>
+                <FileBase64
+                    multiple={false}
+                    buttonText="Select a file"
+                    onDone={({ base64 }) => setImage(base64)}
+                />
+                <TextField
+                    id="name"
+                    label="Name"
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                    value={name}
+                    onChange={handleNameChange}
+                />
+                <br />
+                <MKButton
+                    className={classes.submitButton}
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    onClick={handleOnSubmit}
+                >
+                    Save
+                </MKButton>
+                </CardContent>
+            </Card>
+            </>
+        </div>
     );
 };
 

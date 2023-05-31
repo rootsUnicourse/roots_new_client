@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const UserDetailsPopup = ({ open, handleClose, avatarSrc, avaterName, moneyEarned, lastActivity, createdAt }) => {
+const UserDetailsPopup = ({ email,open, handleClose, avatarSrc, avaterName, moneyEarned, lastActivity, createdAt }) => {
 
     const classes = useStyles();
     
@@ -38,6 +38,9 @@ const UserDetailsPopup = ({ open, handleClose, avatarSrc, avaterName, moneyEarne
         <DialogTitle className={classes.title}>{avaterName}</DialogTitle>
         <DialogContent className={classes.content}>
             <img src={avatarSrc} className={classes.avatar} alt="Profile Picture" width={100} height={100}/>
+            <Typography variant="subtitle1" className={classes.infoText}>
+            Email: {email}
+            </Typography>
             <Typography variant="subtitle1" className={classes.infoText}>
             Money earned from this user: {moneyEarned}$
             </Typography>

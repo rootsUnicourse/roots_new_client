@@ -68,7 +68,6 @@ function Presentation() {
   // const navigate = useNavigate()
   const email = user ? user.result.email : null;
   const encodedEmail = window.btoa(email);
-  //https://www.rootz.website/pages/authentication/sign-in
   const url = `https://www.rootz.website/pages/authentication/sign-in?email=${encodedEmail}`
   // const url = `http://localhost:3000/pages/authentication/sign-in?email=${encodedEmail}`
   const isMobile = window.innerWidth <= 768;

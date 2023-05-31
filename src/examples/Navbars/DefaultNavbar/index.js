@@ -520,8 +520,9 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             mr={center ? "auto" : 0}
             alignItems="center" // Ensure all items are centrally aligned vertically
         >
+          {/* here */}
             <MKBox display="flex" alignItems="center" mr={2}>
-                <MKTypography component={Link} to="/profile" style={{ fontSize: '14px', marginLeft: '8px' }}>
+                <MKTypography component={Link} to={user ? "/profile" : "/pages/authentication/sign-in"} style={{ fontSize: '14px', marginLeft: '8px' }}>
                     Profile
                 </MKTypography>
                 <MKAvatar src={user?.result.imageUrl} alt="User Avatar" size="xs" style={{marginLeft: '8px' }}/>

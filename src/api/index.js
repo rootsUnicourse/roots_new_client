@@ -19,3 +19,5 @@ export const sendMail = (mailData) => API.post('/mail', mailData);
 export const updateUser = (formData) => API.put('/user/update',formData);
 export const getAllDescendants = (email) => API.get(`/user/descendants?email=${email}`);
 export const getUserByEmail = (email) => API.get(`/user/user-by-email?email=${email}`);
+export const getInviteLimit = (userId) => API.get(`/user/inviteLimit/${userId}`);
+export const updateInviteLimit = (userId, newLimit) => API.put(`/user/updateInviteLimit/${userId}`, {inviteLimit: newLimit});

@@ -15,7 +15,7 @@ Coded by www.creative-tim.com
 import React, { useState } from 'react';
 
 // @mui material components
-// import Card from "@mui/material/Card";
+import Card from "@mui/material/Card";
 
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
@@ -75,10 +75,19 @@ function Author() {
             placeItems: "center",
           }}
         />
-        
-        <ProfileButton/>
-        <Profile user={user}/>
-        <HoveringButton url={url}/>
+        <Card sx={{
+              p: 2,
+              mx: { xs: 2, lg: 3 },
+              mt: -8,
+              mb: 4,
+              backgroundColor: ({ palette: { white }, functions: { rgba } }) => rgba(white.main, 0.8),
+              backdropFilter: "saturate(200%) blur(30px)",
+              boxShadow: ({ boxShadows: { xxl } }) => xxl,
+          }}>
+          <ProfileButton/>
+          <Profile user={user}/>
+        </Card>
+          <HoveringButton url={url}/>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
     

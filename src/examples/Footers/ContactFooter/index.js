@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TextField, Button } from "@material-ui/core";
 import Grid from "@mui/material/Grid";
 import MKTypography from "components/MKTypography";
@@ -9,6 +9,15 @@ const ContactForm = () => {
 const [name, setName] = React.useState("");
 const [email, setEmail] = React.useState("");
 const [message, setMessage] = React.useState("");
+const [user] = useState(JSON.parse(localStorage.getItem('profile')));
+
+// If the user is logged in, set the initial email value to the user's email
+useEffect(() => {
+    if(user){
+        setEmail(user?.result.email);
+        setName(user?.result.name);
+    }
+}, [user]);
 
 const handleSubmit = (e) => {
     e.preventDefault();

@@ -33,6 +33,7 @@ import './styles.css';
 import BigLink from "components/BigLinkText/BigLinkText";
 import * as go from "gojs";
 import UserDetailsPopup from '../../../../components/UserDetailsPopup/UserDetailsPopup';
+import InviteButton from "components/Invite/InviteButton";
 
 
 
@@ -230,6 +231,7 @@ function Profile({ user }) {
             <MKTypography variant="h3" >
                 Your Roots
             </MKTypography>
+          <InviteButton user = {user}/>
             <Container id="gojs-diagram" className="gojs-diagram" style={{ width: "100vw", height: "800px" }} /> 
           </MKBox>) : null}
         </MKBox>
@@ -247,6 +249,9 @@ function Profile({ user }) {
             createdAt={selectedUser.createdAt}
             email={selectedUser.email}
         />
+          <MKBox mb={5} mt={offspring ? 15 : null} textAlign="center">
+            <InviteButton user = {user}/>
+          </MKBox>
       </Container>
     </MKBox>
   );

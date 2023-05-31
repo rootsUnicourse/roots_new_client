@@ -1,49 +1,19 @@
-/**
-=========================================================
-* Material Kit 2 React - v2.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
 
 import { useState } from "react";
 import * as api from '../../../api/index'
-// react-router-dom components
 import { Link as RouterLink }  from "react-router-dom";
-
-// @mui material components
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import { Link } from '@material-ui/core';
+// import { Link } from '@material-ui/core';
 import ReCAPTCHA from 'react-google-recaptcha';
-
-// @mui icons
-// import FacebookIcon from "@mui/icons-material/Facebook";
-// import GitHubIcon from "@mui/icons-material/GitHub";
-
-// Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
 import Checkbox from '@mui/material/Checkbox';
-// Material Kit 2 React example components
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-
-// Material Kit 2 React page layout routes
-import routes from "routes";
 import Pdf from "./privacy.pdf";
-// Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 import { useSelector } from 'react-redux';
-
 import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { signin ,signup, googleLogin } from '../../../actions/auth'
@@ -56,7 +26,6 @@ function SignInBasic() {
   const queryParams = new URLSearchParams(window.location.search);
   const encodedEmail = queryParams.get('email');
   const email = window.atob(encodedEmail);
-  console.log(email);
   const [isChecked, setIsChecked] = useState(false);
   const [isSignup, setIsSignup] = useState(false)
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', password: '', confirmPassword: '',parentId: email, imageUrl: ''})
@@ -95,12 +64,9 @@ function SignInBasic() {
   }
 
   const googleSuccess = async (res) => {
-    // console.log(process.env.BASE_IMAGE)
     const result = res?.profileObj
     const token = res?.tokenId
-    // console.log(result)
     const googleData = {result: result, token: token, parentId : formData.parentId}
-    // console.log(googleData)
     try {
         dispatch(googleLogin(googleData, navigate))
     } catch (error) {
@@ -114,12 +80,7 @@ const googleFailure = (err) => {
 }
 
   return (
-    <>
-      <DefaultNavbar
-        routes={routes}
-        transparent
-        light
-      />
+    <div>
       <MKBox
         position="absolute"
         top={0}
@@ -212,9 +173,17 @@ const googleFailure = (err) => {
                   </MKBox>
                   <MKBox style={{ display: 'flex' }}>
                     <Checkbox onChange={handleCheckbox} style={{ marginTop: '14px' }}/>
-                    <Link variant="subtitle1" style={{ marginTop: '20px' }} href={Pdf} target="_blank" rel="noopener noreferrer">
+                    {/* <Link variant="subtitle1" style={{ marginTop: '20px' }} href={Pdf} target="_blank" rel="noopener noreferrer">
                       I Agree To The Terms And Conditions 
-                    </Link>
+                    </Link> */}
+                    <a 
+                      href={Pdf} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      style={{ marginTop: '20px', textDecoration: 'none', color: 'blue', fontSize: '16px' }}
+                    >
+                      I Agree To The Terms And Conditions 
+                    </a>
                   </MKBox>
                   <MKBox mt={3} mb={1} textAlign="center">
                     <MKButton
@@ -233,7 +202,7 @@ const googleFailure = (err) => {
       {/* <MKBox width="100%" position="absolute" zIndex={2} bottom="1.625rem">
         <SimpleFooter light />
       </MKBox> */}
-    </>
+    </div>
   );
 }
 

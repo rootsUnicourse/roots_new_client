@@ -101,7 +101,7 @@ function Companys() {
                             (
                                 <Grid container item spacing={3} alignItems="center" >
                                     {getSortedCompanies().map((company) => (
-                                        <Grid key={company._id} item xs={4} sm={4} md={4} lg={3}>
+                                        <Grid key={company._id} item xs={6} sm={4} md={4} lg={3}>
                                             <RotatingCard>
                                                     <RotatingCardFront
                                                         image={company.image}

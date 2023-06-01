@@ -22,15 +22,15 @@ import Icon from "@mui/material/Icon";
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
-import useMediaQuery from '@mui/material/useMediaQuery';
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 function RotatingCardFront({ discount,color, image, icon, title, customColor}) {
 
-  const matchesXS = useMediaQuery(theme => theme.breakpoints.down('xs'));
+  const matches = useMediaQuery(theme => theme.breakpoints.down('sm'));
 
   return (
     <MKBox
-      height={matchesXS ? 50 : 350}
+      height={{ xs: 200, sm: 350 }}
       width="100%"
       display="flex"
       justifyContent="center"
@@ -53,20 +53,20 @@ function RotatingCardFront({ discount,color, image, icon, title, customColor}) {
       }}
     >
       <MKBox py={13} textAlign="center" >
-        <MKBox>
-          <MKTypography variant="h5" color="dark" gutterBottom pb={6} sx={{ fontWeight: 'bold',lineHeight: '1.5',letterSpacing: '0.05em'}}>
+        {!matches && <MKBox>
+          <MKTypography  color="dark" gutterBottom pb={6} sx={{ fontWeight: 'bold',letterSpacing: '0.05em'}}>
             {title}
           </MKTypography>
-        </MKBox>
+        </MKBox>}
         <MKBox>
           {icon && (
-            <MKTypography variant="h2" color="dark">
+            <MKTypography variant={matches ? "body" : "h2"} color="dark">
               {typeof icon === "string" ? <Icon>{icon}</Icon> : icon}
             </MKTypography>
           )}
         </MKBox>
         <MKBox>
-          <MKTypography variant="h5" color="dark" gutterBottom pb={6} sx={{ fontWeight: 'bold',lineHeight: '1.5',letterSpacing: '0.05em'}}>
+          <MKTypography variant="h5" color="dark" gutterBottom pb={matches ? null : 6} sx={{ fontWeight: 'bold',letterSpacing: '0.05em'}}>
             {discount}
           </MKTypography>
         </MKBox>

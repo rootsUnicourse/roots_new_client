@@ -31,7 +31,17 @@ function RotatingCard({ children }) {
   const rotate180 = () => setRotate(true);
 
   return (
-    <MKBox sx={{ perspective: "50rem"}} onMouseEnter={rotate180} onMouseLeave={rotate0}>
+    <MKBox 
+      sx={{ 
+        perspective: "50rem", 
+        // Responsive height 
+        '@media (max-width: 600px)': {
+        height: "200px",
+      },
+    }} 
+      onMouseEnter={rotate180} 
+      onMouseLeave={rotate0}
+      >
       <Card
         sx={{
           backgroundColor: "transparent",

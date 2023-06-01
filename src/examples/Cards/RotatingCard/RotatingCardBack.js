@@ -27,7 +27,7 @@ import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKButton from "components/MKButton";
 import { makeStyles } from "@material-ui/core/styles";
-import useMediaQuery from '@mui/material/useMediaQuery';
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -53,14 +53,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function RotatingCard({ color, image, title, description, action, url }) {
+function RotatingCard({ color, image,description, action, url }) {
 
   const classes = useStyles();
-  const matchesXS = useMediaQuery(theme => theme.breakpoints.down('xs'));
+  const matches = useMediaQuery(theme => theme.breakpoints.down('sm'));
 
   return (
     <MKBox
-      height={matchesXS ? 50 : 350}
+      height={{ xs: 200, sm: 350 }}
       width="100%"
       display="flex"
       justifyContent="center"
@@ -81,40 +81,39 @@ function RotatingCard({ color, image, title, description, action, url }) {
         backgroundPosition: 'center',
       }}
     >
-      <MKBox pt={5} pb={2} px={2} textAlign="center" >
-        <MKBox>
-          <MKTypography variant="h3" color="white" gutterBottom>
-            {title}
-          </MKTypography>
-        </MKBox>
+      <MKBox textAlign="center" >
         {image && (
-          <MKBox mb={2} sx={{ display: 'flex', justifyContent: 'center' }}>
+          <MKBox mb={matches? 0 : 2} sx={{ display: 'flex', justifyContent: 'center' }}>
             <img src={image} alt="company logo" style={{ width: '130px', height: '50px' }}/>
           </MKBox>
         )}
+        
         <MKBox>
-          <MKTypography variant="body1" color="dark" sx={{ fontWeight: 'bold',lineHeight: '1.5',letterSpacing: '0.05em', textShadow: '2px 2px 4px rgba(0,0,0,0.5)', fontSize: "13px" }}>
+          <MKTypography  variant="body1" color="dark" sx={{ fontWeight: 'bold',lineHeight: '1.5',letterSpacing: '0.05em', textShadow: '2px 2px 4px rgba(0,0,0,0.5)', fontSize: matches ? "9px":"13px" }}>
             {description}
           </MKTypography>
         </MKBox>
+        
         <MKBox>
           {action && (
-            <MKBox  mt={4} mb={2} mx="auto">
+            <MKBox mt={matches ? 3 : 4} mb={2} mx="auto">
               {action.type === "external" ? (
                 <MKButton
-                  component={MuiLink}
-                  href={url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={classes.button}
-                  sx={{
-                    whiteSpace: 'nowrap',
-                    textOverflow: 'ellipsis',
-                    overflow: 'hidden',
-                  }}
-                >
-                  {action.label}
-                </MKButton>
+                component={MuiLink}
+                href={url}
+                target="_blank"
+                rel="noreferrer"
+                className={classes.button}
+                sx={{
+                  whiteSpace: 'nowrap',
+                  textOverflow: 'ellipsis',
+                  overflow: 'hidden',
+                  height: matches ? "20px" : "40px",
+                  width: matches ? "80px" : "120px",
+                }}
+              >
+                {action.label}
+              </MKButton>
               ) : (
                 <MKButton className={classes.button} component={Link} to={url} sx={{whiteSpace: 'nowrap',textOverflow: 'ellipsis',overflow: 'hidden',}}>
                   {action.label}

@@ -27,6 +27,7 @@ import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKButton from "components/MKButton";
 import { makeStyles } from "@material-ui/core/styles";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -55,20 +56,19 @@ const useStyles = makeStyles((theme) => ({
 function RotatingCard({ color, image, title, description, action, url }) {
 
   const classes = useStyles();
-  
+  const matchesXS = useMediaQuery(theme => theme.breakpoints.down('xs'));
 
   return (
     <MKBox
-      height={350}
-      width={300}
+      height={matchesXS ? 50 : 350}
+      width="100%"
       display="flex"
       justifyContent="center"
       alignItems="center"
       borderRadius="lg"
       coloredShadow={color}
       position="absolute"
-      width="100%"
-      height="100%"
+      
       top={0}
       left={0}
       zIndex={5}

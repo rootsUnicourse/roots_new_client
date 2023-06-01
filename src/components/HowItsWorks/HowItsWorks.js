@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography, Button, Grid } from '@material-ui/core';
+import {Button, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useNavigate } from 'react-router-dom';
 import './css.css';
@@ -7,6 +7,7 @@ import Arrow from '../../assets/svg/forward.svg'
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
 import { useDispatch } from 'react-redux';
+import MKTypography from 'components/MKTypography';
 
 const useStyles = makeStyles((theme) => ({
   stepContainer: {
@@ -82,15 +83,15 @@ const HowItWorks = () => {
         style={{ minHeight: '100vh' , backgroundColor: '#F2F0E6' }} // assuming you want to fill the full viewport
       >
         <Grid item >
-          <Typography className={classes.text} style={{ marginTop: '100px' }} variant="h3" align="center" gutterBottom >It's Easy as 1,2,3</Typography>
+          <MKTypography className={classes.text} style={{ marginTop: '100px' }} variant="h3" align="center" gutterBottom >It's Easy as 1,2,3</MKTypography>
         </Grid>
         <Grid item>
-          <Typography style={{ marginBottom: '100px' }} className={classes.text} variant="h5" align="center" gutterBottom >Roots can help you make money easily. Here's how:</Typography>
+          <MKTypography style={{ marginBottom: '100px' }} className={classes.text} variant="h5" align="center" gutterBottom >Roots can help you make money easily. Here's how:</MKTypography>
         </Grid>
         <Grid item container direction="row" justifyContent="center" alignItems="center" style={{ marginBottom: '20px' }}>
           {steps.map((step, index) => (
             <Grid item xs={12} sm={6} md={3} key={index} className={classes.stepContainer} >
-              <Typography  variant="body1" align="center" className={classes.largerText} dangerouslySetInnerHTML={{ __html: step }} />
+              <MKTypography  variant="body1" align="center" className={classes.largerText} dangerouslySetInnerHTML={{ __html: step }} />
               {index < steps.length - 1 && <img src={Arrow} alt="arrow" className={classes.arrow} />}
             </Grid>
           ))}

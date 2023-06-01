@@ -9,9 +9,6 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'flex-end'
     },
-    button: {
-        
-    },
     popover: {
         padding: theme.spacing(2),
     },

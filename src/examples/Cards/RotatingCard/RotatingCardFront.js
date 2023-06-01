@@ -22,11 +22,15 @@ import Icon from "@mui/material/Icon";
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 function RotatingCardFront({ discount,color, image, icon, title, customColor}) {
+
+  const matchesXS = useMediaQuery(theme => theme.breakpoints.down('xs'));
+
   return (
     <MKBox
-      height={350}
+      height={matchesXS ? 50 : 350}
       width="100%"
       display="flex"
       justifyContent="center"

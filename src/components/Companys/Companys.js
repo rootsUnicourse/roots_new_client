@@ -44,7 +44,7 @@ function Companys() {
     const [user] = useState(JSON.parse(localStorage.getItem('profile')));
     const [selectedCategory, setSelectedCategory] = useState(null);
     const classes = useStyles();
-
+    
     const mockData = companys.map((company) => ({
         ...company,
         views: Math.floor(Math.random() * 1000),
@@ -101,29 +101,29 @@ function Companys() {
                             (
                                 <Grid container item spacing={3} alignItems="center" >
                                     {getSortedCompanies().map((company) => (
-                                        <Grid key={company._id} item xs={4} sm={4} md={4} lg={3} sx={{ display: { xs: 'none', sm: 'block' } }}>
+                                        <Grid key={company._id} item xs={4} sm={4} md={4} lg={3}>
                                             <RotatingCard>
-                                                <RotatingCardFront
-                                                    image={company.image}
-                                                    icon="touch_app"
-                                                    title={company.title}
-                                                    customColor="#FFFFFF"
-                                                    discount = {company.discount}
-                                                    color="secondary"
-                                                />
-                                                <RotatingCardBack
-                                                    image={company.image}
-                                                    title={company.discount}
-                                                    description={company.description}
-                                                    customColor="#FFFFFF"
-                                                    color="secondary"
-                                                    action={{
-                                                    type: "external",
-                                                    route: "/",
-                                                    label: user ? "Go To Store" : "Sign in first",
-                                                    }}
-                                                    url={user ? company.siteUrl : "/pages/authentication/sign-in"}
-                                                />
+                                                    <RotatingCardFront
+                                                        image={company.image}
+                                                        icon="touch_app"
+                                                        title={company.title}
+                                                        customColor="#FFFFFF"
+                                                        discount = {company.discount}
+                                                        color="secondary"
+                                                    />
+                                                    <RotatingCardBack
+                                                        image={company.image}
+                                                        title={company.discount}
+                                                        description={company.description}
+                                                        customColor="#FFFFFF"
+                                                        color="secondary"
+                                                        action={{
+                                                        type: "external",
+                                                        route: "/",
+                                                        label: user ? "Go To Store" : "Sign in first",
+                                                        }}
+                                                        url={user ? company.siteUrl : "/pages/authentication/sign-in"}
+                                                    />
                                             </RotatingCard>
                                         </Grid>
                                     ))}

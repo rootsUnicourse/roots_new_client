@@ -527,7 +527,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                 </MKTypography>
                 <MKAvatar src={user?.result.imageUrl} alt="User Avatar" size="xs" style={{marginLeft: '8px' }}/>
             </MKBox>
-            <MKTypography component={Link} to="/howitworks" style={{ fontSize: '14px' }} mr={2}>
+            <MKTypography component={Link} to="/pages/landing-pages/about-us" style={{ fontSize: '14px' }} mr={2}>
                 How It Works
             </MKTypography>
             {

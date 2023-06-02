@@ -31,14 +31,20 @@ import MKTypography from "components/MKTypography";
 
 // Material Kit 2 React example components
 import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbar/DefaultNavbarDropdown";
+import MKAvatar from "components/MKAvatar";
 
-function DefaultNavbarMobile({ routes, open }) {
+function DefaultNavbarMobile({ routes, open,user }) {
   const [collapse, setCollapse] = useState("");
 
   const handleSetCollapse = (name) => (collapse === name ? setCollapse(false) : setCollapse(name));
 
-  const renderNavbarItems = routes.map(
-    ({ name, icon, collapse: routeCollapses, href, route, collapse: navCollapse }) => (
+  const renderNavbarItems = [
+  <MKBox key="user-profile" display="flex" alignItems="center" py={1} px={2}>
+    <MKAvatar src={user?.result.imageUrl} alt={user?.result.name} sx={{ width: 24, height: 24, mr: 2 }} />
+    <Link to={"/profile"}>{user?.result.name}</Link>
+  </MKBox>,
+    ...routes.map(
+    ({name, icon, collapse: routeCollapses, href, route, collapse: navCollapse }) => (
       <DefaultNavbarDropdown
         key={name}
         name={name}
@@ -146,7 +152,7 @@ function DefaultNavbarMobile({ routes, open }) {
         </MKBox>
       </DefaultNavbarDropdown>
     )
-  );
+  )];
 
   return (
     <Collapse in={Boolean(open)} timeout="auto" unmountOnExit>

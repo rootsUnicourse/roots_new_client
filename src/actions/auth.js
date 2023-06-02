@@ -30,7 +30,7 @@ export const signup = (formData, navigate) => async (dispatch) => {
         const { data } = await api.signUp(formData)
         console.log('data :', data);
         dispatch({ type: AUTH, data })
-        navigate('/')
+        navigate('/avatarCreation')
 
     } catch (error) {
         console.log(error)

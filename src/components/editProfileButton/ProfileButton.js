@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { ReactComponent as EditProfile } from '../../assets/svg/settings-sharp.svg';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,8 +19,8 @@ const ProfileButton = () => {
     return (
         <div className={classes.buttonContainer}>
             <Link to='/editProfile'>
-                <Button className={classes.button} >
-                    <EditProfile/>
+                <Button>
+                    <ion-icon name="settings-sharp" size="large"></ion-icon>
                 </Button>
             </Link>
         </div>

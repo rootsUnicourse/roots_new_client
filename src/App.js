@@ -25,7 +25,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 // Material Kit 2 React themes
 import theme from "assets/theme";
 import Presentation from "layouts/pages/presentation";
-
+import AvatarCreationPage from 'components/AvatarCreationPage/AvatarCreationPage'
 // Material Kit 2 React routes
 
 import { getCompanys } from './actions/companys'
@@ -63,6 +63,7 @@ export default function App() {
         <Route path="/editProfile" exact element={<EditProfile/>}/>
         <Route path="/pages/authentication/sign-in" element={<SignIn/>} />
         <Route path="/pages/landing-pages/about-us" element={<HowItWorks/>} />
+        <Route path="/avatarCreation" element={<AvatarCreationPage/>}/>
       </Routes>
     </ThemeProvider>
   );

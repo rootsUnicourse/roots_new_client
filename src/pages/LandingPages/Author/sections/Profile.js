@@ -34,6 +34,7 @@ import BigLink from "components/BigLinkText/BigLinkText";
 import * as go from "gojs";
 import UserDetailsPopup from '../../../../components/UserDetailsPopup/UserDetailsPopup';
 import InviteButton from "components/Invite/InviteButton";
+import CircularProgress from "@mui/material/CircularProgress";
 
 
 
@@ -232,7 +233,11 @@ function Profile({ user }) {
                 Your Roots
             </MKTypography>
           <InviteButton user = {user}/>
+          {offspringFetched ? 
             <Container id="gojs-diagram" className="gojs-diagram" style={{ width: "100vw", height: "800px" }} /> 
+              : 
+            <CircularProgress />
+          }
           </MKBox>) : null}
         </MKBox>
           {offspring ? <hr style={{ marginTop: "100px" }}/> : null}

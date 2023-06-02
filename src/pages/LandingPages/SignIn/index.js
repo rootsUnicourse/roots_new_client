@@ -36,13 +36,9 @@ function SignInBasic() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(formData);
-    // console.log(formData)
     if(isSignup){
-        // console.log(formData)
         dispatch(signup(formData, navigate))
     }else {
-        // console.log(formData)
         dispatch(signin(formData, navigate))
     }
   }
@@ -173,9 +169,6 @@ const googleFailure = (err) => {
                   </MKBox>
                   <MKBox style={{ display: 'flex' }}>
                     <Checkbox onChange={handleCheckbox} style={{ marginTop: '14px' }}/>
-                    {/* <Link variant="subtitle1" style={{ marginTop: '20px' }} href={Pdf} target="_blank" rel="noopener noreferrer">
-                      I Agree To The Terms And Conditions 
-                    </Link> */}
                     <a 
                       href={Pdf} 
                       target="_blank" 

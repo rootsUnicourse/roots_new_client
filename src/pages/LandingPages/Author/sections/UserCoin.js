@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
 import UserDetailsPopup from 'components/UserDetailsPopup/UserDetailsPopup';
 import MKTypography from 'components/MKTypography';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   dad: {
@@ -70,11 +71,12 @@ const useStyles = makeStyles((theme) => ({
 
 const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind,moneyWaiting,moneyApproved,cashWithdrawn,createdAt,lastActivity }) => {
   const classes = useStyles();
+  const navigate = useNavigate();
 
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true);
+    navigate('/avatarCreation');
   };
 
   const handleClose = () => {

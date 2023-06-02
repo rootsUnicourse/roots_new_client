@@ -45,7 +45,7 @@ import Icon from "@mui/material/Icon";
 // Pages
 // import AboutUs from "layouts/pages/landing-pages/about-us";
 // import ContactUs from "layouts/pages/landing-pages/contact-us";
-import Author from "layouts/pages/landing-pages/author";
+// import Author from "layouts/pages/landing-pages/author/index";
 // import SignIn from "layouts/pages/authentication/sign-in";
 
 // Sections
@@ -68,10 +68,8 @@ import Author from "layouts/pages/landing-pages/author";
 // import Toggles from "layouts/sections/elements/toggles";
 // import Typography from "layouts/sections/elements/typography";
 
-import SignIn from './pages/LandingPages/SignIn/index';
+// import SignIn from './pages/LandingPages/SignIn/index';
 import HowItsWorks from "components/HowItsWorks/HowItsWorks";
-
-const user = JSON.parse(localStorage.getItem('profile'));
 
 const routes = [
   {
@@ -87,17 +85,7 @@ const routes = [
             name: "How Its Works",
             route: "/pages/landing-pages/about-us",
             component: <HowItsWorks />,
-          },
-          // {
-          //   name: "contact us",
-          //   route: "/pages/landing-pages/contact-us",
-          //   component: <ContactUs />,
-          // },
-          {
-            name: "Profile",
-            route: user ? "/pages/landing-pages/author" : "/pages/authentication/sign-in",
-            component: user ? <Author/> : <SignIn/>,
-          },
+          }
         ],
       },
       // {

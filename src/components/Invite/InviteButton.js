@@ -24,7 +24,6 @@ const useStyles = makeStyles({
 });
 
 function InviteButton({ user }) {
-    console.log(user);
     const classes = useStyles();
     const [counter, setCounter] = useState(0); // Initialize with 0
     const [showCopyAlert, setShowCopyAlert] = useState(false);

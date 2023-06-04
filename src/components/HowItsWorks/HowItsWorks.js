@@ -90,8 +90,8 @@ const HowItWorks = () => {
         </Grid>
         <Grid item container direction="row" justifyContent="center" alignItems="center" style={{ marginBottom: '20px' }}>
           {steps.map((step, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index} className={classes.stepContainer} >
-              <MKTypography  variant="body1" align="center" className={classes.largerText} dangerouslySetInnerHTML={{ __html: step }} />
+            <Grid item xs={12} sm={8} md={3} key={index} className={classes.stepContainer} >
+              <MKTypography ml={6} mb={4} variant="body1" align="center" className={classes.largerText} dangerouslySetInnerHTML={{ __html: step }} />
               {index < steps.length - 1 && <img src={Arrow} alt="arrow" className={classes.arrow} />}
             </Grid>
           ))}

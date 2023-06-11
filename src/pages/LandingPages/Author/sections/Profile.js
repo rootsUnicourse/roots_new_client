@@ -33,8 +33,12 @@ import './styles.css';
 import BigLink from "components/BigLinkText/BigLinkText";
 import * as go from "gojs";
 import UserDetailsPopup from '../../../../components/UserDetailsPopup/UserDetailsPopup';
-import InviteButton from "components/Invite/InviteButton";
 import CircularProgress from "@mui/material/CircularProgress";
+import TreeView from "@mui/lab/TreeView";
+import TreeItem from "@mui/lab/TreeItem";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import MKAvatar from "components/MKAvatar";
 
 
 
@@ -216,11 +220,76 @@ function Profile({ user }) {
     }
   }, [offspringFetched, offspring]);
 
+
+  const UserTreeView = ({ user, offspring, theKey, topFatherEmail }) => {
+    const childUsers = offspring.filter((item) => item.parentId === theKey);
   
+    const [open, setOpen] = useState(false);
   
+    const handleMouseDown = (event) => {
+      // Check if the click came from the avatar
+      if (event.target.closest('.avatar')) {
+        event.stopPropagation(); // Stop event propagation
+        if (theKey !== topFatherEmail) {
+          setOpen(true);
+        }
+      }
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+  
+    return (
+      <TreeItem nodeId={theKey} label={
+        <Grid container alignItems="center">
+          <Grid item>
+            <MKAvatar 
+              className="avatar" // Added className to the avatar
+              alt={user.name} 
+              src={user.imageUrl}
+              style={{ marginRight: "10px", width: "75px", height: "75px" }}
+            />
+          </Grid>
+          <Grid item>
+            {user.name}
+          </Grid>
+        </Grid>
+      }
+       onMouseDown={handleMouseDown}> {/* Use onMouseDown event here */}
+        {childUsers.map((childUser) => {
+          const earningsRecord = user.descendantsEarnings.find(record => record.descendant === childUser._id);
+          const earningsFromChild = earningsRecord ? earningsRecord.earnings : 0;
+  
+          return (
+            <UserTreeView 
+              key={childUser.email} 
+              theKey={childUser.email} 
+              user={{...childUser, earningsFromFather: earningsFromChild}} 
+              offspring={offspring} 
+              topFatherEmail={topFatherEmail}
+            />
+          );
+        })}
+        <UserDetailsPopup
+          open={open}
+          handleClose={handleClose}
+          avatarSrc={user.imageUrl}
+          avaterName={user.name}
+          moneyEarned={user.earningsFromFather}
+          lastActivity={user.lastActivity ? user.lastActivity.split('T')[0] : null}
+          createdAt={user.createdAt ? user.createdAt.split('T')[0] : null}
+          email={user.email}
+        />
+      </TreeItem>
+    );
+  };
+  
+
+ 
   
   return (
-    <MKBox component="section" py={{ xs: 6, sm: 12 }}>
+    <MKBox component="section" >
       <Container>
         <MKBox>
           <Grid container spacing={3}>
@@ -229,17 +298,41 @@ function Profile({ user }) {
               </Grid>
             </Grid>
           {offspring ? (<MKBox  textAlign="center" >
-            <MKTypography variant="h3" >
+            <MKTypography variant="h3" sx={{marginTop: "-50px"}}>
                 Your Roots
             </MKTypography>
-          <InviteButton user = {user}/>
-          {offspringFetched ? 
+          {/* {offspringFetched ? 
             <Container id="gojs-diagram" className="gojs-diagram" style={{ width: "100vw", height: "800px" }} /> 
               : 
             <CircularProgress />
-          }
+          } */}
           </MKBox>) : null}
         </MKBox>
+          {offspringFetched ?
+            <TreeView
+              defaultCollapseIcon={<ExpandMoreIcon />}
+              defaultExpandIcon={<ChevronRightIcon />}
+              sx= {{ marginTop: "50px" }}
+            >
+              <UserTreeView topFatherEmail={user.result.email} theKey={user.result.email} user={{name: user.result.name, imageUrl: user.result.imageUrl, descendantsEarnings: user.result.descendantsEarnings }} offspring={offspring} />
+            </TreeView>
+            : 
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center', 
+              height: '100vh', 
+              position: 'absolute', 
+              top: 0, 
+              left: 0, 
+              right: 0, 
+              bottom: 0,
+              marginTop: "90px"
+            }}>
+              <CircularProgress />
+            </div>
+            
+          }
           {offspring ? <hr style={{ marginTop: "100px" }}/> : null}
           <MKBox mb={5} mt={offspring ? 15 : null} textAlign="center">
               {offspring ? <RootsTable data={offspring ? offspring : null} user={user}/> : <BigLink/>}
@@ -254,9 +347,6 @@ function Profile({ user }) {
             createdAt={selectedUser.createdAt}
             email={selectedUser.email}
         />
-          <MKBox mb={5} mt={offspring ? 15 : null} textAlign="center">
-            <InviteButton user = {user}/>
-          </MKBox>
       </Container>
     </MKBox>
   );

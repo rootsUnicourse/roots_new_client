@@ -183,7 +183,7 @@ function Presentation() {
         }}
       >
         <Counters/>
-        <SearchBar  change = {handleChange}/>
+        <SearchBar change = {handleChange}/>
         <Companys/>
       </Card>
       <MKBox pt={6} px={1} mt={6}>

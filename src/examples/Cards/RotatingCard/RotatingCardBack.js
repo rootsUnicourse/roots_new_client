@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         "&:hover": {
         color: "#3B3A3B",
-        backgroundColor: "#53AD57",
+        backgroundColor: "#03CF9D",
         },
     },
     selectedButton: {
@@ -89,7 +89,7 @@ function RotatingCard({ color, image,description, action, url }) {
         )}
         
         <MKBox>
-          <MKTypography  variant="body1" color="dark" sx={{ fontWeight: 'bold',lineHeight: '1.5',letterSpacing: '0.05em', textShadow: '2px 2px 4px rgba(0,0,0,0.5)', fontSize: matches ? "9px":"13px" }}>
+          <MKTypography  variant="body1" sx={{ color: "1C1F4B", fontWeight: 'bold',lineHeight: '1.5',letterSpacing: '0.05em', textShadow: '2px 2px 4px rgba(0,0,0,0.5)', fontSize: matches ? "9px":"13px" }}>
             {description}
           </MKTypography>
         </MKBox>

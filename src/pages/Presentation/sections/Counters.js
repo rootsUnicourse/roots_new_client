@@ -31,7 +31,7 @@ function Counters() {
         <Grid container item xs={12} lg={9} sx={{ mx: "auto" }}>
           <Grid item xs={12} md={4}>
             <DefaultCounterCard
-              count={2000}
+              count={200}
               suffix="+"
               title="Stores"
               description="Choose the store you like, buy regularly and earn money"
@@ -41,7 +41,7 @@ function Counters() {
           <Grid item xs={12} md={4} display="flex">
             <Divider orientation="vertical" sx={{ display: { xs: "none", md: "block" }, mx: 0 }} />
             <DefaultCounterCard
-              count={25}
+              count={10}
               suffix="K+"
               title="Users"
               description="We are growing fast, come be part of us and ask your friends to join and earn more money!"

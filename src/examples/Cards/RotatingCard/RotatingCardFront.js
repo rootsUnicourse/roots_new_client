@@ -54,19 +54,19 @@ function RotatingCardFront({ discount,color, image, icon, title, customColor}) {
     >
       <MKBox py={13} textAlign="center" >
         {!matches && <MKBox>
-          <MKTypography  color="dark" gutterBottom pb={6} sx={{ fontWeight: 'bold',letterSpacing: '0.05em'}}>
+          <MKTypography sx={{ color: "#1C1F4B", fontWeight: 'bold',letterSpacing: '0.05em', marginBottom: "30px"}}>
             {title}
           </MKTypography>
         </MKBox>}
         <MKBox>
           {icon && (
-            <MKTypography variant={matches ? "body" : "h2"} color="dark">
+            <MKTypography variant={matches ? "body" : "h2"} sx={{color: "#1C1F4B", marginTop: "80px"}}>
               {typeof icon === "string" ? <Icon>{icon}</Icon> : icon}
             </MKTypography>
           )}
         </MKBox>
         <MKBox>
-          <MKTypography variant="h5" color="dark" gutterBottom pb={matches ? null : 6} sx={{ fontWeight: 'bold',letterSpacing: '0.05em'}}>
+          <MKTypography variant="h5" gutterBottom pb={matches ? null : 6} sx={{color: "#1C1F4B", fontWeight: 'bold',letterSpacing: '0.05em'}}>
             {discount}
           </MKTypography>
         </MKBox>

@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   moneyEarned: {
     textAlign: 'center',
-    marginTop: 10
+    marginBottom: "50px" 
   },
   avatar: {
     border: '0px solid transparent',
@@ -119,8 +119,8 @@ const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind,moneyWaiting,moneyApp
             {moneyEarned >= 0? 
               <Card className={classes.card}>
                 <CardContent className={classes.cardContent}>
-                  <MKTypography className={classes.responsiveTypography}>
-                    Money Earned: <br /> <br />  <span style={{ color: 'green' }}>{moneyEarned}</span>
+                  <MKTypography className={classes.responsiveTypography} sx={{color: "#1C1F4B"}}>
+                    Money Earned: <br /> <br />  <span style={{ color: '#02D2A0' }}>{moneyEarned}</span>
                   </MKTypography>
                 </CardContent>
               </Card> 
@@ -129,8 +129,8 @@ const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind,moneyWaiting,moneyApp
           <Grid item>
             <Card className={classes.card}>
               <CardContent className={classes.cardContent}>
-                <MKTypography className={classes.responsiveTypography}>
-                  Money Waiting: <br /> <br />  <span style={{ color: 'green' }}>{moneyWaiting}</span>
+                <MKTypography className={classes.responsiveTypography} sx={{color: "#1C1F4B"}}>
+                  Money Waiting: <br /> <br />  <span style={{ color: '#02D2A0' }}>{moneyWaiting}</span>
                 </MKTypography>
               </CardContent>
             </Card>
@@ -138,8 +138,8 @@ const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind,moneyWaiting,moneyApp
           <Grid item>
             <Card className={classes.card}>
               <CardContent className={classes.cardContent}>
-                <MKTypography className={classes.responsiveTypography}>
-                  Money Approved: <br /> <br />  <span style={{ color: 'green' }}>{moneyApproved}</span>
+                <MKTypography className={classes.responsiveTypography} sx={{color: "#1C1F4B"}}>
+                  Money Approved: <br /> <br />  <span style={{ color: '#02D2A0' }}>{moneyApproved}</span>
                 </MKTypography>
               </CardContent>
             </Card>
@@ -147,8 +147,8 @@ const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind,moneyWaiting,moneyApp
           <Grid item>
             <Card className={classes.card}>
               <CardContent className={classes.cardContent}>
-                <MKTypography className={classes.responsiveTypography}>
-                  Cash Withdrawn: <br /> <br />  <span style={{ color: 'green' }}>{cashWithdrawn}</span>
+                <MKTypography className={classes.responsiveTypography} sx={{color: "#1C1F4B"}}>
+                  Cash Withdrawn: <br /> <br />  <span style={{ color: '#02D2A0' }}>{cashWithdrawn}</span>
                 </MKTypography>
               </CardContent>
             </Card>

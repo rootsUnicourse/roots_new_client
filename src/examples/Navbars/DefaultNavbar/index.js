@@ -486,7 +486,8 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
             display={{ xs: user ? "none" : "flex", lg: "flex" }}
           >
-            <MKTypography fontWeight="bold" color={light ? "white" : "dark"} >
+            <MKTypography fontWeight="bold" style={{ color: '#1C1F4B' }}
+ >
               {brand}
             </MKTypography>
           </MKBox>
@@ -520,14 +521,14 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             mr={center ? "auto" : 0}
             alignItems="center" // Ensure all items are centrally aligned vertically
         >
-          {/* here */}
+          
             <MKBox display="flex" alignItems="center" mr={2}>
-                <MKTypography component={Link} to={user ? "/profile" : "/pages/authentication/sign-in"} style={{ fontSize: '14px', marginLeft: '8px' }}>
+                <MKAvatar src={user?.result.imageUrl} alt="User Avatar" size="xs" style={{marginLeft: '8px' }}/>
+                <MKTypography component={Link} to={user ? "/profile" : "/pages/authentication/sign-in"} style={{ fontSize: '14px', marginLeft: '8px' , color: "#1C1F4B", fontWeight: "bold"}}>
                     Profile
                 </MKTypography>
-                <MKAvatar src={user?.result.imageUrl} alt="User Avatar" size="xs" style={{marginLeft: '8px' }}/>
             </MKBox>
-            <MKTypography component={Link} to="/pages/landing-pages/about-us" style={{ fontSize: '14px' }} mr={2}>
+            <MKTypography component={Link} to="/pages/landing-pages/about-us" style={{ fontSize: '14px', color: "#1C1F4B", fontWeight: "bold" }} mr={2}>
                 How It Works
             </MKTypography>
             {
@@ -561,7 +562,8 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                       ? "contained"
                       : "gradient"
                   }
-                  color={action.color ? action.color : "info"}
+                  style={{ backgroundColor: '#02D2A0' }}
+
                   size="small"
                   onClick={handleLogout}
                   sx={{
@@ -583,7 +585,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                       ? "contained"
                       : "gradient"
                   }
-                  color={action.color ? action.color : "info"}
+                  style={{ backgroundColor: '#02D2A0' }}
                   size="small"
                 >
                   {action.label}

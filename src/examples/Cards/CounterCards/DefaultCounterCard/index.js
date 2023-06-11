@@ -23,19 +23,19 @@ import CountUp from "react-countup";
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 
-function DefaultCounterCard({ color, count, title, description, ...rest }) {
+function DefaultCounterCard({ count, title, description, ...rest }) {
   return (
     <MKBox p={2} textAlign="center" lineHeight={1}>
-      <MKTypography variant="h1" color={color} textGradient>
+      <MKTypography variant="h1" style={{ color: "#03CF9D" }} >
         <CountUp end={count} duration={1} {...rest} />
       </MKTypography>
       {title && (
-        <MKTypography variant="h5" mt={2} mb={1}>
+        <MKTypography variant="h5" mt={2} mb={1} style={{ color: "#1C1F4D" }}>
           {title}
         </MKTypography>
       )}
       {description && (
-        <MKTypography variant="body2" color="text">
+        <MKTypography variant="body2" color="text" style={{ color: "#1C1F4D" }}>
           {description}
         </MKTypography>
       )}

@@ -16,15 +16,25 @@ import MKInput from "components/MKInput";
 
 function SearchBar(props) {
 
-    // const [search,setSearch] = useState('');
+    
 
     return (
-        <MKBox component="section" pt={10} pb={3}>
+        <MKBox component="section" pt={10} pb={3} sx={{marginBottom: "0px", marginTop: "-60px"}}>
         <Container>
             <Grid container item xs={12} lg={4}  mx="auto">
             <MKInput
+                sx={{
+                    "& .MuiInput-underline:after": {
+                      borderBottomColor: "#03CF9D", // this changes the line beneath the input
+                    },
+                    "& .MuiInput-underline.Mui-focused:after": {
+                      borderBottomColor: "#03CF9D", // this changes the color of the line beneath the input when focused
+                    },
+                    "& .MuiFormLabel-root.Mui-focused": {
+                      color: "#03CF9D", // this changes the color of the label when focused
+                    },
+                }}
                 onChange={(e)=>props.change(e)} 
-                // onKeyPress={(e) => props.handlePress(e)}
                 variant="standard"
                 placeholder="Search"
                 fullWidth

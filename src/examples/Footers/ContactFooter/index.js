@@ -33,7 +33,7 @@ return (
     <form onSubmit={handleSubmit}>
         <Grid container spacing={1} justifyContent="center" alignItems="center" height="100%" mb={5}>
             <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
-                <MKTypography variant="h4" fontWeight="medium" color="dark" mt={1}>
+                <MKTypography variant="h4" fontWeight="medium" sx={{color: "#1C1F4B"}} mt={1}>
                     Contact us !
                 </MKTypography>
                 <TextField
@@ -62,7 +62,7 @@ return (
                     multiline
                     minRows={4}
                 />
-                <Button type="submit" variant="contained" color="secondary">
+                <Button type="submit" variant="contained" style={{backgroundColor: "#02D2A0"}}>
                     Send!
                 </Button>
             </Grid>

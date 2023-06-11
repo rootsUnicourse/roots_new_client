@@ -23,16 +23,16 @@ const useStyles = makeStyles((theme) => ({
         textTransform: "none",
         margin: theme.spacing(1),
         "&:hover": {
-        color: "#3B3A3B",
-        backgroundColor: "#53AD57",
+        color: "#1C1F4B",
+        backgroundColor: "#03CF9D",
         },
     },
     selectedButton: {
         backgroundColor: "#F1F1F1",
-        color: "#3B3A3B",
+        color: "#1C1F4B",
         "&:hover, &:focus, &:active": {
-            color: "#3B3A3B",
-            backgroundColor: "#53AD57",
+            color: "#1C1F4B",
+            backgroundColor: "#03CF9D",
         },
     },
 }));
@@ -78,9 +78,9 @@ function Companys() {
     
     
     return (
-        <MKBox component="section">
-            <Container>
-                <Grid container justifyContent="center" spacing={2}>
+        <MKBox component="section" >
+            <Container >
+                <Grid container justifyContent="center" spacing={2} sx={{marginBottom: "50px"}}>
                     <Grid item>
                         <Button onClick={() => handleCategoryChange("mostViewed")} className={`${classes.button} ${selectedCategory === "mostViewed" ? classes.selectedButton : ""}`}>
                             Most Viewed

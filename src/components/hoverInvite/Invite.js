@@ -5,6 +5,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import Popover from '@material-ui/core/Popover';
 import Tree from '../../assets/images/tree.png'
+import {ReactComponent as TreeSvg} from '../../assets/svg/tree.svg'
+import { isMobile } from 'react-device-detect';
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -12,27 +14,32 @@ const useStyles = makeStyles((theme) => ({
     left: theme.spacing(2),
     bottom: theme.spacing(2),
     zIndex: 1,
-    
     color: 'white',
     borderRadius: '50%',
-    width: theme.spacing(7),
-    height: theme.spacing(7),
+    width: theme.spacing(8),
+    height: theme.spacing(8),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     '&:hover': {
-      backgroundColor: '#F5B5D5',
-      
+      backgroundColor: '#04CA9A',
     },
   },
   popover: {
     padding: theme.spacing(2),
+  },
+  icon: {
+    display: 'inline-block',
+  },
+  ionIcon: {
+    transition: 'transform 0.3s ease-in-out',
   },
 }));
 
 const HoveringButton = ({ url }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -54,13 +61,33 @@ const HoveringButton = ({ url }) => {
 
   return (
     <>
-      <Button
-        className={classes.button}
+      <Button 
+        className={classes.button} 
         onClick={handleClick}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
-        <img src={Tree} alt="Tree" />
+        {isMobile ? (
+          <>
+            <img src={Tree} alt="Tree" />
+            <ion-icon 
+              name="add-circle-sharp" 
+              className={classes.ionIcon} 
+              style={{ color: 'black', transform: isHovered ? 'scale(2.2)' : 'scale(2)' }}
+            ></ion-icon>
+          </>
+        ) : (
+          <>
+            <TreeSvg alt="Tree" />
+            <ion-icon 
+              name="add-sharp" 
+              className={classes.ionIcon} 
+              style={{ color: 'black', transform: isHovered ? 'scale(2)' : 'scale(2)' }}
+            ></ion-icon>
+          </>
+        )}
       </Button>
-    
+
       <Popover
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}

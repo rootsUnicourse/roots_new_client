@@ -44,7 +44,9 @@ import routes from "routes";
 import footerRoutes from "footer.routes";
 
 // Images
-import bgImage from "assets/images/roots.webp";
+import bgImage from "assets/images/rootz.png";
+import bgImage2 from "assets/images/rootz.png";
+
 import SearchBar from "components/SearchBar/SearchBar";
 // import CompCards from "components/CompCards/CompCards";
 import Companys from '../../components/Companys/Companys'
@@ -176,7 +178,7 @@ function Presentation() {
           p: 2,
           mx: { xs: 2, lg: 3 },
           mt: -8,
-          mb: 4,
+          mb: -8,
           backgroundColor: ({ palette: { white }, functions: { rgba } }) => rgba(white.main, 0.8),
           backdropFilter: "saturate(200%) blur(30px)",
           boxShadow: ({ boxShadows: { xxl } }) => xxl,
@@ -185,10 +187,40 @@ function Presentation() {
         <Counters/>
         <SearchBar change = {handleChange}/>
         <Companys/>
-      </Card>
-      <MKBox pt={6} px={1} mt={6}>
+        <hr style={{ marginTop: "100px" }}/>
+      <MKBox mt={2}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
+      </Card>
+    <MKBox
+      width="100%"
+      sx={{
+        position: 'relative',
+        minHeight: '50vh', // desktop minHeight
+        backgroundColor: 'rgba(255, 255, 255, 0.1)', // adjust transparency as needed
+        placeItems: "center",
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          backgroundImage: `url(${bgImage2})`, // desktop image
+          backgroundSize: "cover",
+          backgroundPosition: "bottom",
+          zIndex: -1, // ensure the image is behind your content
+        },
+        '@media (max-width: 600px)': {
+          minHeight: '30vh', // mobile minHeight
+          '&::before': {
+            backgroundImage: 'none', // no image for mobile
+          }
+        }
+      }}
+    >
+      {/* Your content here */}
+    </MKBox>
     </>
   );
 }

@@ -12,7 +12,7 @@ import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
 import Checkbox from '@mui/material/Checkbox';
 import Pdf from "./privacy.pdf";
-import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import bgImage from "assets/images/rootz5.png";
 import { useSelector } from 'react-redux';
 import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -88,7 +88,7 @@ const googleFailure = (err) => {
           backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
             `${linearGradient(
               rgba(gradients.dark.main, 0.6),
-              rgba(gradients.dark.state, 0.6)
+              rgba(gradients.dark.state, 0.1)
             )}, url(${bgImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -101,7 +101,7 @@ const googleFailure = (err) => {
             <Card>
               <MKBox
                 variant="gradient"
-                bgColor="info"
+                sx={{backgroundColor: "#02D2A0"}}
                 borderRadius="lg"
                 coloredShadow="info"
                 mx={2}
@@ -110,7 +110,7 @@ const googleFailure = (err) => {
                 mb={1}
                 textAlign="center"
               >
-                <MKTypography variant="h4" fontWeight="medium" color="white" mt={1}>
+                <MKTypography variant="h4" fontWeight="medium" sx={{color: "#1C1F4D"}} mt={1}>
                   Sign in
                 </MKTypography>
               </MKBox>
@@ -127,7 +127,7 @@ const googleFailure = (err) => {
                       
                     </>
                   )}
-                  <MKBox mb={2}>
+                  <MKBox mb={2} >
                     <MKInput name="email" type="email" label="Email" fullWidth onChange={handleChange} error={error == "User doesn't exist." ? true : false} helperText={error == "User doesn't exist." ? error : null}/>
                   </MKBox>
                   <MKBox mb={2}>
@@ -140,13 +140,13 @@ const googleFailure = (err) => {
                   </MKBox>}
                   
                   {!isSignup && <MKBox>
-                    <MKTypography variant="body2">
-                      <RouterLink to="/forgotpassword">Forgot your password?</RouterLink>
+                    <MKTypography variant="body2" style={{color: "#02D2A0"}}>
+                      <RouterLink style={{color: "#1C1F4D"}} to="/forgotpassword">Forgot your password?</RouterLink>
                     </MKTypography>
                   </MKBox> }
 
                   <MKBox mt={4} mb={1}>
-                    <MKButton variant="gradient" color="info" fullWidth onClick={handleSubmit} disabled = {!isChecked}>
+                    <MKButton variant="gradient" style={{backgroundColor: "#02D2A0", color: "#1C1F4D"}} fullWidth onClick={handleSubmit} disabled = {!isChecked}>
                       {isSignup ? 'Sign up' : 'Sign In'}
                     </MKButton>
                   </MKBox>
@@ -168,12 +168,12 @@ const googleFailure = (err) => {
                     <ReCAPTCHA sitekey="6Ldb2wQkAAAAAM6o3s8VlHHL8vxJmfdNvsCpCnt_" />
                   </MKBox>
                   <MKBox style={{ display: 'flex' }}>
-                    <Checkbox onChange={handleCheckbox} style={{ marginTop: '14px' }}/>
+                    <Checkbox onChange={handleCheckbox} style={{ marginTop: '14px', color: "#02D2A0" }}/>
                     <a 
                       href={Pdf} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      style={{ marginTop: '20px', textDecoration: 'none', color: 'blue', fontSize: '16px' }}
+                      style={{ marginTop: '20px', textDecoration: 'none', color: '#02D2A0', fontSize: '16px' }}
                     >
                       I Agree To The Terms And Conditions 
                     </a>

@@ -43,7 +43,7 @@ import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMob
 // Material Kit 2 React base styles
 import breakpoints from "assets/theme/base/breakpoints";
 import MKAvatar from "components/MKAvatar";
-
+import logo from '../../../assets/images/logo2-removebg.png'
 import { useNavigate } from 'react-router-dom'
 
 /* eslint-disable */
@@ -62,7 +62,9 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
 
   const navigate = useNavigate()
   const openMobileNavbar = () => setMobileNavbar(!mobileNavbar);
-
+  const vhToPixel = (vh) => {
+    return (vh * window.innerHeight) / 100;
+  }
   useEffect(() => {
     // A function that sets the display state for the DefaultNavbarMobile.
     function displayMobileNavbar() {
@@ -484,10 +486,10 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             lineHeight={1}
             py={transparent ? 1.5 : 0.75}
             pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
-            display={{ xs: user ? "none" : "flex", lg: "flex" }}
+            display="flex" alignItems="center"
           >
-            <MKTypography fontWeight="bold" style={{ color: '#1C1F4B' }}
- >
+            <img src={logo} alt="Logo" style={{ width: 50, height: 50 }} />
+            <MKTypography fontWeight="bold" style={{ color: '#1C1F4B' }}>
               {brand}
             </MKTypography>
           </MKBox>
@@ -524,7 +526,15 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
           
             <MKBox display="flex" alignItems="center" mr={2}>
                 <MKAvatar src={user?.result.imageUrl} alt="User Avatar" size="xs" style={{marginLeft: '8px' }}/>
-                <MKTypography component={Link} to={user ? "/profile" : "/pages/authentication/sign-in"} style={{ fontSize: '14px', marginLeft: '8px' , color: "#1C1F4B", fontWeight: "bold"}}>
+                <MKTypography onClick={() => {
+                                setTimeout(() => {
+                                    window.scrollTo({
+                                        top: vhToPixel(68),
+                                        behavior: "smooth"
+                                    });
+                                }, 0);
+                            }}
+                    component={Link} to={user ? "/profile" : "/pages/authentication/sign-in"} style={{ fontSize: '14px', marginLeft: '8px' , color: "#1C1F4B", fontWeight: "bold"}}>
                     Profile
                 </MKTypography>
             </MKBox>

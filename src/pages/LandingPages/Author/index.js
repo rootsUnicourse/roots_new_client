@@ -18,7 +18,7 @@ import DefaultFooter from "../../../examples/Footers/DefaultFooter/index";
 import routes from "routes";
 
 // Images
-import bgImage from "assets/images/roots.webp";
+import bgImage from "assets/images/rootz.png";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import footerRoutes from "footer.routes";
@@ -34,7 +34,6 @@ function Author() {
   const navigate = useNavigate();
   const email = user.result.email;
   const encodedEmail = window.btoa(email);
-  //https://www.rootz.website/pages/authentication/sign-in
   const url = `https://www.rootz.website/pages/authentication/sign-in?email=${encodedEmail}`
   // const url = `http://localhost:3000/pages/authentication/sign-in?email=${encodedEmail}`
 
@@ -60,16 +59,12 @@ function Author() {
         user = {user}
       />
         <MKBox
-          minHeight="25rem"
+          minHeight="75vh"
           width="100%"
           sx={{
-            backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
-              `${linearGradient(
-                rgba(gradients.dark.main, 0.2),
-                rgba(gradients.dark.state, 0.2)
-              )}, url(${bgImage})`,
+            backgroundImage: `url(${bgImage})`,
             backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundPosition: "top",
             display: "grid",
             placeItems: "center",
           }}

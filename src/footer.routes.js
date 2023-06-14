@@ -73,8 +73,8 @@ export default {
     },
   ],
   copyright: (
-    <MKTypography variant="button" fontWeight="regular" sx={{color: "#1C1F4B"}}>
-      All rights reserved. Copyright &copy; {date} Roots
+    <MKTypography variant="button" fontWeight="regular" sx={{color: "#1C1F4B"}} >
+      All rights reserved. Copyright &copy; {date} Rootz
     </MKTypography>
   ),
 };

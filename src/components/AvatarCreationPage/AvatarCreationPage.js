@@ -33,7 +33,7 @@ function MyAvatarComponent() {
                 }
             };
             localStorage.setItem('profile', JSON.stringify(newUserData));
-            navigate('/next-page'); // replace with the path to the next page
+            navigate('/'); 
         }
         } catch (error) {
         console.error('Failed to save avatar image:', error);
@@ -41,11 +41,11 @@ function MyAvatarComponent() {
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <h1>My Avatar</h1>
             <Avatar id="avatar" style={{ width: '8rem', height: '8rem' }} {...config} />
-            <button onClick={generateNewAvatar} style={{ marginTop: '1rem', padding: '0.5rem 1rem', fontSize: '1rem', borderRadius: '5px', border: 'none', color: 'white', backgroundColor: '#007BFF', cursor: 'pointer' }}>Generate New Avatar</button>
-            <button onClick={saveAvatar} style={{ marginTop: '1rem', padding: '0.5rem 1rem', fontSize: '1rem', borderRadius: '5px', border: 'none', color: 'white', backgroundColor: '#28a745', cursor: 'pointer' }}>Let's Go!</button>
+            <button onClick={generateNewAvatar} style={{ marginTop: '1rem', padding: '0.5rem 1rem', fontSize: '1rem', borderRadius: '5px', border: 'none', color: '#1B1F49', backgroundColor: '#03CF9D', cursor: 'pointer' }}>Generate New Avatar</button>
+            <button onClick={saveAvatar} style={{ marginTop: '1rem', padding: '0.5rem 1rem', fontSize: '1rem', borderRadius: '5px', border: 'none', color: '#1B1F49', backgroundColor: '#03CF9D', cursor: 'pointer' }}>Let's Go!</button>
         </div>
     );
 }

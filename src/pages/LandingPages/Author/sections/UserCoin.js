@@ -7,7 +7,12 @@ import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
 import UserDetailsPopup from 'components/UserDetailsPopup/UserDetailsPopup';
 import MKTypography from 'components/MKTypography';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+// import DialogTitle from '@material-ui/core/DialogTitle';
+import MyAvatarComponent from 'components/AvatarCreationPage/AvatarCreationPage';
+import EditProfile from 'components/editProfile/EditProfile';
 
 const useStyles = makeStyles((theme) => ({
   dad: {
@@ -71,16 +76,16 @@ const useStyles = makeStyles((theme) => ({
 
 const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind,moneyWaiting,moneyApproved,cashWithdrawn,createdAt,lastActivity }) => {
   const classes = useStyles();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    navigate('/avatarCreation');
+    setOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+      setOpen(false);
   };
 
   var classKind;
@@ -96,7 +101,17 @@ const UserCoin = ({ avatarSrc,avaterName, moneyEarned,kind,moneyWaiting,moneyApp
   return (
     <MKBox mb={10}>
       <div>
-        <MKAvatar onClick={handleClickOpen} alt="Profile Picture" src={avatarSrc} className={`${classKind} ${classes.avatar}`} />
+          <MKAvatar onClick={handleClickOpen} alt="Profile Picture" src={avatarSrc}  className={`${classKind} ${classes.avatar}`} />
+          <Dialog PaperProps={{style: { borderRadius: 20 }}} open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+              <DialogContent style={{ display: 'flex', justifyContent: 'space-between', }}>
+                  <div style={{ width: '50%', borderRight: '1px solid #000', height: "100%"}}>
+                      <MyAvatarComponent />
+                  </div>
+                  <div style={{ width: '50%', height: "100%", marginLeft: "50px"}}>
+                      <EditProfile />
+                  </div>
+              </DialogContent>
+          </Dialog>
       </div>
       {kind !== 'dad' ? (
       <UserDetailsPopup

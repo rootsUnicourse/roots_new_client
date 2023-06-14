@@ -29,7 +29,7 @@ function DefaultFooter({ content }) {
   const {copyright} = content;
 
   return (
-    <MKBox component="footer">
+    <MKBox component="footer" style={{marginTop: "100px"}}>
       <Container>
         <Grid container spacing={3}>
           {/* <Grid item xs={12} md={3} sx={{ ml: "auto", mb: 3 }}>
@@ -100,7 +100,7 @@ function DefaultFooter({ content }) {
             </Grid>
           ))} */}
           <Grid item xs={12} sx={{ textAlign: "center", my: 3 }}>
-            <Contact/>
+            <Contact />
             {copyright}
           </Grid>
         </Grid>

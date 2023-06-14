@@ -7,6 +7,7 @@ import Popover from '@material-ui/core/Popover';
 import Tree from '../../assets/images/tree.png'
 import {ReactComponent as TreeSvg} from '../../assets/svg/tree.svg'
 import { isMobile } from 'react-device-detect';
+// import rootz from '../../assets/images/logo2-removebg.png'
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -79,6 +80,7 @@ const HoveringButton = ({ url }) => {
         ) : (
           <>
             <TreeSvg alt="Tree" />
+            {/* <img src={rootz}  style={{ width: '70px', height: '70px' }}/> */}
             <ion-icon 
               name="add-sharp" 
               className={classes.ionIcon} 

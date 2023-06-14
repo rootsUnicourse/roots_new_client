@@ -60,7 +60,7 @@ function RotatingCardFront({ discount,color, image, icon, title, customColor}) {
         </MKBox>}
         <MKBox>
           {icon && (
-            <MKTypography variant={matches ? "body" : "h2"} sx={{color: "#1C1F4B", marginTop: "80px"}}>
+            <MKTypography variant={matches ? "body" : "h2"} sx={{color: "#02D2A0", marginTop: "80px"}}>
               {typeof icon === "string" ? <Icon>{icon}</Icon> : icon}
             </MKTypography>
           )}

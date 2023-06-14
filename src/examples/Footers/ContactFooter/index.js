@@ -62,7 +62,7 @@ return (
                     multiline
                     minRows={4}
                 />
-                <Button type="submit" variant="contained" style={{backgroundColor: "#02D2A0"}}>
+                <Button type="submit" variant="contained" style={{backgroundColor: "#02D2A0" , marginBottom: "100px"}}>
                     Send!
                 </Button>
             </Grid>

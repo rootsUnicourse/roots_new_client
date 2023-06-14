@@ -299,7 +299,7 @@ function Profile({ user }) {
             </Grid>
           {offspring ? (<MKBox  textAlign="center" >
             <MKTypography variant="h3" sx={{marginTop: "-50px"}}>
-                Your Roots
+                Your Rootz
             </MKTypography>
           {/* {offspringFetched ? 
             <Container id="gojs-diagram" className="gojs-diagram" style={{ width: "100vw", height: "800px" }} /> 
@@ -337,6 +337,7 @@ function Profile({ user }) {
           <MKBox mb={5} mt={offspring ? 15 : null} textAlign="center">
               {offspring ? <RootsTable data={offspring ? offspring : null} user={user}/> : <BigLink/>}
           </MKBox>
+          <hr style={{ marginTop: "100px" }}/>
           <UserDetailsPopup
             open={popupOpen}
             handleClose={() => setPopupOpen(false)}

@@ -6,17 +6,15 @@ import{
 
     makeStyles,
 } from "@material-ui/core";
-import roots from '../../assets/images/roots.webp'
+// import roots from '../../assets/images/roots.webp'
 import * as api from '../../api/index'
-import FileBase64 from 'react-file-base64';
+// import FileBase64 from 'react-file-base64';
 import { useNavigate } from 'react-router-dom';
 import MKAvatar from "components/MKAvatar";
 import MKButton from "components/MKButton";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     editProfileContainer: {
-        paddingTop: theme.spacing(35), //adjust this value
-        zIndex: 0,
     },
     roott: {
         maxWidth: 500,
@@ -44,11 +42,11 @@ const EditProfile = () => {
     const classes = useStyles();
     const [user] = useState(JSON.parse(localStorage.getItem('profile')));
     const [name, setName] = useState(user.result.name);
-    const [image, setImage] = useState('');
+    const [image, setImage] = useState(null);
     const [avatarUrl] = useState(
         user.result.imageUrl
     );
-    const [bgImageUrl] = useState(roots);
+    
     const navigate = useNavigate();
     
     const handleNameChange = (event) => {
@@ -72,29 +70,39 @@ const EditProfile = () => {
             }
         };
         localStorage.setItem('profile', JSON.stringify(newUserData));
-        navigate(-1);
+        navigate(0);
     }
     
-    
+    const handleFileChange = (event) => {
+        // Convert the file to base64 and set the image
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setImage(reader.result);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
     
 
 
     return (
         <div className={classes.editProfileContainer}>
             <>
-            <img src={bgImageUrl} alt="Background" className={classes.background} />
+            
             <Card className={classes.roott}>
                 <MKAvatar
                 className={classes.avatar}
-                src={avatarUrl}
+                src={image ? image : avatarUrl}
                 >
                 </MKAvatar>
                 <CardContent>
-                <FileBase64
-                    multiple={false}
-                    buttonText="Select a file"
-                    onDone={({ base64 }) => setImage(base64)}
-                />
+                <MKButton variant="contained" style={{backgroundColor: "#03CF9D"}} component="label">
+                    Select an image
+                    <input
+                        type="file"
+                        hidden
+                        onChange={handleFileChange}
+                    />
+                </MKButton>
                 <TextField
                     id="name"
                     label="Name"
@@ -108,7 +116,7 @@ const EditProfile = () => {
                 <MKButton
                     className={classes.submitButton}
                     variant="contained"
-                    color="primary"
+                    style={{backgroundColor: "#03CF9D"}}
                     type="submit"
                     onClick={handleOnSubmit}
                 >

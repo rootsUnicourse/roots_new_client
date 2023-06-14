@@ -57,7 +57,6 @@ import { useNavigate } from 'react-router-dom'
 // import Video from 'components/Video/Video';
 // import companys from 'reducers/companys';
 import HoveringButton from '../../components/hoverInvite/Invite'
-import HowItWorks from 'components/HowItsWorks/HowItsWorks';
 
 function Presentation() {
 
@@ -135,7 +134,7 @@ function Presentation() {
           <Grid container item xs={12} lg={7} justifyContent="center" mx="auto">
             <MKTypography
               variant="h1"
-              style={{color:"#1D203F"}}
+              color="white"
               mt={-6}
               mb={1}
               sx={({ breakpoints, typography: { size } }) => ({
@@ -184,7 +183,6 @@ function Presentation() {
         }}
       >
         <Counters/>
-        <HowItWorks/>
         <SearchBar change = {handleChange}/>
         <Companys/>
         <hr style={{ marginTop: "100px" }}/>

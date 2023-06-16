@@ -62,9 +62,9 @@ const HowItWorks = () => {
       <Box display="flex" style={{backgroundImage: `url(${test})`, backgroundSize: "cover", backgroundPosition: "top",}} flexDirection="column" alignItems="center" justifyContent="center" minHeight="100vh">
         <Box display="flex" flexDirection={isMobile ? "column" : "row"} alignItems="center" justifyContent="center" p={2}>
           <HowItWorksBox imgSrc={cart} text="Step 1: Buy through our website" />
-          <ArrowIcon />
+          <ArrowIcon style={{color: "#03D09E"}}/>
           <HowItWorksBox imgSrc={friends} text="Step 2: Invite friends to buy too" />
-          <ArrowIcon />
+          <ArrowIcon style={{color: "#03D09E"}}/>
           <HowItWorksBox imgSrc={money} text="Step 3: Earn money from everyone's purchases" />
         </Box>
         <MKButton className={classes.button} component="a" href="/" style={{width: '30%', backgroundColor: "#03D09E"}}> Lets Go !</MKButton>

@@ -7,6 +7,8 @@ import Popover from '@material-ui/core/Popover';
 import Tree from '../../assets/images/tree.png'
 import {ReactComponent as TreeSvg} from '../../assets/svg/tree.svg'
 import { isMobile } from 'react-device-detect';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 // import rootz from '../../assets/images/logo2-removebg.png'
 
 const useStyles = makeStyles((theme) => ({
@@ -41,6 +43,7 @@ const HoveringButton = ({ url }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -52,12 +55,21 @@ const HoveringButton = ({ url }) => {
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(url);
+    setIsCopied(true);
     handleClose();
   };
 
   const handleWhatsAppLink = () => {
     window.open(`https://api.whatsapp.com/send?text=${url}`, '_blank');
     handleClose();
+  };
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setIsCopied(false);
   };
 
   return (
@@ -114,6 +126,16 @@ const HoveringButton = ({ url }) => {
           </MenuItem>
         </div>
       </Popover>
+      <Snackbar 
+        open={isCopied} 
+        autoHideDuration={1000} 
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+      >
+        <Alert onClose={handleSnackbarClose} severity="success">
+          Copied!
+        </Alert>
+      </Snackbar>
     </>
   );
 };

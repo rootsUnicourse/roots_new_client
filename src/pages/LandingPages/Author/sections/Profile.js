@@ -242,7 +242,7 @@ function Profile({ user }) {
   
     return (
       <TreeItem nodeId={theKey} label={
-        <Grid container alignItems="center">
+        <Grid container alignItems="center" >
           <Grid item>
             <MKAvatar 
               className="avatar" // Added className to the avatar

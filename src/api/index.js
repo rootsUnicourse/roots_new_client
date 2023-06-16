@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// const API = axios.create({ baseURL: 'https://roots-server.onrender.com' });
-const API = axios.create({ baseURL: 'http://localhost:5002' });
+const API = axios.create({ baseURL: 'https://roots-server.onrender.com' });
+// const API = axios.create({ baseURL: 'http://localhost:5002' });
 
 
 export const fetchUsers = () => API.get('/user');

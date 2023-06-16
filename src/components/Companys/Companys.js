@@ -97,8 +97,11 @@ function Companys() {
                         </Button>
                     </Grid>
                 </Grid>
-                {!companys.length ? <CircularProgress/> : 
-                            (
+                {!companys.length ? 
+                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                <CircularProgress style={{color: "#02D2A0"}}/>
+                            </div> 
+                            : (
                                 <Grid container item spacing={3} alignItems="center" >
                                     {getSortedCompanies().map((company) => (
                                         <Grid key={company._id} item xs={6} sm={4} md={4} lg={3}>

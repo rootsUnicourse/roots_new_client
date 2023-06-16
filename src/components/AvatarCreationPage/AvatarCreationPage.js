@@ -17,6 +17,7 @@ function MyAvatarComponent() {
     const saveAvatar = async () => {
         try {
         const avatarElement = document.getElementById('avatar');
+        console.log(avatarElement);
         const avatarImage = await toPng(avatarElement);
         const formData = {
             id: user.result._id,

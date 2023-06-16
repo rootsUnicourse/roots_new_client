@@ -30,7 +30,7 @@ import RootsTable from './OffspringTable';
 // import CircleAvatars from '../../../../components/CircleAvatars/CircleAvatars'
 import './styles.css';
 // import SouthIcon from '@mui/icons-material/South';
-import BigLink from "components/BigLinkText/BigLinkText";
+// import BigLink from "components/BigLinkText/BigLinkText";
 import * as go from "gojs";
 import UserDetailsPopup from '../../../../components/UserDetailsPopup/UserDetailsPopup';
 import CircularProgress from "@mui/material/CircularProgress";
@@ -39,7 +39,7 @@ import TreeItem from "@mui/lab/TreeItem";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import MKAvatar from "components/MKAvatar";
-
+import CopyLinkComponent from "components/CopyLinkComponent/CopyLinkComponent";
 
 
 
@@ -50,7 +50,7 @@ function Profile({ user }) {
   const [offspringFetched, setOffspringFetched] = useState(false);
   const [popupOpen, setPopupOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
-
+  
   async function fetchUserByEmail(email) {
     const user = await api.getUserByEmail(email);
     return user;
@@ -286,7 +286,7 @@ function Profile({ user }) {
   };
   
 
- 
+
   
   return (
     <MKBox component="section" >
@@ -331,11 +331,11 @@ function Profile({ user }) {
             }}>
               <CircularProgress />
             </div>
-            
           }
+          <CopyLinkComponent/>
           {offspring ? <hr style={{ marginTop: "100px" }}/> : null}
           <MKBox mb={5} mt={offspring ? 15 : null} textAlign="center">
-              {offspring ? <RootsTable data={offspring ? offspring : null} user={user}/> : <BigLink/>}
+              {offspring ? <RootsTable data={offspring ? offspring : null} user={user}/> : null}
           </MKBox>
           <hr style={{ marginTop: "100px" }}/>
           <UserDetailsPopup

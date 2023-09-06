@@ -36,7 +36,7 @@ const ForgotPasswordForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('https://roots-server.onrender.com/forgotpassword', { email })
+    axios.post('https://rootz-website-db080a6c5c50.herokuapp.com/forgotpassword', { email })
       .then( 
         console.log("yayy")
       )

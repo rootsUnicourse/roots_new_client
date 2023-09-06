@@ -37,7 +37,7 @@ import ResetPassword from './pages/LandingPages/SignIn/resetPass'
 import EditProfile from "components/editProfile/EditProfile";
 import SignIn from './pages/LandingPages/SignIn/index'
 import { useDispatch } from 'react-redux';
-import HowItWorks from "components/HowItsWorks/HowItsWorks";
+import HowItWorksNew from "components/HowItsWorks/HowItsWorksNew";
 
 
 export default function App() {
@@ -62,7 +62,7 @@ export default function App() {
         <Route path="/resetpassword/:token" element={<ResetPassword/>}/>
         <Route path="/editProfile" exact element={<EditProfile/>}/>
         <Route path="/pages/authentication/sign-in" element={<SignIn/>} />
-        <Route path="/pages/landing-pages/about-us" element={<HowItWorks/>} />
+        <Route path="/pages/landing-pages/about-us" element={<HowItWorksNew/>} />
         <Route path="/avatarCreation" element={<AvatarCreationPage/>}/>
       </Routes>
     </ThemeProvider>

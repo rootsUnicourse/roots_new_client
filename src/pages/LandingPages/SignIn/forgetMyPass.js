@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Button, Typography } from '@material-ui/core';
 import axios from 'axios';
+import bgImage from "assets/images/rootz5.png";
+import MKBox from 'components/MKBox';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -12,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     minHeight: '100vh',
     padding: theme.spacing(3),
+    
   },
   form: {
     width: '100%',
@@ -21,9 +24,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     padding: theme.spacing(3),
-    backgroundColor: theme.palette.background.paper,
     borderRadius: theme.shape.borderRadius,
     boxShadow: theme.shadows[3],
+    backgroundColor: '#03CF9D'
   },
   title: {
     marginBottom: theme.spacing(3),
@@ -33,13 +36,15 @@ const useStyles = makeStyles((theme) => ({
 const ForgotPasswordForm = () => {
   const classes = useStyles();
   const [email, setEmail] = useState('');
+  const [emailSent, setEmailSent] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     axios.post('https://rootz-website-db080a6c5c50.herokuapp.com/forgotpassword', { email })
-      .then( 
-        console.log("yayy")
-      )
+    .then(() => {
+      setEmailSent(true); // Set the emailSent state to true when the email is sent
+      console.log("yayy");
+      })
       .catch(
         // Handle error
       );
@@ -58,26 +63,39 @@ const ForgotPasswordForm = () => {
 
 
   return (
-    <div className={classes.container}>
+    <MKBox className={classes.container} sx={{
+      backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
+        `${linearGradient(
+          rgba(gradients.dark.main, 0.6),
+          rgba(gradients.dark.state, 0.1)
+        )}, url(${bgImage})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    }}>
       <div className={classes.form}>
         <Typography variant="h4" component="h1" className={classes.title}>
-          Not everybody has a good memory...
+          {emailSent ? "An email will be sent to you in the next few minutes" : "Not everybody has a good memory..."}
         </Typography>
-        <TextField
-          id="email"
-          label="Email"
-          type="email"
-          margin="normal"
-          required
-          fullWidth
-          onChange={e => setEmail(e.target.value)}
-        />
-        <Button variant="contained" color="primary" fullWidth onClick={handleSubmit}>
-          Reset Password
-        </Button>
-        <Link to="/">Back to Sign In</Link>
+        {!emailSent && ( // Conditionally render based on the emailSent state
+          <>
+            <TextField
+              id="email"
+              label="Email"
+              type="email"
+              margin="normal"
+              required
+              fullWidth
+              onChange={e => setEmail(e.target.value)}
+            />
+            <Button variant="contained" style={{ backgroundColor: "#1C1F4D", color: "#FFFFFF"}} fullWidth onClick={handleSubmit}>
+              Reset Password
+            </Button>
+          </>
+        )}
+        { emailSent && <Link to="/pages/authentication/sign-in">Back to Sign In</Link> }
       </div>
-    </div>
+    </MKBox>
   );
 };
 

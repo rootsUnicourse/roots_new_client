@@ -145,29 +145,11 @@ const googleFailure = (err) => {
                     </MKTypography>
                   </MKBox> }
 
-                  <MKBox mt={4} mb={1}>
-                    <MKButton variant="gradient" style={{backgroundColor: "#02D2A0", color: "#1C1F4D"}} fullWidth onClick={handleSubmit} disabled = {!isChecked}>
-                      {isSignup ? 'Sign up' : 'Sign In'}
-                    </MKButton>
-                  </MKBox>
-                  <MKBox mt={4} mb={1}>
-                    <Grid align="center" justify="center">
-                      <GoogleLogin
-                                  clientId="299163078742-7udqvrad5p2pc66g2im7q7bknb4pf6gh.apps.googleusercontent.com"
-                                  render={(renderProps)=>(
-                                      <MKButton onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon/>} variant="contained" disabled = {!isChecked} >Google Sign in</MKButton>
-                                  )}
-                                  onSuccess={googleSuccess}
-                                  onFailure={googleFailure}
-                                  cookiePolicy="single_host_origin"
-                            />
-                      </Grid>
-                    </MKBox>
-                  {/* here */}
-                  <MKBox textAlign="center" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  {isSignup &&<MKBox textAlign="center" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <ReCAPTCHA sitekey="6Ldb2wQkAAAAAM6o3s8VlHHL8vxJmfdNvsCpCnt_" />
-                  </MKBox>
-                  <MKBox style={{ display: 'flex' }}>
+                  </MKBox>}
+
+                  {isSignup && <MKBox style={{ display: 'flex' }}>
                     <Checkbox onChange={handleCheckbox} style={{ marginTop: '14px', color: "#02D2A0" }}/>
                     <a 
                       href={Pdf} 
@@ -177,7 +159,28 @@ const googleFailure = (err) => {
                     >
                       I Agree To The Terms And Conditions 
                     </a>
+                  </MKBox>}
+
+                  <MKBox mt={4} mb={1}>
+                    <MKButton variant="gradient" style={{backgroundColor: "#02D2A0", color: "#1C1F4D"}} fullWidth onClick={handleSubmit} disabled = {(!isChecked && isSignup)}>
+                      {isSignup ? 'Sign up' : 'Sign In'}
+                    </MKButton>
                   </MKBox>
+
+                  <MKBox mt={4} mb={1}>
+                    <Grid align="center" justify="center">
+                      <GoogleLogin
+                                  clientId="299163078742-7udqvrad5p2pc66g2im7q7bknb4pf6gh.apps.googleusercontent.com"
+                                  render={(renderProps)=>(
+                                      <MKButton onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon/>} variant="contained" disabled = {(!isChecked && isSignup)} >Google Sign in</MKButton>
+                                  )}
+                                  onSuccess={googleSuccess}
+                                  onFailure={googleFailure}
+                                  cookiePolicy="single_host_origin"
+                            />
+                      </Grid>
+                    </MKBox>
+                  
                   <MKBox mt={3} mb={1} textAlign="center">
                     <MKButton
                       fontWeight="medium"

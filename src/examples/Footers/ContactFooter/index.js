@@ -3,13 +3,14 @@ import { TextField, Button } from "@material-ui/core";
 import Grid from "@mui/material/Grid";
 import MKTypography from "components/MKTypography";
 import * as api from '../../../api/index'
-
+import ReCAPTCHA from "react-google-recaptcha";
 
 const ContactForm = () => {
 const [name, setName] = React.useState("");
 const [email, setEmail] = React.useState("");
 const [message, setMessage] = React.useState("");
 const [user] = useState(JSON.parse(localStorage.getItem('profile')));
+const [recaptchaValue, setRecaptchaValue] = useState(null);
 
 // If the user is logged in, set the initial email value to the user's email
 useEffect(() => {
@@ -21,6 +22,10 @@ useEffect(() => {
 
 const handleSubmit = (e) => {
     e.preventDefault();
+    if (!recaptchaValue) {
+        alert("Please verify you are not a robot.");
+        return;
+    }
     const mailData ={
         email: email,
         name: name,
@@ -62,7 +67,12 @@ return (
                     multiline
                     minRows={4}
                 />
-                <Button type="submit" variant="contained" style={{backgroundColor: "#02D2A0" , marginBottom: "100px"}}>
+                <ReCAPTCHA
+                sitekey="6LeGpwgoAAAAAPK8GiZ7AHRFOB5HEeHm49sv-G0r
+                " // Replace with your Site Key
+                onChange={value => setRecaptchaValue(value)}
+                />
+                <Button type="submit" variant="contained" disabled={!recaptchaValue} style={{backgroundColor: "#02D2A0" , marginBottom: "100px"}}>
                     Send!
                 </Button>
             </Grid>

@@ -39,7 +39,6 @@ import SignIn from './pages/LandingPages/SignIn/index'
 import { useDispatch } from 'react-redux';
 import HowItWorksNew from "components/HowItsWorks/HowItsWorksNew";
 
-
 export default function App() {
   const dispatch = useDispatch();
   

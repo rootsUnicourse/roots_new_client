@@ -5,6 +5,7 @@ import { TextField, Button, Typography } from '@material-ui/core';
 import axios from 'axios';
 import bgImage from "assets/images/rootz5.png";
 import MKBox from 'components/MKBox';
+import ReCAPTCHA from "react-google-recaptcha";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -37,6 +38,9 @@ const ForgotPasswordForm = () => {
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [emailSent, setEmailSent] = useState(false);
+  const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -46,8 +50,16 @@ const ForgotPasswordForm = () => {
       console.log("yayy");
       })
       .catch(
-        // Handle error
+        setErrorMessage("The provided email is incorrect.")
       );
+  };
+
+  const onCaptchaChange = (value) => {
+    if (value) { // if we have a value, captcha was successful
+      setIsCaptchaVerified(true);
+    } else { // if no value, it's either expired or failed
+      setIsCaptchaVerified(false);
+    }
   };
 
   // const handleSubmit = (event) => {
@@ -88,7 +100,12 @@ const ForgotPasswordForm = () => {
               fullWidth
               onChange={e => setEmail(e.target.value)}
             />
-            <Button variant="contained" style={{ backgroundColor: "#1C1F4D", color: "#FFFFFF"}} fullWidth onClick={handleSubmit}>
+            {errorMessage && <Typography color="error">{errorMessage}</Typography>}
+            <ReCAPTCHA
+              sitekey="6LeGpwgoAAAAAPK8GiZ7AHRFOB5HEeHm49sv-G0r" // Replace with your site key
+              onChange={onCaptchaChange}
+            />
+            <Button variant="contained" disabled={!isCaptchaVerified} style={{ backgroundColor: isCaptchaVerified ? "#1C1F4D" : "#B0B0B0", color: "#FFFFFF"}} fullWidth onClick={handleSubmit}>
               Reset Password
             </Button>
           </>

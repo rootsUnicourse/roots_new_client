@@ -1,10 +1,16 @@
-import { Typography, Card, CardContent, Grid, Box } from '@material-ui/core';
+import {Card, CardContent, Grid} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import cart from "../../assets/images/buy-removebg-preview.png"
 import friends from '../../assets/images/invite-removebg-preview.png'
 import money from '../../assets/images/earn-removebg-preview.png'
 import MKButton from 'components/MKButton';
-
+import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import routes from "routes";
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
+import {useState } from 'react';
+import MKBox from 'components/MKBox';
+import MKTypography from 'components/MKTypography';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -48,6 +54,17 @@ const useStyles = makeStyles((theme) => ({
 
 const HowItWorksNew = () => {
 const classes = useStyles();
+const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+const label = user ? "Log Out" : "Sign In"
+const route = user ? "/" : "/pages/authentication/sign-in"
+const dispatch = useDispatch();
+const navigate = useNavigate();
+
+const logout = () => {
+    dispatch({ type: 'LOGOUT' })
+    navigate('/')
+    setUser(null)
+}
 
     const steps = [
         {
@@ -69,25 +86,37 @@ const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            <Box py={4}>
-            <Typography variant="h4" className={classes.header}>
+            <DefaultNavbar
+                routes={routes}
+                action={{
+                type: "internal",
+                route: route,
+                label: label,
+                color: "info",
+                }}
+                
+                handleLogout = {logout}
+                user = {user}
+            />
+            <MKBox py={4} >
+            <MKTypography variant="h3" className={classes.header} style={{ marginTop: "150px", color: "#333333" }}>
                 How Does it Work
-            </Typography>
+            </MKTypography>
             <Grid container spacing={4} justifyContent="center" className={classes.gridContainer}>
                 {steps.map((step, index) => (
                 <Grid item xs={12} sm={6} md={4} key={index}>
                     <Card className={classes.card}>
                     <div className={classes.icon}>{step.icon}</div>
                     <CardContent>
-                        <Typography variant="h4" align="center">{step.title}</Typography>
-                        <Typography className={classes.descriptionText}>{step.description}</Typography>
+                        <MKTypography variant="h4" align="center">{step.title}</MKTypography>
+                        <MKTypography className={classes.descriptionText}>{step.description}</MKTypography>
                     </CardContent>
                     </Card>
                 </Grid>
                 ))}
                 <MKButton className={classes.button} component="a" href="/" style={{ fontSize: '20px', backgroundColor: '#333', color: '#fff'}}> Get Started! </MKButton>
             </Grid>
-            </Box>
+            </MKBox>
         </div>
     );
     };

@@ -34,6 +34,11 @@ const handleSubmit = (e) => {
     api.sendMail(mailData);
 };
 
+const areFieldsFilled = () => {
+    return name && email && message;
+};
+
+
 return (
     <form onSubmit={handleSubmit}>
         <Grid container spacing={1} justifyContent="center" alignItems="center" height="100%" mb={5}>
@@ -72,7 +77,7 @@ return (
                 " // Replace with your Site Key
                 onChange={value => setRecaptchaValue(value)}
                 />
-                <Button type="submit" variant="contained" disabled={!recaptchaValue} style={{backgroundColor: "#02D2A0" , marginBottom: "100px"}}>
+                <Button type="submit" variant="contained" disabled={!areFieldsFilled() || !recaptchaValue} style={{backgroundColor: "#02D2A0" , marginBottom: "100px"}}>
                     Send!
                 </Button>
             </Grid>

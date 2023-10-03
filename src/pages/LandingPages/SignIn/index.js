@@ -19,6 +19,8 @@ import { useNavigate } from 'react-router-dom'
 import { signin ,signup, googleLogin } from '../../../actions/auth'
 import {GoogleLogin} from 'react-google-login'
 import Icon from './Icon'
+import routes from "routes";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 
 
 
@@ -31,6 +33,16 @@ function SignInBasic() {
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', password: '', confirmPassword: '',parentId: email, imageUrl: ''})
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const label = user ? "Log Out" : "Sign In"
+  const route = user ? "/" : "/pages/authentication/sign-in"
+
+
+  const logout = () => {
+      dispatch({ type: 'LOGOUT' })
+      navigate('/')
+      setUser(null)
+  }
 
   const error = useSelector(state => state.auth.error);
 
@@ -75,15 +87,37 @@ const googleFailure = (err) => {
     console.log(err)
 }
 
+const handleGoogleClick = (renderProps) => {
+  if (isSignup && !isChecked) {
+      alert('Please agree to the terms first.');
+      return;
+  }
+  renderProps.onClick();
+}
+
+
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <DefaultNavbar
+          routes={routes}
+          action={{
+          type: "internal",
+          route: route,
+          label: label,
+          color: "info",
+          }}
+          
+          handleLogout = {logout}
+          user = {user}
+      />
+      <div style={{ height: isSignup ? '150px' : '40px' }}></div>
       <MKBox
         position="absolute"
         top={0}
         left={0}
         zIndex={1}
         width="100%"
-        minHeight="100vh"
+        minHeight="136vh"
         sx={{
           backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
             `${linearGradient(
@@ -96,7 +130,7 @@ const googleFailure = (err) => {
         }}
       />
       <MKBox px={1} width="100%" height="100vh" mx="auto" position="relative" zIndex={2}>
-        <Grid container spacing={1} justifyContent="center" alignItems="center" height="100%">
+        <Grid container spacing={1} justifyContent="center" alignItems="center" height="100%" >
           <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
             <Card>
               <MKBox
@@ -110,7 +144,7 @@ const googleFailure = (err) => {
                 mb={1}
                 textAlign="center"
               >
-                <MKTypography variant="h4" fontWeight="medium" sx={{color: "#1C1F4D"}} mt={1}>
+                <MKTypography variant="h4" fontWeight="medium" sx={{color: "#1C1F4D"}} mt={1} >
                   Sign in
                 </MKTypography>
               </MKBox>
@@ -170,15 +204,17 @@ const googleFailure = (err) => {
                   <MKBox mt={4} mb={1}>
                     <Grid align="center" justify="center">
                       <GoogleLogin
-                                  clientId="299163078742-7udqvrad5p2pc66g2im7q7bknb4pf6gh.apps.googleusercontent.com"
-                                  render={(renderProps)=>(
-                                      <MKButton onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon/>} variant="contained" disabled = {(!isChecked && isSignup)} >Google Sign in</MKButton>
-                                  )}
-                                  onSuccess={googleSuccess}
-                                  onFailure={googleFailure}
-                                  cookiePolicy="single_host_origin"
-                            />
-                      </Grid>
+                          clientId="299163078742-7udqvrad5p2pc66g2im7q7bknb4pf6gh.apps.googleusercontent.com"
+                          render={(renderProps) => (
+                              <MKButton onClick={() => handleGoogleClick(renderProps)} disabled={renderProps.disabled} startIcon={<Icon/>} variant="contained" >
+                                  Google Sign in
+                              </MKButton>
+                          )}
+                          onSuccess={googleSuccess}
+                          onFailure={googleFailure}
+                          cookiePolicy="single_host_origin"
+                      />
+                    </Grid>
                     </MKBox>
                   
                   <MKBox mt={3} mb={1} textAlign="center">

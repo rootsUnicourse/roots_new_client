@@ -32,13 +32,11 @@ import MKBox from "components/MKBox";
 // Material Kit 2 React example components
 // import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbar/DefaultNavbarDropdown";
 import MKAvatar from "components/MKAvatar";
-import routes from '../../../routes'
 
 function DefaultNavbarMobile({open,user }) {
   // const [collapse, setCollapse] = useState("");
 
   // const handleSetCollapse = (name) => (collapse === name ? setCollapse(false) : setCollapse(name));
-  console.log(routes);
   // const renderNavbarItems = [
   // ,
     // ...routes.map(

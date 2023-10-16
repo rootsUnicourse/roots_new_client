@@ -21,6 +21,8 @@ import {GoogleLogin} from 'react-google-login'
 import Icon from './Icon'
 import routes from "routes";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import FacebookLogin from 'react-facebook-login';
+
 
 
 
@@ -94,6 +96,16 @@ const handleGoogleClick = (renderProps) => {
   }
   renderProps.onClick();
 }
+
+const facebookResponse = (response) => {
+  console.log(response);
+  // Handle your response here, maybe call an API to log in the user with the Facebook token or other necessary data.
+};
+
+const facebookFailure = (err) => {
+  console.log("Facebook Sign In was unsuccessful. Try Again Later");
+  console.log(err);
+};
 
 
   return (
@@ -215,8 +227,22 @@ const handleGoogleClick = (renderProps) => {
                           cookiePolicy="single_host_origin"
                       />
                     </Grid>
-                    </MKBox>
-                  
+                  </MKBox>
+
+                  <MKBox mt={1} mb={1}>
+                    <Grid align="center" justify="center">
+                      <FacebookLogin
+                        appId="347530817682916"
+                        autoLoad={false}
+                        fields="name,email,picture"
+                        callback={facebookResponse}
+                        onFailure={facebookFailure}
+                        cssClass="my-facebook-button-class"
+                        icon="fa-facebook"
+                      />
+                    </Grid>
+                  </MKBox>
+
                   <MKBox mt={3} mb={1} textAlign="center">
                     <MKButton
                       fontWeight="medium"

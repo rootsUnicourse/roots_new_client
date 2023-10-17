@@ -21,6 +21,8 @@ import {GoogleLogin} from 'react-google-login'
 import Icon from './Icon'
 import routes from "routes";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import { LoginSocialFacebook } from "reactjs-social-login";
+import { FacebookLoginButton } from "react-social-login-buttons";
 
 
 
@@ -183,8 +185,8 @@ const handleGoogleClick = (renderProps) => {
                     </MKTypography>
                   </MKBox> }
 
-                  {isSignup &&<MKBox textAlign="center" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <ReCAPTCHA sitekey="6Ldb2wQkAAAAAM6o3s8VlHHL8vxJmfdNvsCpCnt_" />
+                  {isSignup && <MKBox textAlign="center" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <ReCAPTCHA sitekey="6LeGpwgoAAAAAPK8GiZ7AHRFOB5HEeHm49sv-G0r" />
                   </MKBox>}
 
                   {isSignup && <MKBox style={{ display: 'flex' }}>
@@ -221,7 +223,17 @@ const handleGoogleClick = (renderProps) => {
                     </Grid>
                   </MKBox>
 
-      
+                  <LoginSocialFacebook
+                    appId="347530817682916"
+                    onResolve={(response) => {
+                      console.log(response);
+                    }}
+                    onReject={(error) => {
+                      console.log(error);
+                    }}
+                  >
+                    <FacebookLoginButton />
+                  </LoginSocialFacebook>          
 
                   <MKBox mt={3} mb={1} textAlign="center">
                     <MKButton

@@ -11,6 +11,17 @@ export const googleLogin = (googleData, navigate) => async (dispatch) => {
     }
 }
 
+export const facebookLogin = (facebookData, navigate) => async (dispatch) => {
+    try {
+        const { data } = await api.facebookLogin(facebookData);
+        dispatch({ type: AUTH, data });
+        navigate('/');
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
 export const signin = (formData, navigate) => async (dispatch) => {
     try {
         //log in the user

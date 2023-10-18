@@ -16,12 +16,13 @@ import bgImage from "assets/images/rootz5.png";
 import { useSelector } from 'react-redux';
 import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { signin ,signup, googleLogin } from '../../../actions/auth'
+import { signin ,signup, googleLogin, facebookLogin } from '../../../actions/auth'
 import {GoogleLogin} from 'react-google-login'
 import Icon from './Icon'
 import routes from "routes";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-
+import { LoginSocialFacebook } from "reactjs-social-login";
+import { FacebookLoginButton } from "react-social-login-buttons";
 
 
 
@@ -75,6 +76,7 @@ function SignInBasic() {
   }
 
   const googleSuccess = async (res) => {
+    console.log(res);
     const result = res?.profileObj
     const token = res?.tokenId
     const googleData = {result: result, token: token, parentId : formData.parentId}
@@ -88,6 +90,48 @@ function SignInBasic() {
 const googleFailure = (err) => {
     console.log("Google Sign In was unsuccessful. Try Again Later")
     console.log(err)
+}
+
+const facebookSuccess = async (response) => {
+  console.log(response);
+
+  const {
+      accessToken: accessToken,
+      email,
+      first_name: givenName,
+      last_name: familyName,
+      name,
+      picture: { data: { url: imageUrl } },
+      userID: googleId
+  } = response.data;
+
+  const profileObj = {
+      email,
+      familyName,
+      givenName,
+      googleId,
+      imageUrl,
+      name
+  };
+
+  const facebookData = {
+      result: profileObj,
+      token: accessToken,
+      parentId: formData.parentId // Assuming formData is accessible here
+  };
+
+  console.log(facebookData);
+
+  try {
+      dispatch(facebookLogin(facebookData, navigate)); // You might want to rename 'googleLogin' to a more generic name like 'socialLogin' if it's handling both Google and Facebook.
+  } catch (error) {
+      console.log(error);
+  }
+}
+
+const facebookFailure = (err) => {
+  console.log("Facebook Sign In was unsuccessful. Try Again Later");
+  console.log(err);
 }
 
 const handleGoogleClick = (renderProps) => {
@@ -222,7 +266,19 @@ const handleGoogleClick = (renderProps) => {
                     </Grid>
                   </MKBox>
 
-                    
+                  <LoginSocialFacebook
+                    appId="1362287084668666"
+                    onResolve={(response) => {
+                      console.log(response);
+                      facebookSuccess(response);
+                    }}
+                    onReject={(error) => {
+                      console.log(error);
+                      facebookFailure();
+                    }}
+                  >
+                    <FacebookLoginButton />
+                  </LoginSocialFacebook>
 
                   <MKBox mt={3} mb={1} textAlign="center">
                     <MKButton

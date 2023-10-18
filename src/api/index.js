@@ -11,6 +11,7 @@ export const getGrandchildren = (emails) => API.get(`/user/grandchildren?first=$
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
 export const googleLogin = (googleData) => API.post('/user/googleLogin', googleData);
+export const facebookLogin = (facebookData) => API.post('/user/facebookLogin', facebookData);
 export const fetchCompanys = () => API.get('/companys')
 export const createCompany = (newCompany) => API.post('/companys', newCompany);
 export const fetchCompanysBySearch = (searchQuery) => API.get(`/companys/search?searchQuery=${searchQuery.search || 'none'}`)

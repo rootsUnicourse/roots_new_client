@@ -267,7 +267,7 @@ const handleGoogleClick = (renderProps) => {
                   </MKBox>
 
                   <LoginSocialFacebook
-                    appId="1362287084668666"
+                    appId="1673460533176473"
                     onResolve={(response) => {
                       console.log(response);
                       facebookSuccess(response);

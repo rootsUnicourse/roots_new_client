@@ -156,11 +156,13 @@ function DefaultNavbarMobile({open,user }) {
         {renderNavbarItems}
       </MKBox> */}
       <MKBox key="user-profile" display="flex" alignItems="center" py={1} px={2}>
-        <MKAvatar src={user?.result.imageUrl} alt={user?.result.name} sx={{ width: 24, height: 24, mr: 2 }} />
-        <Link to={"/profile"}>{user?.result.name}</Link>
+        <Link to={user ? "/profile" : "/pages/authentication/sign-in"} style={{ fontSize: '15px', textDecoration: 'none', color: 'inherit' }}>
+          {user ? user.result.name : "Profile"}
+        </Link>
+        <MKAvatar src={user ? user.result.imageUrl : undefined} alt={user ? user.result.name : "Profile"} sx={{ width: 24, height: 24, ml: 1 }} />
       </MKBox>
       <MKBox key="how it works" display="flex" alignItems="center" py={1} px={2}>
-        <Link to={"/pages/landing-pages/about-us"} style={{ textDecoration: 'none', fontSize: '15px' }}>How Its Works</Link>
+        <Link to={"/pages/landing-pages/about-us"} style={{ textDecoration: 'none', fontSize: '15px', color: 'inherit' }}>How Its Works</Link>
       </MKBox>
     </Collapse>
   );

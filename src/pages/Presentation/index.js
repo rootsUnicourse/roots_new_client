@@ -132,7 +132,7 @@ function Presentation() {
       >
         <Container>
           <Grid container item xs={12} lg={7} justifyContent="center" mx="auto">
-            <MKTypography
+          <MKTypography
               variant="h1"
               color="white"
               mt={-6}
@@ -141,10 +141,12 @@ function Presentation() {
                 [breakpoints.down("md")]: {
                   fontSize: size["3xl"],
                 },
+                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' // Adding a text shadow
               })}
-            >
+          >
               Rootz{" "}
-            </MKTypography>
+          </MKTypography>
+
             <MKTypography
               variant="h4"
               color="white"

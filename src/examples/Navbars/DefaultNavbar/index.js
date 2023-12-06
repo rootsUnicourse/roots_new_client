@@ -526,17 +526,23 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
           
             <MKBox display="flex" alignItems="center" mr={2}>
                 <MKAvatar src={user?.result.imageUrl} alt="User Avatar" size="xs" style={{marginLeft: '8px' }}/>
-                <MKTypography onClick={() => {
-                                setTimeout(() => {
-                                    window.scrollTo({
-                                        top: vhToPixel(68),
-                                        behavior: "smooth"
-                                    });
-                                }, 0);
-                            }}
-                    component={Link} to={user ? "/profile" : "/pages/authentication/sign-in"} style={{ fontSize: '14px', marginLeft: '8px' , color: "#1C1F4B", fontWeight: "bold"}}>
-                    Profile
-                </MKTypography>
+                <MKTypography
+                  onClick={() => {
+                      if (user) {
+                          setTimeout(() => {
+                              window.scrollTo({
+                                  top: vhToPixel(68),
+                                  behavior: "smooth"
+                              });
+                          }, 0);
+                      }
+                  }}
+                  component={Link}
+                  to={user ? "/profile" : "/pages/authentication/sign-in"}
+                  style={{ fontSize: '14px', marginLeft: '8px', color: "#1C1F4B", fontWeight: "bold" }}
+              >
+                  Profile
+              </MKTypography>
             </MKBox>
             <MKTypography component={Link} to="/pages/landing-pages/about-us" style={{ fontSize: '14px', color: "#1C1F4B", fontWeight: "bold" }} mr={2}>
                 How It Works

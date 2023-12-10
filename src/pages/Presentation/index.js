@@ -12,7 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 // @mui material components
 import Container from "@mui/material/Container";
@@ -57,6 +57,7 @@ import { useNavigate } from 'react-router-dom'
 // import Video from 'components/Video/Video';
 // import companys from 'reducers/companys';
 import HoveringButton from '../../components/hoverInvite/Invite'
+import { debounce } from 'lodash';
 
 function Presentation() {
 
@@ -75,12 +76,18 @@ function Presentation() {
   //   dispatch(getCompanys())
   // },[search==''])
 
-  useEffect(()=>{
-    if(search == ''){
-      dispatch(getCompanys())
+  const debouncedSearch = useCallback(debounce((query) => {
+    if (query === '') {
+        // Handle empty search case here, e.g., reset to default state
+        dispatch(getCompanys());
+    } else {
+        dispatch(getCompanyBySearch({ search: query }));
     }
-    dispatch(getCompanyBySearch({ search }))
-  },[search])
+}, 500), []); // Adjust debounce time as needed
+
+  useEffect(() => {
+    debouncedSearch(search);
+}, [search, debouncedSearch]);
 
   // const searchCompany = () => {
   //   if(search.trim())
@@ -98,6 +105,8 @@ function Presentation() {
   const handleChange = (e) => {
     setSearch(e.target.value)
   }
+
+  
 
   const logout = () => {
     dispatch({ type: 'LOGOUT' })

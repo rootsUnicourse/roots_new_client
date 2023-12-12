@@ -4,6 +4,8 @@ import Grid from "@mui/material/Grid";
 import MKTypography from "components/MKTypography";
 import * as api from '../../../api/index'
 import ReCAPTCHA from "react-google-recaptcha";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ContactForm = () => {
 const [name, setName] = React.useState("");
@@ -31,7 +33,13 @@ const handleSubmit = (e) => {
         name: name,
         message: message
     }
-    api.sendMail(mailData);
+    api.sendMail(mailData)
+        .then(() => {
+            toast.success('Mail sent successfully!');
+        })
+        .catch((error) => {
+            toast.error('Failed to send mail: ' + error.message);
+        });
 };
 
 const areFieldsFilled = () => {
@@ -41,6 +49,7 @@ const areFieldsFilled = () => {
 
 return (
     <form onSubmit={handleSubmit}>
+        <ToastContainer position="bottom-center"/>
         <Grid container spacing={1} justifyContent="center" alignItems="center" height="100%" mb={5}>
             <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
                 <MKTypography variant="h4" fontWeight="medium" sx={{color: "#1C1F4B"}} mt={1}>

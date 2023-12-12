@@ -3,7 +3,11 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import MKTypography from 'components/MKTypography';
-import MKButton from 'components/MKButton';
+//import MKButton from 'components/MKButton';
+import Button from '@mui/material/Button';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,31 +29,45 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         height: '54px',
-        backgroundColor: "#03CF9D",
+        backgroundColor: "#03CF9D !important",
         '&:hover': {
-            backgroundColor: "#03CF9D",
+            backgroundColor: "#03CF9D !important",
         },
+        '&:focus': {
+            backgroundColor: "#03CF9D !important",
+        },
+        '&:active': {
+            backgroundColor: "#03CF9D !important",
+        },
+        '&.Mui-focusVisible': {
+            backgroundColor: "#03CF9D !important",
+        },
+        '& .MuiTouchRipple-root': {
+            color: '#03CF9D !important',
+        },
+    },
+    message: {
+        marginTop: theme.spacing(1),
     },
 }));
 
 const CopyLinkComponent = () => {
     const classes = useStyles();
-    const [copySuccess, setCopySuccess] = useState('');
     const [user] = useState(JSON.parse(localStorage.getItem('profile')));
     const email = user ? user.result.email : null;
     const encodedEmail = window.btoa(email);
     const url = `https://www.rootz.website/pages/authentication/sign-in?email=${encodedEmail}`;
 
     const copyToClipboard = async () => {
-        if (navigator.clipboard) { // checking if clipboard API is supported
+        if (navigator.clipboard) {
             try {
                 await navigator.clipboard.writeText(url);
-                setCopySuccess('Copied!');
+                toast.success('Copied!');
             } catch (err) {
-                setCopySuccess('Failed to copy!');
+                toast.error('Failed to copy!');
             }
         } else {
-            setCopySuccess('Browser does not support Clipboard API');
+            toast.warn('Browser does not support Clipboard API');
         }
     };
 
@@ -68,16 +86,16 @@ const CopyLinkComponent = () => {
                         variant="outlined"
                         className={classes.textField}
                     />
-                    <MKButton
+                    <Button
                         variant="contained" 
                         onClick={copyToClipboard} 
                         className={classes.button}
                     >
                         Copy
-                    </MKButton>
+                    </Button>
                 </div>
-                {copySuccess && <div>{copySuccess}</div>}
             </Grid>
+            <ToastContainer/>
         </Grid>
     );
 };

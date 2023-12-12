@@ -59,6 +59,7 @@
     "react-social-login-buttons": "^3.9.1",
     "react-svg": "^16.1.14",
     "react-syntax-highlighter": "15.4.5",
+    "react-toastify": "^9.0.3",
     "react-transparent-video": "^1.0.1",
     "reactjs-popup": "^2.0.5",
     "reactjs-social-login": "^2.6.3",

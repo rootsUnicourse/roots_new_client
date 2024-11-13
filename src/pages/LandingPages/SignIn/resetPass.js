@@ -36,7 +36,7 @@ function ResetPasswordForm() {
         }
 
         try {
-        const response = await axios.post('https://rootz-website-db080a6c5c50.herokuapp.com/forgotpassword/reset-password', {
+        const response = await axios.post('https://roots-server.fly.dev/forgotpassword/reset-password', {
             password,
             token: window.location.pathname.split('/')[2], // get the token from the query string
         });

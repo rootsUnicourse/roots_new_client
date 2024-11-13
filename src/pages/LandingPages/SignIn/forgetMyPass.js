@@ -44,7 +44,7 @@ const ForgotPasswordForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('https://rootz-website-db080a6c5c50.herokuapp.com/forgotpassword', { email })
+    axios.post('https://roots-server.fly.dev/forgotpassword', { email })
     .then(() => {
       setEmailSent(true); // Set the emailSent state to true when the email is sent
       console.log("yayy");

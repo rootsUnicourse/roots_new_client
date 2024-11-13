@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API = axios.create({ baseURL: 'https://rootz-website-db080a6c5c50.herokuapp.com/' });
+const API = axios.create({ baseURL: 'https://roots-server.fly.dev' });
 // const API = axios.create({ baseURL: 'http://localhost:5002' });
 
 
